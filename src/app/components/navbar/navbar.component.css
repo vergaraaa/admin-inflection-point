@@ -1,0 +1,26 @@
+.nav-link {
+    font-family: 'Roboto Regular', sans-serif; 
+    font-weight: bold;
+    font-size: 95%;
+    color: white !important;
+    text-align: center;
+    display: inline-block;
+}
+
+.navbar{
+    margin: 0;
+    padding: 0;
+}
+
+#logo {
+    width: 215px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #F1592A !important;
+    
+}
+
+.active {
+    color: #F1592A !important;
+}
