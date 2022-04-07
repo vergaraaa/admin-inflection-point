@@ -1,0 +1,252 @@
+<!-- <div class="d-flex flex-column"> -->
+<div class="container-fluid d-flex flex-fill">
+  <div class="row row-height">
+    <div class="col-md-3 left sidebar">
+      <ul class="list-unstyled pt-3">
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle align-items-center rounded"
+            data-bs-toggle="collapse"
+            data-bs-target="#usuarios-collapse"
+            aria-expanded="true"
+          >
+            Usuarios
+          </button>
+          <div class="collapse show" id="usuarios-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/users/:id</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/users/create</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/users/update/:id</a
+                >
+              </li>
+              <li class="link-light bg-white text-black-50 add-route-link"></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle align-items-center rounded"
+            data-bs-toggle="collapse"
+            data-bs-
+            data-bs-target="#equipos-collapse"
+            aria-expanded="true"
+          >
+            Equipos
+          </button>
+          <div class="collapse show" id="equipos-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/teams/:id</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/teams/create</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/teams/update/:id</a
+                >
+              </li>
+              <li class="link-light bg-white text-black-50 add-route-link"></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle align-items-center rounded"
+            data-bs-toggle="collapse"
+            data-bs-target="#departamentos-collapse"
+            aria-expanded="true"
+          >
+            Departamentos
+          </button>
+          <div class="collapse show" id="departamentos-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/dept/:id</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/dept/create</a
+                >
+              </li>
+              <li>
+                <a href="#" class="link-light rounded route-link"
+                  >/api/dept/update/:id</a
+                >
+              </li>
+              <li class="link-light bg-white text-black-50 add-route-link"></li>
+            </ul>
+          </div>
+        </li>
+        <li class="link-light bg-white add-route-button">Agregar Ruta</li>
+      </ul>
+    </div>
+
+    <div class="col-md right details">
+      <div class="row top-row mt-5">
+        <div class="col-4">
+          <h2>Nombre API</h2>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-probar">Probar</button>
+        </div>
+        <div class="col-4 options">
+          <div class="estatus"></div>
+          <div class="editar">
+            <i class="fa-solid fa-pen"></i>
+          </div>
+          <div class="borrar">
+            <i class="fa-solid fa-trash"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <h5>Método: GET</h5>
+      </div>
+
+      <div class="row mt-3">
+        <h5>/api/users/:id</h5>
+      </div>
+
+      <div class="row mt-3">
+        <h5>Descripción</h5>
+        <p class="">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+          iure error soluta officiis adipisci libero provident beatae asperiores
+          eveniet modi unde totam qui sit nemo recusandae sed, deserunt
+          blanditiis veniam?
+        </p>
+      </div>
+
+      <div class="row mt-3">
+        <h5>Parámetros de entrada</h5>
+        <div class="col-12">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Obligatorio</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>id</td>
+                <td>Number</td>
+                <td>Si</td>
+                <td>ID del usuario</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <h5>Query Strings</h5>
+        <div class="col-12">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Obligatorio</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>limit</td>
+                <td>Number</td>
+                <td>No</td>
+                <td>Página a mostrar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row mt-3">
+          <h5>Headers</h5>
+          <div class="col-12">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Obligatorio</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Authorization</td>
+                  <td>Si</td>
+                  <td>Token de autenticación</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <h5>Parámetros de salida</h5>
+          <div class="col-12">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>id</td>
+                  <td>Number</td>
+                  <td>ID del usuario</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>String</td>
+                  <td>Nombre del usuario</td>
+                </tr>
+                <tr>
+                  <td>email</td>
+                  <td>String</td>
+                  <td>Correo electrónico del usuario</td>
+                </tr>
+                <tr>
+                  <td>created_at</td>
+                  <td>Date</td>
+                  <td>Fecha de creación del usuario</td>
+                </tr>
+                <tr>
+                  <td>updated_at</td>
+                  <td>Date</td>
+                  <td>Fecha de actualización del usuario</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
