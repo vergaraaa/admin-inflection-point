@@ -1,6 +1,6 @@
 /*Set the row height to the viewport*/
 .row-height{
-    height: 90vh;
+    height: calc(100vh - 70.8px);
 }
 
 @media (max-width: 769px) {
