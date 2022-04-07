@@ -5,14 +5,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ApiDetailComponent } from './components/api-detail/api-detail.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent,  },
-    { path: 'home', component: HomeComponent },
-    { path: 'detail', component: ApiDetailComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'api/:id', component: ApiDetailComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
