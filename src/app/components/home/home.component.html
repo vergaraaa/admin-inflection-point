@@ -26,103 +26,23 @@
                 <div class="col-md">Estatus</div>
             </div>
             <!-- CONTENT -->
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md ">Api #1</div>
+            <div class="row align-items-center text-center py-3 border-bottom" *ngFor="let number of [1,2,3,4,5]">
+                <div class="col-md ">Api #{{number}}</div>
                 <div class="col-md">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#descripcion1" aria-expanded="false">
-                        Descripción 1
+                        [attr.data-bs-target]= "'#descripcion' + number" aria-expanded="false">
+                        Descripción {{number}}
                     </button>
-                    <div class="collapse" id="descripcion1" style="">
+                    <div class="collapse" [attr.id]="'descripcion' + number">
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sunt earum
                             architecto nesciunt sit porro magnam omnis quas dolor ut.</p>
                     </div>
                 </div>
                 <div class="col-md">
-                    <a routerLink="/api/1">https://api1.com/</a>
+                    <a [routerLink]="['/api/', number]">https://api{{number}}.com/</a>
                 </div>
                 <div class="col-md">
-                    <div class="estatus mx-auto"></div>
-                </div>
-            </div>
-
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md">Api #2</div>
-                <div class="col-md">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#descripcion2" aria-expanded="false">
-                        Descripción 2
-                    </button>
-                    <div class="collapse" id="descripcion2" style="">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sunt earum architecto
-                            nesciunt sit porro magnam omnis quas dolor ut.</p>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <a routerLink="/api/2">https://api2.com/</a>
-                </div>
-                <div class="col-md">
-                    <div class="estatus-error mx-auto"></div>
-                </div>
-            </div>
-
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md">Api #3</div>
-                <div class="col-md">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#descripcion3" aria-expanded="false">
-                        Descripción 3
-                    </button>
-                    <div class="collapse" id="descripcion3" style="">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sunt earum
-                            architecto nesciunt sit porro magnam omnis quas dolor ut.</p>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <a routerLink="/api/3">https://api3.com/</a>
-                </div>
-                <div class="col-md">
-                    <div class="estatus mx-auto"></div>
-                </div>
-            </div>
-            
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md">Api #4</div>
-                <div class="col-md">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#descripcion4" aria-expanded="false">
-                        Descripción 4
-                    </button>
-                    <div class="collapse" id="descripcion4" style="">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sunt earum
-                            architecto nesciunt sit porro magnam omnis quas dolor ut.</p>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <a routerLink="/api/4">https://api4.com/</a>
-                </div>
-                <div class="col-md">
-                    <div class="estatus mx-auto"></div>
-                </div>
-            </div>
-            
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md">Api #5</div>
-                <div class="col-md">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#descripcion5" aria-expanded="false">
-                        Descripción 5
-                    </button>
-                    <div class="collapse" id="descripcion5" style="">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore sunt earum
-                            architecto nesciunt sit porro magnam omnis quas dolor ut.</p>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <a routerLink="/api/5">https://api5.com/</a>
-                </div>
-                <div class="col-md">
-                    <div class="estatus-error mx-auto"></div>
+                    <div [ngClass]="number == 2 || number == 5 ? 'estatus-error' : 'estatus'" class="mx-auto"></div>
                 </div>
             </div>
         </div>
