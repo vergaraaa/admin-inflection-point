@@ -1,26 +1,26 @@
 .nav-link {
-    font-family: 'Roboto Regular', sans-serif; 
-    font-weight: bold;
-    font-size: 95%;
-    color: white !important;
-    text-align: center;
-    display: inline-block;
+  font-family: "Roboto Regular", sans-serif;
+  font-weight: bold;
+  font-size: 95%;
+  color: white !important;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.navbar{
-    margin: 0;
-    padding: 0;
+.navbar {
+  margin: 0;
+  padding: 0;
 }
 
 #logo {
-    width: 215px;
+  width: 215px;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #F1592A !important;
-    
+  color: #f1592a !important;
 }
 
 .active {
-    color: #F1592A !important;
+  color: #f1592a !important;
 }
