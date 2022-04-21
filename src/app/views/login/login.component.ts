@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -20,39 +20,34 @@ export class LoginComponent implements OnInit {
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(async (user) => {
             // Save on local storage
             localStorage.setItem('google_auth', JSON.stringify(user));
-
-            // Check if user exists on database
-            this.userService.getUserByEmail(user.email).subscribe({
-                next: res => {
-                    console.log(res);
-                    if (res == null) {
-                        console.log('creando usuario');
-                        this.userService.createUser(
-                            user.firstName,
-                            user.lastName,
-                            3,
-                            user.email
-                        ).subscribe({
-                            next: () => console.log('usuario creado')
-                        });
-                    }
-
-                    // Redirect 
-                    this.removeBackground();
-                    this.router.navigate(['/home']);
-                },
-                error: err => console.error(err)
-            });
-
-
+            this.getUserByEmail(user);
         });
     }
 
     microsoftAuth() {
-        this.authService.signIn(MicrosoftLoginProvider.PROVIDER_ID).then((data) => {
-            localStorage.setItem('microsoft_auth', JSON.stringify(data));
-            this.removeBackground();
-            this.router.navigate(['/home']);
+        this.authService.signIn(MicrosoftLoginProvider.PROVIDER_ID).then((user) => {
+            localStorage.setItem('microsoft_auth', JSON.stringify(user));
+            this.getUserByEmail(user);
+        });
+    }
+    getUserByEmail(user: SocialUser) {
+        // Check if user exists on database
+        this.userService.getUserByEmail(user.email).subscribe({
+            next: res => {
+                if (res == null) {
+                    this.userService.createUser(
+                        user.firstName,
+                        user.lastName,
+                        3,
+                        user.email
+                    ).subscribe({});
+                }
+
+                // Redirect 
+                this.removeBackground();
+                this.router.navigate(['/home']);
+            },
+            error: err => console.error(err)
         });
     }
 

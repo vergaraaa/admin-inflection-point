@@ -16,18 +16,18 @@ export class AuthGuard implements CanActivate {
             if (localStorage.getItem('google_auth') || localStorage.getItem('microsoft_auth')) {
                 return true;
             }
-    
+            
             this.router.navigate(['/login']);
             return false;
         }
         else{
             // logged in so redirect to home page
-            if (!localStorage.getItem('google_auth') || !localStorage.getItem('microsoft_auth')) {
-                return true;
+            if (localStorage.getItem('google_auth') || localStorage.getItem('microsoft_auth')) {
+                this.router.navigate(['/']);
+                return false;
             }
-    
-            this.router.navigate(['/']);
-            return false;
+            
+            return true;
         }
     }
 }
