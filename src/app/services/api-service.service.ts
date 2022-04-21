@@ -8,11 +8,11 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getApisData() {
-    return this.http.get('http://localhost:3000/api/apis/getApis');
+    return this.http.get('http://localhost:3000/api/apis/');
   }
 
   getApiDetail(apiId: number) {
-    return this.http.get(`http://localhost:3000/api/apis/getApi/${apiId}`);
+    return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
   }
 
   getRouteDetails(routeId: number) {

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from './../../shared/shared.module';
+import { LoadingIndicatorComponent } from 'src/app/shared/loading-indicator/loading-indicator.component';
 
 @NgModule({
   declarations: [HomeComponent],
