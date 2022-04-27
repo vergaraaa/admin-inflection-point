@@ -1,0 +1,23 @@
+<div class="container mt-3">
+    <form>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">URL</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL">
+        </div>
+        <h3>Secciones</h3>
+        <i class="fa-solid fa-square-plus" (click)="addSection('hola')"></i>
+        <!-- <button type="button" class="btn-close" disabled aria-label="Close"></button> -->
+        <button *ngFor="let section of sections; let i = index" type="button"
+            class="btn btn-outline-secondary">{{section.name}}
+            <i class="fa-solid fa-square-xmark" (click)="deleteSection(i)"></i>
+        </button>
+    </form>
+</div>

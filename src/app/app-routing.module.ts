@@ -34,6 +34,13 @@ const routes: Routes = [
         data: { requiresLogin: true },
         canActivate: [AuthGuard],
     },
+    {
+        path: 'create',
+        loadChildren: () =>
+        import('./views/forms/forms.module').then((m) => m.FormsModule),
+        data: { requiresLogin: true },
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({
