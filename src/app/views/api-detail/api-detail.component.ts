@@ -29,5 +29,6 @@ export class ApiDetailComponent implements OnInit {
       this.routes = data.routes;
       this.sections = data.sections;
     });
+    console.log(this.apiData.name);
   }
 }

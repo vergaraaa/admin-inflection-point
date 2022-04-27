@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
             this.getUserByEmail(user);
         });
     }
+    
     getUserByEmail(user: SocialUser) {
         // Check if user exists on database
         this.userService.getUserByEmail(user.email).subscribe({

@@ -24,12 +24,13 @@
                                 <app-loading-indicator></app-loading-indicator>
                             </ng-template>
                             <ng-template #elseBlockImage>
-                                <img [src]="profilePicture" style="max-height: 30px; border-radius: 50%;">
+                                <img [src]="!googleLogin ? profilePicture : getUserImageGoogle()"
+                                    style="max-height: 30px; border-radius: 50%;">
                             </ng-template>
 
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a class="dropdown-item" type="a" (click)="logout()">Cerrar Sesión</a></li>
+                            <li><button class="dropdown-item" type="a" (click)="logout()">Cerrar Sesión</button></li>
                         </ul>
                     </div>
                 </div>

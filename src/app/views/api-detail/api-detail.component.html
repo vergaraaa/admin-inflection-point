@@ -1,35 +1,28 @@
 <div class="container-fluid">
-  <div class="row row-height">
-    <div class="col-md-3 left">
-      <ul class="list-unstyled pt-3">
-        <li class="mb-1" *ngFor="let section of sections">
-          <button
-            class="btn btn-toggle align-items-center rounded"
-            data-bs-toggle="collapse"
-            data-bs-target="#usuarios-collapse"
-            aria-expanded="true"
-          >
-            {{ section.name }}
-          </button>
-          <div class="collapse collapse" id="usuarios-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li *ngFor="let route of routes[section.id]">
-                <a
-                  routerLink="./"
-                  [queryParams]="{ route: route.id }"
-                  class="link-light rounded route-link"
-                  >{{ route.route }}</a
-                >
-              </li>
-              <li class="link-light bg-white text-black-50 add-route-link"></li>
+    <div class="row row-height">
+        <div class="col-md-3 left">
+            <ul class="list-unstyled pt-3">
+                <li class="mb-1" *ngFor="let section of sections">
+                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"
+                        data-bs-target="#usuarios-collapse" aria-expanded="true">
+                        {{ section.name }}
+                    </button>
+                    <div class="collapse collapse" id="usuarios-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li *ngFor="let route of routes[section.id]">
+                                <a routerLink="./" [queryParams]="{ route: route.id }"
+                                    class="link-light rounded route-link">{{ route.route }}</a>
+                            </li>
+                            <li class="link-light bg-white text-black-50 add-route-link"></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="link-light bg-white add-route-button">Agregar Ruta</li>
             </ul>
-          </div>
-        </li>
-        <li class="link-light bg-white add-route-button">Agregar Ruta</li>
-      </ul>
+        </div>
+        <div class="col-md right">
+            {{apiData.name}}
+            <app-route-detail *ngIf="routeId" [routeId]="routeId"></app-route-detail>
+        </div>
     </div>
-    <div class="col-md right">
-      <app-route-detail *ngIf="routeId" [routeId]="routeId"></app-route-detail>
-    </div>
-  </div>
 </div>

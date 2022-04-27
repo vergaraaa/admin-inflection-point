@@ -38,10 +38,10 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    getUserImageGoogle() {
+    getUserImageGoogle() : string {
         let user = JSON.parse(localStorage.getItem('google_auth')!);
-        this.profilePicture = user.photoUrl;
         this.isLoadingImage = false;
+        return user.photoUrl;
     }
 
     getUserImageMicrosoft() {
@@ -61,8 +61,8 @@ export class NavbarComponent implements OnInit {
         this.isLoadingImage = false;
     }
 
-    async logout() {
-        await this.authService.signOut();
+    logout() {
+        this.authService.signOut(true);
         localStorage.clear();
         this.router.navigate(['/login']);
     }
