@@ -4,7 +4,7 @@ import { Section, Route } from "src/app/models/forms.model";
 import { ApiRouteComponent } from "./api-route/api-route.component";
 
 @Component({
-    selector: "app-forms",
+    selector: "app-api-form",
     templateUrl: "./api-form.component.html",
     styleUrls: ["./api-form.component.css"]
 })

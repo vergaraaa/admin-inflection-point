@@ -20,4 +20,8 @@ export class ApiService {
       `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
     );
   }
+
+  createApi(){
+      
+  }
 }

@@ -1,49 +1,59 @@
 <div class="container mt-3">
     <div class="row">
-        <form>
-            <div class="mb-3">
-                <label for="api-name" class="form-label">Nombre</label>
-                <input type="text" name="api-name" class="form-control" id="api-name" placeholder="Nombre">
-            </div>
-            <div class="mb-3">
-                <label for="api-description" class="form-label">Descripción</label>
-                <textarea class="form-control" name="api-description" id="api-description" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="api-url" class="form-label">URL</label>
-                <input type="text" name="api-url" class="form-control" id="api-url" placeholder="URL">
-            </div>
-            <h3>Secciones</h3>
-            <div class="row">
-                <label for="api-section-name" class="form-label">Nombre de sección</label>
-                <div class="col-md-3">
-                    <div class="row align-items-center">
-                        <div class="col-md-10">
-                            <div class="">
-                                <input [(ngModel)]="newSection" name="api-section-name" type="text" class="form-control"
-                                    id="api-section-name" placeholder="Nombre de sección">
+        <div class="row g-0">
+            <div class="col-md-8 mx-auto">
+                <form>
+                    <div class="mb-3">
+                        <label for="api-name" class="form-label">Nombre</label>
+                        <input type="text" name="api-name" class="form-control" id="api-name" placeholder="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="api-description" class="form-label">Descripción</label>
+                        <textarea class="form-control" name="api-description" id="api-description" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="api-url" class="form-label">URL</label>
+                        <input type="text" name="api-url" class="form-control" id="api-url" placeholder="URL">
+                    </div>
+                    <div class="d-grid col-md-2 ms-auto">
+                        <button class="btn btn-primary" type="button">Agregar</button>
+                    </div>
+
+
+
+                    <!-- <h3>Secciones</h3>
+                    <div class="row">
+                        <label for="api-section-name" class="form-label">Nombre de sección</label>
+                        <div class="col-md-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-10">
+                                    <div class="">
+                                        <input [(ngModel)]="newSection" name="api-section-name" type="text" class="form-control"
+                                            id="api-section-name" placeholder="Nombre de sección">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <i class="fa-solid fa-square-plus" (click)="addSection()"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <i class="fa-solid fa-square-plus" (click)="addSection()"></i>
+                        <div class="col-md-9 border-start">
+                            <button *ngFor="let section of sections; let i = index" type="button"
+                                class="btn btn-outline-secondary mx-1">{{section.name}}
+                                <i class="fa-solid fa-square-xmark" (click)="deleteSection(i)"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-9 border-start">
-                    <button *ngFor="let section of sections; let i = index" type="button"
-                        class="btn btn-outline-secondary mx-1">{{section.name}}
-                        <i class="fa-solid fa-square-xmark" (click)="deleteSection(i)"></i>
-                    </button>
-                </div>
+                    <h3 class="mt-5">Rutas</h3>
+                    <app-api-route class="my-3" *ngFor="let routeComponent of routeComponents; let i = index"
+                        [sections]="sections" [route]="routes[i]" [index]="i" >
+                    </app-api-route>
+                    <div class="row text-center">
+                        <div class="col-md-12"><i class="fa-solid fa-square-plus fa-2x"
+                                (click)="addRoute()"></i></div>
+                    </div> -->
+                </form>
             </div>
-            <h3 class="mt-5">Rutas</h3>
-            <app-api-route class="my-3" *ngFor="let routeComponent of routeComponents; let i = index"
-                [sections]="sections" [route]="routes[i]" [index]="i" >
-            </app-api-route>
-            <div class="row text-center">
-                <div class="col-md-12"><i class="fa-solid fa-square-plus fa-2x"
-                        (click)="addRoute()"></i></div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

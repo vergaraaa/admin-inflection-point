@@ -1,0 +1,15 @@
+.btn-primary {
+    color: #fff;
+    background-color: #f1592A;
+    border-color: #f1592A;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    border-color: #f1592A;
+    box-shadow: 0 0 0 0.2rem #f1582a80;
+} 
+
+.form-control:focus {
+    border-color: #f1592A;
+    box-shadow: 0 0 0 0.2rem #f1582a80;
+}
