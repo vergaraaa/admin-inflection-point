@@ -22,6 +22,16 @@ export class UserService {
         );
     }
 
+    editRole(id : number, role_id: number) {
+        var body = {
+            'role_id': role_id
+        }
+
+        return this.http.put(
+            `http://localhost:3000/api/users/updateUserRole/${id}`, body
+        );
+    }
+
     getUserByEmail(email: String) {
         var body = {
             'email': email
@@ -42,4 +52,18 @@ export class UserService {
             })
         )
     }
+
+    getUsers(){
+
+        return this.http.get(
+            
+            `http://localhost:3000/api/users/`
+                
+        );
+
+    }
+
+    // updateUserRole(){
+    //     return this.http.put('', )
+    // }
 }
