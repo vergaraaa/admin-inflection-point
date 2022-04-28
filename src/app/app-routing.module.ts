@@ -37,7 +37,7 @@ const routes: Routes = [
     {
         path: 'create',
         loadChildren: () =>
-        import('./views/forms/forms.module').then((m) => m.FormsModule),
+        import('./views/api-form/api-form.module').then((m) => m.ApiFormModule),
         data: { requiresLogin: true },
         canActivate: [AuthGuard],
     },

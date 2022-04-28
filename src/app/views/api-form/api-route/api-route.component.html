@@ -1,0 +1,41 @@
+<div class="row border border-secondary rounded p-3 position-relative my-2">
+    <div><i class="float-end fa-solid fa-circle-xmark fa-2x"></i></div>
+    <div class="col-md-3">
+        <label for="api-route-name" class="form-label">Nombre</label>
+        <div class="mb-3">
+            <input name="api-route-name" type="text" class="form-control" id="api-route-name"
+            placeholder="Nombre de la ruta" >
+        </div>
+        <label for="api-route-route" class="form-label">Nombre</label>
+        <div class="mb-3">
+            <input name="api-route-route" type="text" class="form-control" id="api-route-route"
+            placeholder="Ruta" >
+        </div>
+        <label for="api-route-method" class="form-label">Nombre</label>
+        <div class="mb-3">
+            <select class="form-select" name="api-route-method" id="api-route-method">
+                <option value="get">GET</option>
+                <option value="post">POST</option>
+                <option value="put">PUT</option>
+                <option value="delete">DELETE</option>
+            </select>
+        </div>
+        <label for="api-route-description" class="form-label">Descripción</label>
+        <div class="mb-3">
+            <input name="api-route-description" type="text" class="form-control" id="api-route-description"
+            placeholder="Descripción de la ruta" >
+        </div>
+        <label for="api-route-section" class="form-label">Sección</label>
+        <div class="">
+            <select class="form-select" name="api-route-section" id="api-route-section" >
+                <option *ngFor="let section of sections" [value]="section.name">{{section.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+
+</div>
