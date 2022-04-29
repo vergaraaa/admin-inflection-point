@@ -19,6 +19,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: 'my-apis',
+        loadChildren: () =>
+        import('./views/my-apis/my-apis.module').then((m) => m.MyApisModule),
+        data: { requiresLogin: true },
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'api',
         loadChildren: () =>
         import('./views/api-detail/api-detail.module').then(

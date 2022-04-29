@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { user } from 'src/app/models/api.user';
+import { User } from 'src/app/models/api.user';
 import { IfStmt } from '@angular/compiler';
 
 @Component({
@@ -10,7 +10,7 @@ import { IfStmt } from '@angular/compiler';
 })
 
 export class UserComponent implements OnInit {
-  usersData: user[] = [];
+  usersData: User[] = [];
   roleIds: number[] = [];
   newRole: number = 0;
   idSelectedUser: number = 0;
