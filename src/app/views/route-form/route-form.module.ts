@@ -7,7 +7,7 @@ import { RouteFormComponent } from './route-form.component';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [RouteFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: RouteFormComponent }]),

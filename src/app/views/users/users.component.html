@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">AGuas paraguAs</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -22,7 +22,7 @@
                 <span class="input-group-text" id="basic-addon1">
                     <i class="fas fa-search"></i>
                 </span>
-                <input type="text" class="form-control" placeholder="Search..." aria-label="Search"
+                <input type="text" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="query"
                     aria-describedby="basic-addon1">
             </div>
         </div>
@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
 
-                        <tr class="noborder" *ngFor="let user of usersData; let i = index " >
+                        <tr class="noborder" *ngFor="let user of search(); let i = index " >
                             <td scope="row">{{ user.first_name }} {{ user.last_name }}</td>
                             <td scope="row">
                                 <select [(ngModel)]="roleIds[i]" (change)="onRoleChange(user.id, roleIds[i], i)" >
