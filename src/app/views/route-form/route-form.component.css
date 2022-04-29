@@ -1,0 +1,46 @@
+.max-height{
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.max-height::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.max-height::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+ 
+.max-height::-webkit-scrollbar-thumb {
+    background-color: #282c3880;
+    border-radius: 100px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #f1592A;
+    border-color: #f1592A;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #282c38;
+    border-color: #282c38;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    border-color: #f1592A;
+    box-shadow: 0 0 0 0.2rem #f1582a80;
+} 
+
+.btn-scondary:focus, .btn-scondary:active {
+    border-color: #282c38;
+    box-shadow: 0 0 0 0.2rem #282c3880;
+} 
+
+.form-control:focus, .form-select:focus {
+    border-color: #f1592A;
+    box-shadow: 0 0 0 0.2rem #f1582a80;
+} 

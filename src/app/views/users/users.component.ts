@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/api.user';
-import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +14,7 @@ export class UserComponent implements OnInit {
   newRole: number = 0;
   idSelectedUser: number = 0;
   indexSelectedUser: number = 0;
+  query: string = "";
 
   constructor(private userService: UserService) {}
 
@@ -42,6 +42,13 @@ export class UserComponent implements OnInit {
   editRole(){
     this.userService.editRole(this.idSelectedUser, this.newRole).subscribe((data: any) => {
       this.getUsers();
+    });
+  }
+
+  search() {
+    return this.usersData.filter(user => {
+      return user.first_name.toLowerCase().includes(this.query.toLowerCase()) 
+          || user.last_name.toLowerCase().includes(this.query.toLowerCase());
     });
   }
 }

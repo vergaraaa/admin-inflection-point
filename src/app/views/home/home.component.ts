@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { Api } from 'src/app/models/api.model';
-import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-home',

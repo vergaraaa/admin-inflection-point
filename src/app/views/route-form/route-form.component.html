@@ -1,0 +1,216 @@
+<div class="container mt-3">
+    <!-- SECTION MODAL -->
+    <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sectionModalLabel">Nueva sección</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addSection()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER MODAL -->
+    <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="headerModalLabel">Nuevo header</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addHeader()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INPUT PARAMETER MODAL -->
+    <div class="modal fade" id="inputParameterModal" tabindex="-1" aria-labelledby="inputParameterModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inputParameterModalLabel">Nuevo parámetro de entrada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addInputParameter()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OUTPUT PARAMETER MODAL -->
+    <div class="modal fade" id="outputParameterModal" tabindex="-1" aria-labelledby="outputParameterModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="outputParameterModalLabel">Nuevo parámetro de salida</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addOutputParameter()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUERY STRING MODAL -->
+    <div class="modal fade" id="queryStringModal" tabindex="-1" aria-labelledby="queryStringModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="queryStringModalLabel">Nuevo query string</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addQueryString()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-11 mx-auto">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="route-name" class="form-label">Nombre</label>
+                        <input type="text" name="route-name" class="form-control" id="route-name" placeholder="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="route-url" class="form-label">URL de la ruta</label>
+                        <input type="text" name="route-url" class="form-control" id="route-url"
+                            placeholder="URL de la ruta">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="route-method" class="form-label">Sección</label>
+                    <div class="mb-3">
+                        <div class="row align-items-center g-0">
+                            <div class="col-md-11">
+                                <select class="form-select" name="route-section" id="route-section">
+                                    <option value="" disabled selected hidden>Seleccionar...</option>
+                                    <option *ngFor="let section of sections" [value]="section.name">{{section.name}}
+                                    </option>
+                                    <!-- <option value="add">Añadir sección</option> -->
+                                </select>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <i data-bs-toggle="modal" data-bs-target="#sectionModal"
+                                    class="fa-solid fa-square-plus fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="route-method" class="form-label">Método</label>
+                    <div class="mb-3">
+                        <select class="form-select" name="route-method" id="route-method">
+                            <option value="" disabled selected hidden>Seleccionar...</option>
+                            <option value="get">GET</option>
+                            <option value="post">POST</option>
+                            <option value="put">PUT</option>
+                            <option value="delete">DELETE</option>
+                        </select>
+                    </div>
+                </div>
+                <label for="api-route-description" class="form-label">Descripción</label>
+                <div class="mb-3">
+                    <textarea class="form-control" name="route-description" id="route-description" rows="3" placeholder="Descripción..."></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h6 class="text-center">Headers</h6>
+                    <div class="max-height">
+                        <div *ngFor="let header of headers; let i = index" class="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [value]="header.name" disabled>
+                                <span class="input-group-text"><i (click)="deleteHeader(i)"
+                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#headerModal"
+                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-center">Parámetros de entrada</h6>
+                    <div class="max-height">
+                        <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [value]="input_parameter.name" disabled>
+                                <span class="input-group-text"><i (click)="deleteInputParameter(i)"
+                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#inputParameterModal"
+                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-center">Parámetros de salida</h6>
+                    <div class="max-height">
+                        <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [value]="output_parameter.name" disabled>
+                                <span class="input-group-text"><i (click)="deleteOutputParameter(i)"
+                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#outputParameterModal"
+                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-center">Query strings</h6>
+                    <div class="max-height">
+                        <div *ngFor="let query_string of query_strings; let i = index" class="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [value]="query_string.name" disabled>
+                                <span class="input-group-text"><i (click)="deleteQueryString(i)"
+                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#queryStringModal"
+                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                </div>
+            </div>
+            <div class="d-grid col-md-2 ms-auto mt-3">
+                <button class="btn btn-primary" type="button">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
