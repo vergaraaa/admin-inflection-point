@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../models/api.user';
 
 @Injectable({
   providedIn: 'root',
@@ -20,4 +21,16 @@ export class ApiService {
       `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
     );
   }
+
+  getApisOfUser(){
+
+    let userId = localStorage.getItem('user_id')
+
+    console.log(userId)
+
+    return this.http.get(`http://localhost:3000/api/apis/getApisOfUser/${userId}`
+    );
+
+  }
+
 }

@@ -6,7 +6,7 @@ import { MyApisComponent } from './my-apis.component';
 import { SharedModule } from './../../shared/shared.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [MyApisComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: MyApisComponent }]),
