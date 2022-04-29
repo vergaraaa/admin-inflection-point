@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { User } from 'src/app/models/api.user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -30,18 +31,28 @@ export class LoginComponent implements OnInit {
             this.getUserByEmail(user);
         });
     }
+    
     getUserByEmail(user: SocialUser) {
         // Check if user exists on database
         this.userService.getUserByEmail(user.email).subscribe({
-            next: res => {
+            next: (res: any) => {
+                let id;
                 if (res == null) {
-                    this.userService.createUser(
+                this.userService.createUser(
                         user.firstName,
                         user.lastName,
                         3,
                         user.email
-                    ).subscribe({});
+                    ).subscribe({
+                        next: (res: any) => {
+                            localStorage.setItem('user_id', res.id);
+                        }
+                    });
                 }
+                else{
+                    localStorage.setItem('user_id', res.id);
+                }
+                
 
                 // Redirect 
                 this.removeBackground();

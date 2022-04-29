@@ -5,12 +5,13 @@
                 <span class="input-group-text" id="basic-addon1">
                     <i class="fas fa-search"></i>
                 </span>
-                <input type="text" class="form-control" [(ngModel)]="query" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon1" />
+                <input type="text" class="form-control" placeholder="Search..." aria-label="Search"
+                    aria-describedby="basic-addon1" />
             </div>
         </div>
         <div class="col-md-1 ps-1 pe-3">
             <div class="d-grid">
-                <button class="btn text-white" type="button" style="background-color: #282c38" routerLink="/create-api">
+                <button class="btn text-white" type="button" style="background-color: #282c38">
                     AGREGAR
                 </button>
             </div>
@@ -37,12 +38,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let api of search()">
+                        <tr *ngFor="let api of apisData">
                             <td scope="row" class="clickable" [routerLink]="['/api/', api.id]">
                                 {{ api.name }}
                             </td>
                             <td>
-                                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [attr.data-bs-target]="'#descripcion' + api.id" aria-expanded="false">
+                                <button class="btn btn-toggle align-items-center rounded collapsed"
+                                    data-bs-toggle="collapse" [attr.data-bs-target]="'#descripcion' + api.id"
+                                    aria-expanded="false">
                                     Descripción
                                 </button>
                                 <div class="collapse" [attr.id]="'descripcion' + api.id">

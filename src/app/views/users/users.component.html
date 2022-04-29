@@ -1,4 +1,21 @@
 <div class="container mt-5">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">AGuas paraguAs</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quieres cambiar el rol de {{usersData[indexSelectedUser].first_name}} {{usersData[indexSelectedUser].last_name}}?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editRole()">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-10 offset-md-1 p-0">
             <div class="input-group mb-3">
@@ -12,67 +29,39 @@
     </div>
     
     <div class="row mt-3">
+        
         <div class="col-md-10 mx-auto">
-            <!-- TABLE HEADER -->
-            <div class="row py-3 text-white text-center" style="background-color: #282C38;">
-                <div class="col-md">Nombre</div>
-                <div class="col-md">Rol</div>
-            </div>
-            <!-- CONTENT -->
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md ">Joel Reyna</div>
-                <div class="col-md">
-                    <select id="mySelect">
-                        <option value="apple">Master</option>
-                        <option value="orange">Admin</option>
-                        <option value="pineapple">Usuario</option>
-                      </select>
-                   
-                </div>
-            </div>
+            <div class="table-responsive-md">
+                <table class="table text-center align-middle">
+                    <thead class="text-white" style="background-color: #282C38;">
+                        <tr>
+                            <th class="col-6">Nombre</th>
+                            <th class="col-6">Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md ">Ingrid Partida</div>
-                <div class="col-md">
-                    <div class="col-md">
-                        <select id="mySelect">
-                            <option value="apple">Master</option>
-                            <option value="orange">Admin</option>
-                            <option value="pineapple">Usuario</option>
-                          </select>
-                       
-                    </div>
-                </div>
-            </div>
+                        <tr class="noborder" *ngFor="let user of usersData; let i = index " >
+                            <td scope="row">{{ user.first_name }} {{ user.last_name }}</td>
+                            <td scope="row">
+                                <select [(ngModel)]="roleIds[i]" (change)="onRoleChange(user.id, roleIds[i], i)" >
+                                    <option [ngValue]="1" [selected]="user.role_id == 1">Master</option>
+                                    <option [ngValue]="2" [selected]="user.role_id == 2">Admin</option>
+                                    <option [ngValue]="3" [selected]="user.role_id == 3">Usuario</option>
+                                </select>
+                                <div *ngIf="user.role_id != roleIds[i] then thenBlockImage"></div>
+                                <ng-template #thenBlockImage>
+                                    <i class="fa-solid fa-floppy-disk ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>                               
+                                </ng-template>
+                            </td>
+                        </tr>
 
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md ">Edgar Vergara</div>
-                <div class="col-md">
-                    <div class="col-md">
-                        <select id="mySelect">
-                            <option value="apple">Master</option>
-                            <option value="orange">Admin</option>
-                            <option value="pineapple">Usuario</option>
-                          </select>
-                       
-                    </div>
-                </div>
-            </div>
-
-            <div class="row align-items-center text-center py-3 border-bottom">
-                <div class="col-md ">Eugenio Peñna</div>
-                <div class="col-md">
-                    <div class="col-md">
-                        <select id="mySelect">
-                            <option value="apple">Master</option>
-                            <option value="orange">Admin</option>
-                            <option value="pineapple">Usuario</option>
-                          </select>
-                       
-                    </div>
-                </div>
+                        
+                    </tbody>
+                </table>
             </div>
 
         </div>
     </div>
+
 </div>

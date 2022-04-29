@@ -2,18 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { UserComponent } from './users.component';
+import { MyApisComponent } from './my-apis.component';
 import { SharedModule } from './../../shared/shared.module';
-import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [MyApisComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: UserComponent }]),
+    RouterModule.forChild([{ path: '', component: MyApisComponent }]),
     SharedModule,
-    FormsModule
   ],
 })
-export class UsersModule {}
+export class MyApisModule {}
