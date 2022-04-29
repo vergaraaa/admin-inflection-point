@@ -1,0 +1,6 @@
+.delete-route {
+    /* position: absolute; */
+    padding: 0px;
+    display: flex;
+    justify-content: end;
+}

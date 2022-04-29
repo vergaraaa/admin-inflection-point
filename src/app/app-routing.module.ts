@@ -41,6 +41,20 @@ const routes: Routes = [
         data: { requiresLogin: true },
         canActivate: [AuthGuard],
     },
+    {
+        path: 'create-api',
+        loadChildren: () =>
+        import('./views/api-form/api-form.module').then((m) => m.ApiFormModule),
+        data: { requiresLogin: true },
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'create-route/:api',
+        loadChildren: () =>
+        import('./views/route-form/route-form.module').then((m) => m.RouteFormModule),
+        data: { requiresLogin: true },
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({

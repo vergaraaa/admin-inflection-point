@@ -22,14 +22,13 @@ export class ApiService {
     );
   }
 
+  createApi(){
+      
+  }
+
   getApisOfUser(){
-
-    let userId = localStorage.getItem('user_id')
-
-    console.log(userId)
-
-    return this.http.get(`http://localhost:3000/api/apis/getApisOfUser/${userId}`
-    );
+    let userId = localStorage.getItem('user_id');
+    return this.http.get(`http://localhost:3000/api/apis/getApisOfUser/${userId}`);
 
   }
 
