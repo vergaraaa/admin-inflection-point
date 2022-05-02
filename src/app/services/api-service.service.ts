@@ -10,29 +10,29 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getApisData() {
-    return this.http.get('http://localhost:3000/api/apis/');
+    return this.http.get('https://api-inflection-point.herokuapp.com/api/apis/');
   }
 
   getApiDetail(apiId: number) {
-    return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
+    return this.http.get(`https://api-inflection-point.herokuapp.com/api/apis/${apiId}`);
   }
 
   getRouteDetails(routeId: number) {
     return this.http.get(
-      `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
+      `https://api-inflection-point.herokuapp.com/api/apis/getRouteDetails/${routeId}`
     );
   }
 
   createApi(api: Api){
       return this.http.post(
-        `http://localhost:3000/api/apis/addApi`,
+        `https://api-inflection-point.herokuapp.com/api/apis/addApi`,
         api
       )
   }
 
   getApisOfUser(){
     let userId = localStorage.getItem('user_id');
-    return this.http.get(`http://localhost:3000/api/apis/getApisOfUser/${userId}`);
+    return this.http.get(`https://api-inflection-point.herokuapp.com/api/apis/getApisOfUser/${userId}`);
 
   }
 

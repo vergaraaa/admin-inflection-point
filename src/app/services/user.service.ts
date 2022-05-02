@@ -18,7 +18,7 @@ export class UserService {
         }
 
         return this.http.post(
-            `http://localhost:3000/api/users/`, body
+            `https://api-inflection-point.herokuapp.com/api/users/`, body
         );
     }
 
@@ -28,7 +28,7 @@ export class UserService {
         }
 
         return this.http.put(
-            `http://localhost:3000/api/users/updateUserRole/${id}`, body
+            `https://api-inflection-point.herokuapp.com/api/users/updateUserRole/${id}`, body
         );
     }
 
@@ -38,7 +38,7 @@ export class UserService {
         }
 
         return this.http.post(
-            `http://localhost:3000/api/users/getUserByEmail`, body
+            `https://api-inflection-point.herokuapp.com/api/users/getUserByEmail`, body
         );
     }
 
@@ -57,7 +57,7 @@ export class UserService {
 
         return this.http.get(
             
-            `http://localhost:3000/api/users/`
+            `https://api-inflection-point.herokuapp.com/api/users/`
                 
         );
 

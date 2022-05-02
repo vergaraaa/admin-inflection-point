@@ -49,7 +49,7 @@
                                     <option [ngValue]="2" [selected]="user.role_id == 2">Admin</option>
                                     <option [ngValue]="3" [selected]="user.role_id == 3">Usuario</option>
                                 </select>
-                                <div *ngIf="user.role_id != roleIds[i] then thenBlockImage"></div>
+                                <div *ngIf="user.role_id != roleIds[i]  then thenBlockImage"></div>
                                 <ng-template #thenBlockImage>
                                     <i class="fa-solid fa-floppy-disk ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>                               
                                 </ng-template>
