@@ -1,13 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { map } from 'rxjs';
+
 @Injectable({
     providedIn: 'root',
 })
 export class UserService {
-    private _sanitizer: any;
     constructor(private http: HttpClient) { }
+
+    generateToken(id: String) {
+        return this.http.get(
+            `http://localhost:3000/api/users/generateToken/${id}`,
+        );
+    }
 
     createUser(first_name: String, last_name: String, role_id: number, email: String) {
         var body = {
@@ -18,17 +23,17 @@ export class UserService {
         }
 
         return this.http.post(
-            `https://api-inflection-point.herokuapp.com/api/users/`, body
+            `http://localhost:3000/api/users/`, body
         );
     }
 
-    editRole(id : number, role_id: number) {
+    editRole(id: number, role_id: number) {
         var body = {
-            'role_id': role_id
+            'role_id': role_id,
         }
 
         return this.http.put(
-            `https://api-inflection-point.herokuapp.com/api/users/updateUserRole/${id}`, body
+            `http://localhost:3000/api/users/updateUserRole/${id}`, body
         );
     }
 
@@ -38,7 +43,7 @@ export class UserService {
         }
 
         return this.http.post(
-            `https://api-inflection-point.herokuapp.com/api/users/getUserByEmail`, body
+            `http://localhost:3000/api/users/getUserByEmail`, body
         );
     }
 
@@ -53,14 +58,19 @@ export class UserService {
         )
     }
 
-    getUsers(){
-
+    getUsers() {
         return this.http.get(
-            
-            `https://api-inflection-point.herokuapp.com/api/users/`
-                
+            `http://localhost:3000/api/users/`
         );
 
+    }
+
+    getUserRole() {
+        var body = {
+            'token': localStorage.getItem('token')
+        }
+
+        return this.http.post(`http://localhost:3000/api/users/getUserRole`, body);
     }
 
     // updateUserRole(){

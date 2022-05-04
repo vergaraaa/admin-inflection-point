@@ -1,32 +1,70 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { UserService } from '../services/user.service';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+    user_role: number = 0;
+    constructor(private router: Router, private userService: UserService) { }
 
-    constructor(private router: Router) {  }
+    getUserRole(){
+        this.userService.getUserRole().subscribe({
+            next: (res: any) => {
+                console.log(res);
+                this.user_role = res.role;
+            },
+            error: err => console.error(err)
+        })
+    }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        let url: string = state.url;
+        return this.checkLogin(route, url);
+    }
+
+    checkLogin(route: ActivatedRouteSnapshot, url: any) {
         const requiresLogin = route.data['requiresLogin'];
+        const role = route.data['role'];
 
-        if(requiresLogin){
+        if (requiresLogin ) {
             // not logged in so redirect to login page
-            if (localStorage.getItem('google_auth') || localStorage.getItem('microsoft_auth')) {
+
+            if (localStorage.getItem('token')) {
+                if(role <= 2){
+                    this.userService.getUserRole().subscribe({
+                        next: (res: any) => {
+                            this.user_role = res.role;
+                            if (localStorage.getItem('token')) {
+                                if (this.user_role > role) {
+                                    this.router.navigate(['/home']);
+                                    return false;
+                                }
+                                return true;
+                            }
+                
+                            this.router.navigate(['/login']);
+                            return false;
+                        },
+                        error: err => console.error(err)
+                    })
+                }
                 return true;
             }
-            
-            this.router.navigate(['/login']);
-            return false;
-        }
-        else{
-            // logged in so redirect to home page
-            if (localStorage.getItem('google_auth') || localStorage.getItem('microsoft_auth')) {
-                this.router.navigate(['/']);
+            else{
+                this.router.navigate(['/login']);
                 return false;
             }
-            
+        }
+        else {
+            // logged in so redirect to home page
+            if (localStorage.getItem('token')) {
+                this.router.navigate(['/home']);
+                return false;
+            }
+
             return true;
         }
     }

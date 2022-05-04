@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #282c38">
     <div class="container-fluid">
         <a class="navbar-brand" routerLink="/">
-            <img src="../../../assets/img/inflection_point_logo.png" class="img-fluid ms-4" id="logo" />
+            <img src="../../../assets/inflection_point_logo.png" class="img-fluid ms-4" id="logo" />
         </a>
         <button class="navbar-toggler border-0 ms-auto text-white" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -12,9 +12,8 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link px-5 py-4 my-auto" routerLink="/home" routerLinkActive="active">HOME</a>
-                    <a class="nav-link px-5 py-4 my-auto" routerLink="/my-apis" routerLinkActive="active">MIS APIS</a>
-                    <a class="nav-link px-5 py-4 my-auto" routerLink="/users" routerLinkActive="active">USUARIOS</a>
+
+                    <a *ngFor="let navlink of navlinks" class="nav-link px-5 py-4 my-auto" [routerLink]="navlink.path" routerLinkActive="active">{{navlink.data.navname}}</a>
 
                     <div class="dropdown mx-auto">
                         <a class="dropdown-toggle nav-link px-5 py-4 my-auto" type="button" id="dropdownMenu2"

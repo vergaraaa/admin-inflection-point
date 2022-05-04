@@ -1,39 +1,42 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/api.user';
-import {Api} from '../models/api.model'
+import { Api } from '../models/api.model'
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-  getApisData() {
-    return this.http.get('https://api-inflection-point.herokuapp.com/api/apis/');
-  }
+    getApisData() {
+        return this.http.get('http://localhost:3000/api/apis/');
+    }
 
-  getApiDetail(apiId: number) {
-    return this.http.get(`https://api-inflection-point.herokuapp.com/api/apis/${apiId}`);
-  }
+    getApiDetail(apiId: number) {
+        return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
+    }
 
-  getRouteDetails(routeId: number) {
-    return this.http.get(
-      `https://api-inflection-point.herokuapp.com/api/apis/getRouteDetails/${routeId}`
-    );
-  }
+    getRouteDetails(routeId: number) {
+        return this.http.get(
+            `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
+        );
+    }
 
-  createApi(api: Api){
-      return this.http.post(
-        `https://api-inflection-point.herokuapp.com/api/apis/addApi`,
-        api
-      )
-  }
+    createApi(api: Api) {
+        return this.http.post(
+            `http://localhost:3000/api/apis/addApi`,
+            api
+        )
+    }
 
-  getApisOfUser(){
-    let userId = localStorage.getItem('user_id');
-    return this.http.get(`https://api-inflection-point.herokuapp.com/api/apis/getApisOfUser/${userId}`);
+    getApisOfUser() {
+        var body = {
+            'token': localStorage.getItem('token')
+        }
 
-  }
+        return this.http.post(`http://localhost:3000/api/apis/getApisOfUser/`, body);
+    }
 
 }
