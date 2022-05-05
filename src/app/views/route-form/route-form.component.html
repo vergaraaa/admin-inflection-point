@@ -3,12 +3,21 @@
     <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="sectionModalLabel">Nueva sección</h5>
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="sectionModalLabel">Nueva sección</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="sectionModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="sectionModalName" class="form-control">
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -23,12 +32,40 @@
     <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="headerModalLabel">Nuevo header</h5>
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="headerModalLabel">Nuevo header</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="headerModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="headerModalName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="InputParameterModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-select" name="InputParameterModalType" aria-label="Tipo">
+                                    <option value="" disabled selected hidden>Seleccionar...</option><!-- Si esto esta seleccionado error-->
+                                    <option value="1">Minion</option>
+                                    <option value="2">Gru</option>
+                                    <option value="3">Nefario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="headerModalDescription" class="form-label">Descripción:</label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea name="headerModalDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -40,63 +77,148 @@
     </div>
 
     <!-- INPUT PARAMETER MODAL -->
-    <div class="modal fade" id="inputParameterModal" tabindex="-1" aria-labelledby="inputParameterModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="inputParameterModal" tabindex="-1" aria-labelledby="inputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="inputParameterModalLabel">Nuevo parámetro de entrada</h5>
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="inputParameterModalLabel">Nuevo parámetro de entrada</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="InputParameterModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="InputParameterModalName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="InputParameterModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-select" name="InputParameterModalType" aria-label="Tipo">
+                                    <option value="" disabled selected hidden>Seleccionar...</option><!-- Si esto esta seleccionado error-->
+                                    <option value="1">Minion</option>
+                                    <option value="2">Gru</option>
+                                    <option value="3">Nefario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="InputParameterModalDescription" class="form-label">Descripción: </label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea name="InputParameterModalDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addInputParameter()">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addInputParameter()">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- OUTPUT PARAMETER MODAL -->
-    <div class="modal fade" id="outputParameterModal" tabindex="-1" aria-labelledby="outputParameterModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="outputParameterModal" tabindex="-1" aria-labelledby="outputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="outputParameterModalLabel">Nuevo parámetro de salida</h5>
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="outputParameterModalLabel">Nuevo parámetro de salida</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="OutputParameterModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="OutputParameterModalName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="OutputParameterModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-select" name="OutputParameterModalType" aria-label="Tipo">
+                                    <option value="" disabled selected hidden>Seleccionar...</option><!-- Si esto esta seleccionado error-->
+                                    <option value="1">Minion</option>
+                                    <option value="2">Gru</option>
+                                    <option value="3">Nefario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="OutputParameterModalDescription" class="form-label">Descripción: </label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea name="OutputParameterModalDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addOutputParameter()">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addOutputParameter()">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- QUERY STRING MODAL -->
-    <div class="modal fade" id="queryStringModal" tabindex="-1" aria-labelledby="queryStringModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="queryStringModal" tabindex="-1" aria-labelledby="queryStringModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="queryStringModalLabel">Nuevo query string</h5>
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="queryStringModalLabel">Nuevo query string</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="queryStringModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" name="queryStringModalName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="queryStringModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-select" name="queryStringModalType" aria-label="Tipo">
+                                    <option value="" disabled selected hidden>Seleccionar...</option><!-- Si esto esta seleccionado error-->
+                                    <option value="1">Minion</option>
+                                    <option value="2">Gru</option>
+                                    <option value="3">Nefario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label for="InputParameterModalObligatory" class="form-label p-2">Obligatorio:</label>
+                        <label class="radio-inline p-2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="1">Sí   
+                            </label>
+                        <label class="radio-inline p-2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="2">No
+                        </label>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="queryStringModalDescription" class="form-label">Descripción: </label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea name="queryStringModalDescription" class="form-control" rows="3"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addQueryString()">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addQueryString()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -112,8 +234,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="route-url" class="form-label">URL de la ruta</label>
-                        <input type="text" name="route-url" class="form-control" id="route-url"
-                            placeholder="URL de la ruta">
+                        <input type="text" name="route-url" class="form-control" id="route-url" placeholder="URL de la ruta">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -129,8 +250,7 @@
                                 </select>
                             </div>
                             <div class="col-md-1 text-center">
-                                <i data-bs-toggle="modal" data-bs-target="#sectionModal"
-                                    class="fa-solid fa-square-plus fa-lg"></i>
+                                <i data-bs-toggle="modal" data-bs-target="#sectionModal" class="fa-solid fa-square-plus fa-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -162,8 +282,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#headerModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#headerModal" class="fa-solid fa-square-plus fa-lg"></i></div>
                 </div>
                 <div class="col-md-3">
                     <h6 class="text-center">Parámetros de entrada</h6>
@@ -176,8 +295,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#inputParameterModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#inputParameterModal" class="fa-solid fa-square-plus fa-lg"></i></div>
                 </div>
                 <div class="col-md-3">
                     <h6 class="text-center">Parámetros de salida</h6>
@@ -190,8 +308,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#outputParameterModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#outputParameterModal" class="fa-solid fa-square-plus fa-lg"></i></div>
                 </div>
                 <div class="col-md-3">
                     <h6 class="text-center">Query strings</h6>
@@ -204,8 +321,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#queryStringModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
+                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#queryStringModal" class="fa-solid fa-square-plus fa-lg"></i></div>
                 </div>
             </div>
             <div class="d-grid col-md-2 ms-auto mt-3">
