@@ -49,12 +49,12 @@ export class LoginComponent implements OnInit {
                             this.userService.generateToken(id).subscribe({
                                 next: (res: any) => {
                                     localStorage.setItem('token', res.token);
+                                    this.removeBackground();
+                                    this.router.navigate(['/home']);
                                 },
                                 error: err => console.error(err)
                             });
                             // Redirect 
-                            this.removeBackground();
-                            this.router.navigate(['/home']);
                         }
                     });
                 }
@@ -63,6 +63,8 @@ export class LoginComponent implements OnInit {
                     this.userService.generateToken(id).subscribe({
                         next: (res: any) => {
                             localStorage.setItem('token', res.token);
+                            this.removeBackground();
+                            this.router.navigate(['/home']);
                         },
                         error: err => console.error(err)
                     });
