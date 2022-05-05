@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "angularx-social-login": "^4.1.0",
+    "jquery": "^3.6.0",
     "remove": "^0.1.5",
     "rxjs": "~7.5.0",
     "zone.js": "~0.11.4"

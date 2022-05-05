@@ -1,0 +1,154 @@
+<!-- NAME, TEST, OPERATIONS -->
+<div *ngIf="!isLoading">
+  <div class="row mt-4 align-items-center">
+    <div class="col-md-4 my-auto">
+      <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
+    </div>
+    <div class="col-md-4 my-3">
+      <div class="">
+        <button class="btn btn-probar" type="button">Probar</button>
+      </div>
+    </div>
+    <div class="col-md-4 mt-1">
+      <div class="row">
+        <div class="col">
+          <i class="mx-4 fa-solid fa-pen editar"></i>
+          <i class="fa-solid fa-trash borrar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHOD -->
+  <div class="row mt-3">
+    <h5>Método: {{ route.method }}</h5>
+  </div>
+
+  <!-- RUTA -->
+  <div class="row mt-3">
+    <h5>{{ route.route }}</h5>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="row mt-3">
+    <h5>Descripción</h5>
+    <p class="p">
+      {{ route.description }}
+    </p>
+  </div>
+
+  <!-- PARÁMETROS DE ENTRADA -->
+  <div class="row mt-3">
+    <h5>Parámetros de entrada</h5>
+    <div class="col-12">
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Obligatorio</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="input_params.length > 0">
+          <tr *ngFor="let input_param of input_params">
+            <td>{{ input_param.name }}</td>
+            <td>{{ input_param.data_type }}</td>
+            <td>{{ input_param.required ? "Si" : "No" }}</td>
+            <td>{{ input_param.description }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="input_params.length == 0">
+          <tr>
+            <td colspan="4">No hay parámetros de entrada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <h5>Query Strings</h5>
+    <div class="col-12">
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Obligatorio</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="query_strings.length > 0">
+          <tr *ngFor="let query_string of query_strings">
+            <td>{{ query_string.name }}</td>
+            <td>{{ query_string.data_type }}</td>
+            <td>{{ query_string.required ? "Si" : "No" }}</td>
+            <td>{{ query_string.description }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="query_strings.length == 0">
+          <tr>
+            <td colspan="4">No hay query strings</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row mt-3">
+      <h5>Headers</h5>
+      <div class="col-12">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="headers.length > 0">
+            <tr *ngFor="let header of headers">
+              <td>{{ header.name }}</td>
+              <td>{{ header.data_type }}</td>
+              <td>{{ header.description }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="headers.length == 0">
+            <tr>
+              <td colspan="3">No hay headers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <h5>Parámetros de salida</h5>
+      <div class="col-12">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="output_params.length > 0">
+            <tr *ngFor="let output_param of output_params">
+              <td>{{ output_param.name }}</td>
+              <td>{{ output_param.data_type }}</td>
+              <td>{{ output_param.description }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="output_params.length == 0">
+            <tr>
+              <td colspan="4">No hay parámetros de entrada</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
