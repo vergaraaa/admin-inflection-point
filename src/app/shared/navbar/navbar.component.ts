@@ -14,11 +14,11 @@ export class NavbarComponent implements OnInit {
     profilePicture: any | string = "";
     googleLogin: boolean = true;
     isLoadingImage: boolean = true;
+    navlinks: any = [];
 
     constructor(
         private router: Router,
         private authService: SocialAuthService,
-        private http: HttpClient,
         private userService: UserService
     ) { }
 
@@ -33,12 +33,21 @@ export class NavbarComponent implements OnInit {
         else if (!this.googleLogin) {
             this.getUserImageMicrosoft();
         }
-        else {
-            this.router.navigate(['/login']);
-        }
+
+        this.userService.getUserRole().subscribe({
+            next: (res: any) => {
+                for (let i = 1; i < this.router.config.length; i++) {
+                    if (this.router.config[i].data!['role'] >= res.role && this.router.config[i].data!['nav']) {
+                        this.navlinks.push(this.router.config[i]);
+                    }
+                }
+            },
+            error: err => console.error(err)
+        })
+
     }
 
-    getUserImageGoogle() : string {
+    getUserImageGoogle(): string {
         let user = JSON.parse(localStorage.getItem('google_auth')!);
         this.isLoadingImage = false;
         return user.photoUrl;
@@ -62,9 +71,10 @@ export class NavbarComponent implements OnInit {
     }
 
     logout() {
-        this.authService.signOut(true);
-        localStorage.clear();
-        this.router.navigate(['/login']);
+        this.authService.signOut(true).then(() => {
+            localStorage.clear();
+            this.router.navigate(['/login']);
+        }).catch((e) => console.error(e));
     }
 
     createImageFromBlob(image: Blob) {
