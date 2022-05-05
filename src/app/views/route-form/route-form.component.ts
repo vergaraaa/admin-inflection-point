@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Section, Header, InputParameter, OutputParameter, QueryString } from "src/app/models/forms.model";
-import * as $ from "jquery";
 
 @Component({
     selector: "app-route-form",
