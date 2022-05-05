@@ -1,6 +1,24 @@
 <!-- NAME, TEST, OPERATIONS -->
 <div *ngIf="!isLoading">
   <div class="row mt-4 align-items-center">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              ¿Seguro que quieres eliminar esta ruta?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteRoute()">Borrar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  
     <div class="col-md-4 my-auto">
       <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
     </div>
@@ -12,8 +30,15 @@
     <div class="col-md-4 mt-1">
       <div class="row">
         <div class="col">
-          <i class="mx-4 fa-solid fa-pen editar"></i>
-          <i class="fa-solid fa-trash borrar"></i>
+
+          <button >
+            <i class="fa-solid fa-pen editar"></i>
+          </button>
+
+          <button >
+            <i class="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+        </button>
+
         </div>
       </div>
     </div>
