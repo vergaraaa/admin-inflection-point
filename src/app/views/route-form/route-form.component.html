@@ -1,216 +1,694 @@
 <div class="container mt-3">
-    <!-- SECTION MODAL -->
-    <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="sectionModalLabel">Nueva sección</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addSection()">Save
-                        changes</button>
-                </div>
-            </div>
+  <!-- SECTION MODAL -->
+  <div
+    class="modal fade"
+    id="sectionModal"
+    tabindex="-1"
+    aria-labelledby="sectionModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100" id="sectionModalLabel">
+            Nueva sección
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <div class="modal-body">
+          <form>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="sectionModalName" class="form-label">Nombre:</label>
+              </div>
+              <div class="col-md-10">
+                <input
+                  type="text"
+                  name="sectionModalName"
+                  class="form-control"
+                  [(ngModel)]="iSectionAdd"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addSection()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- HEADER MODAL -->
-    <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="headerModalLabel">Nuevo header</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addHeader()">Save
-                        changes</button>
-                </div>
-            </div>
+  <!-- HEADER MODAL -->
+  <div
+    class="modal fade"
+    id="headerModal"
+    tabindex="-1"
+    aria-labelledby="headerModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100" id="headerModalLabel">Nuevo header</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <div class="modal-body">
+          <form>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="headerModalName" class="form-label">Nombre:</label>
+              </div>
+              <div class="col-md-10">
+                <input
+                  type="text"
+                  name="headerModalName"
+                  class="form-control"
+                  [(ngModel)]="iHeaderName"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="InputParameterModalType" class="form-label"
+                  >Tipo:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <select
+                  class="form-select"
+                  name="InputParameterModalType"
+                  aria-label="Tipo"
+                  [(ngModel)]="iHeaderType"
+                >
+                  <option value="" disabled selected hidden>
+                    Seleccionar...
+                  </option>
+                  <!-- Si esto esta seleccionado error-->
+                  <option
+                    *ngFor="let dataType of dataTypes"
+                    [label]="dataType.name | titlecase"
+                    [value]="dataType.id"
+                  ></option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center ps-2 pt-2">
+              <label for="headerModalDescription" class="form-label"
+                >Descripción:</label
+              >
+            </div>
+            <div class="row align-items-center px-3">
+              <textarea
+                name="headerModalDescription"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="iHeaderDescription"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addHeader()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- INPUT PARAMETER MODAL -->
-    <div class="modal fade" id="inputParameterModal" tabindex="-1" aria-labelledby="inputParameterModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="inputParameterModalLabel">Nuevo parámetro de entrada</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addInputParameter()">Save changes</button>
-                </div>
-            </div>
+  <!-- INPUT PARAMETER MODAL -->
+  <div
+    class="modal fade"
+    id="inputParameterModal"
+    tabindex="-1"
+    aria-labelledby="inputParameterModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100" id="inputParameterModalLabel">
+            Nuevo parámetro de entrada
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <div class="modal-body">
+          <form>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="InputParameterModalName" class="form-label"
+                  >Nombre:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <input
+                  type="text"
+                  name="InputParameterModalName"
+                  class="form-control"
+                  [(ngModel)]="iInputParamName"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="InputParameterModalType" class="form-label"
+                  >Tipo:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <select
+                  class="form-select"
+                  name="InputParameterModalType"
+                  aria-label="Tipo"
+                  [(ngModel)]="iInputParamType"
+                >
+                  <option value="" disabled selected hidden>
+                    Seleccionar...
+                  </option>
+                  <!-- Si esto esta seleccionado error-->
+                  <option
+                    *ngFor="let dataType of dataTypes"
+                    [label]="dataType.name | titlecase"
+                    [value]="dataType.id"
+                  ></option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center ps-2 pt-2">
+              <label for="InputParameterModalDescription" class="form-label"
+                >Descripción:
+              </label>
+            </div>
+            <div class="row align-items-center px-3">
+              <textarea
+                name="InputParameterModalDescription"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="iInputParamDescription"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addInputParameter()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- OUTPUT PARAMETER MODAL -->
-    <div class="modal fade" id="outputParameterModal" tabindex="-1" aria-labelledby="outputParameterModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="outputParameterModalLabel">Nuevo parámetro de salida</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addOutputParameter()">Save changes</button>
-                </div>
-            </div>
+  <!-- OUTPUT PARAMETER MODAL -->
+  <div
+    class="modal fade"
+    id="outputParameterModal"
+    tabindex="-1"
+    aria-labelledby="outputParameterModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100" id="outputParameterModalLabel">
+            Nuevo parámetro de salida
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
+        <div class="modal-body">
+          <form>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="OutputParameterModalName" class="form-label"
+                  >Nombre:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <input
+                  type="text"
+                  name="OutputParameterModalName"
+                  class="form-control"
+                  [(ngModel)]="iOutputParamName"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="OutputParameterModalType" class="form-label"
+                  >Tipo:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <select
+                  class="form-select"
+                  name="OutputParameterModalType"
+                  aria-label="Tipo"
+                  [(ngModel)]="iOutputParamType"
+                >
+                  <option value="" disabled selected hidden>
+                    Seleccionar...
+                  </option>
+                  <!-- Si esto esta seleccionado error-->
+                  <option
+                    *ngFor="let dataType of dataTypes"
+                    [label]="dataType.name | titlecase"
+                    [value]="dataType.id"
+                  ></option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center ps-2 pt-2">
+              <label for="OutputParameterModalDescription" class="form-label"
+                >Descripción:
+              </label>
+            </div>
+            <div class="row align-items-center px-3">
+              <textarea
+                name="OutputParameterModalDescription"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="iOutputParamDescription"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addOutputParameter()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- QUERY STRING MODAL -->
-    <div class="modal fade" id="queryStringModal" tabindex="-1" aria-labelledby="queryStringModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="queryStringModalLabel">Nuevo query string</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        (click)="addQueryString()">Save changes</button>
-                </div>
-            </div>
+  <!-- QUERY STRING MODAL -->
+  <div
+    class="modal fade"
+    id="queryStringModal"
+    tabindex="-1"
+    aria-labelledby="queryStringModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100" id="queryStringModalLabel">
+            Nuevo query string
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
-    </div>
+        <div class="modal-body">
+          <form>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="queryStringModalName" class="form-label"
+                  >Nombre:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <input
+                  type="text"
+                  name="queryStringModalName"
+                  class="form-control"
+                  [(ngModel)]="iQueryStringName"
+                />
+              </div>
+            </div>
+            <div class="row align-items-center p-2">
+              <div class="col-md-2">
+                <label for="queryStringModalType" class="form-label"
+                  >Tipo:</label
+                >
+              </div>
+              <div class="col-md-10">
+                <select
+                  class="form-select"
+                  name="queryStringModalType"
+                  aria-label="Tipo"
+                  [(ngModel)]="iQueryStringType"
+                >
+                  <option value="" disabled selected hidden>
+                    Seleccionar...
+                  </option>
+                  <!-- Si esto esta seleccionado error-->
+                  <option
+                    *ngFor="let dataType of dataTypes"
+                    [label]="dataType.name | titlecase"
+                    [value]="dataType.id"
+                  ></option>
+                </select>
+              </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-11 mx-auto">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="route-name" class="form-label">Nombre</label>
-                        <input type="text" name="route-name" class="form-control" id="route-name" placeholder="Nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label for="route-url" class="form-label">URL de la ruta</label>
-                        <input type="text" name="route-url" class="form-control" id="route-url"
-                            placeholder="URL de la ruta">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="route-method" class="form-label">Sección</label>
-                    <div class="mb-3">
-                        <div class="row align-items-center g-0">
-                            <div class="col-md-11">
-                                <select class="form-select" name="route-section" id="route-section">
-                                    <option value="" disabled selected hidden>Seleccionar...</option>
-                                    <option *ngFor="let section of sections" [value]="section.name">{{section.name}}
-                                    </option>
-                                    <!-- <option value="add">Añadir sección</option> -->
-                                </select>
-                            </div>
-                            <div class="col-md-1 text-center">
-                                <i data-bs-toggle="modal" data-bs-target="#sectionModal"
-                                    class="fa-solid fa-square-plus fa-lg"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <label for="route-method" class="form-label">Método</label>
-                    <div class="mb-3">
-                        <select class="form-select" name="route-method" id="route-method">
-                            <option value="" disabled selected hidden>Seleccionar...</option>
-                            <option value="get">GET</option>
-                            <option value="post">POST</option>
-                            <option value="put">PUT</option>
-                            <option value="delete">DELETE</option>
-                        </select>
-                    </div>
-                </div>
-                <label for="api-route-description" class="form-label">Descripción</label>
-                <div class="mb-3">
-                    <textarea class="form-control" name="route-description" id="route-description" rows="3" placeholder="Descripción..."></textarea>
-                </div>
+            <label for="InputParameterModalObligatory" class="form-label p-2"
+              >Obligatorio:</label
+            >
+            <label class="radio-inline p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                value="1"
+                [(ngModel)]="iQueryStringRequired"
+              />Sí
+            </label>
+            <label class="radio-inline p-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                value="0"
+                [(ngModel)]="iQueryStringRequired"
+              />No
+            </label>
+            <div class="row align-items-center ps-2 pt-2">
+              <label for="queryStringModalDescription" class="form-label"
+                >Descripción:
+              </label>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <h6 class="text-center">Headers</h6>
-                    <div class="max-height">
-                        <div *ngFor="let header of headers; let i = index" class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" [value]="header.name" disabled>
-                                <span class="input-group-text"><i (click)="deleteHeader(i)"
-                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#headerModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="text-center">Parámetros de entrada</h6>
-                    <div class="max-height">
-                        <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" [value]="input_parameter.name" disabled>
-                                <span class="input-group-text"><i (click)="deleteInputParameter(i)"
-                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#inputParameterModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="text-center">Parámetros de salida</h6>
-                    <div class="max-height">
-                        <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" [value]="output_parameter.name" disabled>
-                                <span class="input-group-text"><i (click)="deleteOutputParameter(i)"
-                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#outputParameterModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="text-center">Query strings</h6>
-                    <div class="max-height">
-                        <div *ngFor="let query_string of query_strings; let i = index" class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" [value]="query_string.name" disabled>
-                                <span class="input-group-text"><i (click)="deleteQueryString(i)"
-                                        class="fa-solid fa-circle-xmark fa-lg"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-center"><i data-bs-toggle="modal" data-bs-target="#queryStringModal"
-                            class="fa-solid fa-square-plus fa-lg"></i></div>
-                </div>
+            <div class="row align-items-center px-3">
+              <textarea
+                name="queryStringModalDescription"
+                class="form-control"
+                rows="3"
+                [(ngModel)]="iQueryStringDescription"
+              ></textarea>
             </div>
-            <div class="d-grid col-md-2 ms-auto mt-3">
-                <button class="btn btn-primary" type="button">Agregar</button>
-            </div>
+          </form>
         </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="addQueryString()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="row">
+    <div class="col-md-11 mx-auto">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="route-name" class="form-label">Nombre</label>
+            <input
+              type="text"
+              name="route-name"
+              class="form-control"
+              id="route-name"
+              placeholder="Nombre"
+              [(ngModel)]="iName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="route-url" class="form-label">URL de la ruta</label>
+            <input
+              type="text"
+              name="route-url"
+              class="form-control"
+              id="route-url"
+              placeholder="URL de la ruta"
+              [(ngModel)]="iURL"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="route-method" class="form-label">Sección</label>
+          <div class="mb-3">
+            <div class="row align-items-center g-0">
+              <div class="col-md-11">
+                <select
+                  class="form-select"
+                  name="route-section"
+                  id="route-section"
+                  [(ngModel)]="iSection"
+                >
+                  <option value="" disabled selected hidden>
+                    Seleccionar...
+                  </option>
+                  <option
+                    *ngFor="let section of sections"
+                    [label]="section.name"
+                    [value]="section.id"
+                  ></option>
+                  <!-- <option value="add">Añadir sección</option> -->
+                </select>
+              </div>
+              <div class="col-md-1 text-center">
+                <i
+                  data-bs-toggle="modal"
+                  data-bs-target="#sectionModal"
+                  class="fa-solid fa-square-plus fa-lg"
+                ></i>
+              </div>
+            </div>
+          </div>
+          <label for="route-method" class="form-label">Método</label>
+          <div class="mb-3">
+            <select
+              class="form-select"
+              name="route-method"
+              id="route-method"
+              [(ngModel)]="iMethod"
+            >
+              <option value="" disabled selected hidden>Seleccionar...</option>
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+          </div>
+        </div>
+        <label for="api-route-description" class="form-label"
+          >Descripción</label
+        >
+        <div class="mb-3">
+          <textarea
+            class="form-control"
+            name="route-description"
+            id="route-description"
+            rows="3"
+            placeholder="Descripción..."
+            [(ngModel)]="iDescription"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <h6 class="text-center">Headers</h6>
+          <div class="max-height">
+            <div *ngFor="let header of headers; let i = index" class="row">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="header.name"
+                  disabled
+                />
+                <span class="input-group-text"
+                  ><i
+                    (click)="deleteHeader(i)"
+                    class="fa-solid fa-circle-xmark fa-lg"
+                  ></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <i
+              data-bs-toggle="modal"
+              data-bs-target="#headerModal"
+              class="fa-solid fa-square-plus fa-lg"
+            ></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h6 class="text-center">Parámetros de entrada</h6>
+          <div class="max-height">
+            <div
+              *ngFor="let input_parameter of input_parameters; let i = index"
+              class="row"
+            >
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="input_parameter.name"
+                  disabled
+                />
+                <span class="input-group-text"
+                  ><i
+                    (click)="deleteInputParameter(i)"
+                    class="fa-solid fa-circle-xmark fa-lg"
+                  ></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <i
+              data-bs-toggle="modal"
+              data-bs-target="#inputParameterModal"
+              class="fa-solid fa-square-plus fa-lg"
+            ></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h6 class="text-center">Parámetros de salida</h6>
+          <div class="max-height">
+            <div
+              *ngFor="let output_parameter of output_parameters; let i = index"
+              class="row"
+            >
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="output_parameter.name"
+                  disabled
+                />
+                <span class="input-group-text"
+                  ><i
+                    (click)="deleteOutputParameter(i)"
+                    class="fa-solid fa-circle-xmark fa-lg"
+                  ></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <i
+              data-bs-toggle="modal"
+              data-bs-target="#outputParameterModal"
+              class="fa-solid fa-square-plus fa-lg"
+            ></i>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <h6 class="text-center">Query strings</h6>
+          <div class="max-height">
+            <div
+              *ngFor="let query_string of query_strings; let i = index"
+              class="row"
+            >
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  [value]="query_string.name"
+                  disabled
+                />
+                <span class="input-group-text"
+                  ><i
+                    (click)="deleteQueryString(i)"
+                    class="fa-solid fa-circle-xmark fa-lg"
+                  ></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <i
+              data-bs-toggle="modal"
+              data-bs-target="#queryStringModal"
+              class="fa-solid fa-square-plus fa-lg"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid col-md-2 ms-auto mt-3">
+        <button class="btn btn-primary" type="button" (click)="addRoute()">
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
