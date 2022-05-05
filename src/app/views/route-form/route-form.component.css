@@ -44,3 +44,7 @@
     border-color: #f1592A;
     box-shadow: 0 0 0 0.2rem #f1582a80;
 } 
+
+.fa-square-plus {
+    cursor: pointer;
+}

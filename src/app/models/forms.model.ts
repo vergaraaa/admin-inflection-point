@@ -1,45 +1,48 @@
 export interface QueryString {
-    id: number;
+    id?: number;
     name: string;
     type_id: number;
     description: string;
     required: boolean;
-    route_id: number;
+    route_id?: number;
   }
   
   export interface OutputParameter {
-    id: number;
+    id?: number;
     name: string;
     type_id: number;
     description: string;
-    route_id: number;
+    route_id?: number;
   }
   
   export interface InputParameter {
-    id: number;
+    id?: number;
     name: string;
     type_id: number;
     description: string;
-    route_id: number;
+    route_id?: number;
   }
   
   export interface Header {
-    id: number;
+    id?: number;
     name: string;
     type_id: number;
     description: string;
-    route_id: number;
+    route_id?: number;
   }
   
   export interface Route {
-    id: number;
+    id?: number;
     name: string;
     route: string;
     method: string;
-    type_id: number;
     description: string;
     section_id: number;
     api_id: number;
+    headers: Header[];
+    input_parameters: InputParameter[];
+    output_parameters: OutputParameter[];
+    query_strings: QueryString[];
   }
 
   export interface Section {
@@ -48,3 +51,7 @@ export interface QueryString {
     api_id: number
   }
   
+  export interface DataType {
+    id: number,
+    name: string
+  }
