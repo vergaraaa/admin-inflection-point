@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Routes } from "@angular/router";
-import { Section, Route } from "src/app/models/forms.model";
-import { ApiRouteComponent } from "./api-route/api-route.component";
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { Api } from "src/app/models/api.model";
 import { ApiService } from "src/app/services/api-service.service";
-
 @Component({
     selector: "app-api-form",
     templateUrl: "./api-form.component.html",
@@ -13,24 +11,26 @@ import { ApiService } from "src/app/services/api-service.service";
 
 export class ApiFormComponent implements OnInit {
 
-    // sections: Section[] = [];
-    // newSection: string = "";
-    // routes: Route[] = [{id: 0, name: '', route: '', method: '', type_id: 0, description: '', section_id: 0, api_id: 0}];
-    // routeComponents: ApiRouteComponent[] = [new ApiRouteComponent];
-
+    isEditing : boolean = false;
+    api_id: string | null = null;
     name: string = '';
     description: string = '';
     url: string = '';
+    api: Api = { id: 0, name: '', url: '', description: '', user_id: 0 };
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
-
+        this.api_id = this.route.snapshot.paramMap.get('api_id');
+        if (this.api_id != null) {
+            this.isEditing = true;
+            this.getApi();
+        }
     }
 
     onSubmit() {
         let userIdFromStorage
-        if(localStorage.getItem('user_id')) {
+        if (localStorage.getItem('user_id')) {
             userIdFromStorage = +localStorage.getItem('user_id')!
         } else {
             userIdFromStorage = 1
@@ -39,28 +39,30 @@ export class ApiFormComponent implements OnInit {
             name: this.name,
             description: this.description,
             url: this.url,
-            user_id: userIdFromStorage 
+            user_id: userIdFromStorage
         }
         this.apiService.createApi(api).subscribe(res => {
             console.log(res)
         })
     }
 
-    // addSection() {
-    //     let section: Section = { id: 0, name: this.newSection, api_id: 0 };
-    //     if (this.newSection != '') this.sections.push(section);
-    //     this.newSection = "";
-    // }
+    onEdit(){
+        console.log('guardando cambios');
+        this.apiService.editApi(+this.api_id!, this.api).subscribe({
+            next: (res: any) => {
+                console.log(res);
+                this.router.navigate(['home']);
+            },
+            error: err => console.error(err),
+        })
+    }
 
-    // deleteSection(index: number) {
-    //     this.sections.splice(index, 1);
-    // }
-    
-    // addRoute(){
-    //     this.routeComponents.push(new ApiRouteComponent);
-    // }
-    
-    // deleteRoute(index: number) {
-    //     this.routeComponents.splice(index, 1);
-    // }
+    getApi() {
+        this.apiService.getOneApi(+this.api_id!).subscribe({
+            next: (res: any) => {
+                this.api = res;
+            },
+            error: err => console.error(err)
+        })
+    }
 }

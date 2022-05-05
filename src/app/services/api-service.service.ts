@@ -39,4 +39,11 @@ export class ApiService {
         return this.http.post(`http://localhost:3000/api/apis/getApisOfUser/`, body);
     }
 
+    getOneApi(apiId: number){
+        return this.http.get(`http://localhost:3000/api/apis/getOneApi/${apiId}`);
+    }
+
+    editApi(apiId: number, api: Api){
+        return this.http.put(`http://localhost:3000/api/apis/${apiId}`, api);
+    }
 }

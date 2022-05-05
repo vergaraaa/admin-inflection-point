@@ -49,6 +49,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: 'edit-api/:api_id',
+        loadChildren: () =>
+            import('./views/api-form/api-form.module').then((m) => m.ApiFormModule),
+        data: { requiresLogin: true, role: 2, nav: false },
+        canActivate: [AuthGuard],
+    },
+    {
         path: 'create-route/:api',
         loadChildren: () =>
             import('./views/route-form/route-form.module').then((m) => m.RouteFormModule),
