@@ -12,7 +12,7 @@ export class MyApisComponent implements OnInit {
 
   apisData: Api[] = [];
   idSelectedApi: number = 0;
-  indexSelectedApi: number = 0;
+  nameSelectedApi: string = '';
   query: string = "";
 
   constructor(private apiService: ApiService, private router: Router) {}
@@ -28,6 +28,12 @@ export class MyApisComponent implements OnInit {
       this.apisData = data;
     });
   }
+
+  onClickDelete(api_id : number, name: string) {
+      this.idSelectedApi = api_id;
+      this.nameSelectedApi = name;
+  }
+
 
   deleteApi(){
     this.apiService.deleteApi(this.idSelectedApi).subscribe((data: any) => {

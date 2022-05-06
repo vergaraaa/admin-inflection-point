@@ -11,7 +11,7 @@ import { ApiService } from "src/app/services/api-service.service";
 
 export class ApiFormComponent implements OnInit {
 
-    isEditing : boolean = false;
+    isEditing: boolean = false;
     api_id: string | null = null;
     name: string = '';
     description: string = '';
@@ -29,24 +29,16 @@ export class ApiFormComponent implements OnInit {
     }
 
     onSubmit() {
-        let userIdFromStorage
-        if (localStorage.getItem('user_id')) {
-            userIdFromStorage = +localStorage.getItem('user_id')!
-        } else {
-            userIdFromStorage = 1
-        }
-        const api: Api = {
-            name: this.name,
-            description: this.description,
-            url: this.url,
-            user_id: userIdFromStorage
-        }
-        this.apiService.createApi(api).subscribe(res => {
-            console.log(res)
-        })
+        this.apiService.createApi(this.api).subscribe({
+            next: (res: any) => {
+                console.log(res);
+                this.router.navigate(['home']);
+            },
+            error: err => console.error(err),
+        });
     }
 
-    onEdit(){
+    onEdit() {
         console.log('guardando cambios');
         this.apiService.editApi(+this.api_id!, this.api).subscribe({
             next: (res: any) => {

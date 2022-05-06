@@ -11,48 +11,59 @@ export class ApiService {
     constructor(private http: HttpClient) { }
 
     getApisData() {
-      return this.http.get('http://localhost:3000/api/apis/');
+        return this.http.get('http://localhost:3000/api/apis/');
     }
 
     getApiDetail(apiId: number) {
-      return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
+        return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
+    }
+
+    getRouteDetails(routeId: number) {
+        return this.http.get(
+            `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
+        );
     }
 
     createApi(api: Api) {
-      return this.http.post(
-          `http://localhost:3000/api/apis/addApi`,
-        api
-      )
+        var body = {
+            api: api,
+            token: localStorage.getItem('token'),
+        }
+
+        return this.http.post(
+            `http://localhost:3000/api/apis/addApi`,
+            body
+        )
     }
 
-    deleteApi(apiId: number){
+    deleteApi(apiId: number) {
 
-      return this.http.delete(`http://localhost:3000/api/apis/${apiId}`);
+        return this.http.delete(`http://localhost:3000/api/apis/${apiId}`);
 
     }
 
-    editApi(apiId: number, api: Api,){
+    editApi(apiId: number, api: Api,) {
 
-      return this.http.put(`http://localhost:3000/api/apis/${apiId}`,
-      api);
+        return this.http.put(`http://localhost:3000/api/apis/${apiId}`,
+            api);
 
     }
 
     getApisOfUser() {
-      var body = {
-        'token': localStorage.getItem('token')
-      }
+        var body = {
+            'token': localStorage.getItem('token')
+        }
 
-      return this.http.post(`http://localhost:3000/api/apis/getApisOfUser/`, body);
+        return this.http.post(`http://localhost:3000/api/apis/getApisOfUser/`, body);
     }
 
-    deleteRoute(routeId: number){
+    deleteRoute(routeId: number) {
 
-      return this.http.delete(`http://localhost:3000/api/apis/deleteRoute/${routeId}`);
+        return this.http.delete(`http://localhost:3000/api/apis/deleteRoute/${routeId}`);
 
     }
 
-    getOneApi(apiId: number){
+    getOneApi(apiId: number) {
         return this.http.get(`http://localhost:3000/api/apis/getOneApi/${apiId}`);
     }
 }

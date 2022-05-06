@@ -3,11 +3,11 @@
         <div class="col-md-3 left">
             <ul class="list-unstyled pt-3">
                 <li class="mb-1" *ngFor="let section of sections">
-                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"
-                        data-bs-target="#usuarios-collapse" aria-expanded="true">
+                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" 
+                    [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
                         {{ section.name }}
                     </button>
-                    <div class="collapse collapse" id="usuarios-collapse">
+                    <div class="collapse collapse" [id]="'collapse'+section.id">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li *ngFor="let route of routes[section.id]">
                                 <a routerLink="./" [queryParams]="{ route: route.id }"
@@ -17,12 +17,12 @@
                         </ul>
                     </div>
                 </li>
-                <li class="link-light bg-white add-route-button">Agregar Ruta</li>
+                <li class="link-light bg-white add-route-button" [routerLink]="'/create-route/'+apiId">Agregar Ruta</li>
             </ul>
         </div>
         <div class="col-md right">
             {{apiData.name}}
-            <app-route-detail *ngIf="routeId" [routeId]="routeId"></app-route-detail>
+            <app-route-detail *ngIf="routeId" [routeId]="routeId" (onDelete)="getApiDetails()"></app-route-detail>
         </div>
     </div>
 </div>
