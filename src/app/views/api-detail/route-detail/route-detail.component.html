@@ -26,7 +26,7 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Cerrar
             </button>
             <button
               type="button"
@@ -41,12 +41,65 @@
       </div>
     </div>
 
+    <div
+      class="modal fade"
+      id="testApiModal"
+      tabindex="-1"
+      aria-labelledby="testApiModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="testApiModalLabel">Probar endpoint</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h6>URL a probar</h6>
+            <p>{{ apiUrl + route.route }}</p>
+            <div *ngIf="testApiResponse">
+              <h6>Respuesta</h6>
+              <pre>{{ testApiResponse | json }}</pre>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary orange"
+              (click)="testRoute(apiUrl + route.route)"
+            >
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-4 my-auto">
       <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
     </div>
     <div class="col-md-4 my-3">
       <div class="div-probar">
-        <button class="btn btn-probar" type="button">Probar</button>
+        <button
+          class="btn btn-probar"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#testApiModal"
+        >
+          Probar
+        </button>
       </div>
     </div>
     <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
@@ -94,7 +147,7 @@
           <tr>
             <th>Nombre</th>
             <th>Tipo</th>
-            <th>Obligatorio</th>
+            <!-- <th>Obligatorio</th> -->
             <th>Descripción</th>
           </tr>
         </thead>
@@ -103,7 +156,7 @@
           <tr *ngFor="let input_param of input_params">
             <td>{{ input_param.name }}</td>
             <td>{{ input_param.data_type }}</td>
-            <td>{{ input_param.required ? "Si" : "No" }}</td>
+            <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
             <td>{{ input_param.description }}</td>
           </tr>
         </tbody>

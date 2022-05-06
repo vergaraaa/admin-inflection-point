@@ -20,6 +20,7 @@ import { RouteService } from 'src/app/services/route.service';
 export class RouteDetailComponent implements OnInit {
   @Input() routeId: any;
   @Input() havePermissionToEdit: boolean = false;
+  @Input() apiUrl: string = "";
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
   isLoading: boolean = true;
@@ -32,6 +33,8 @@ export class RouteDetailComponent implements OnInit {
   headers: any[] = [];
   query: string = '';
 
+  testApiResponse: string = '';
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -39,7 +42,9 @@ export class RouteDetailComponent implements OnInit {
     private routeService: RouteService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.input_params)
+  }
 
   deleteRoute() {
     this.routeService.deleteRoute(this.routeId).subscribe((data: any) => {
@@ -64,5 +69,21 @@ export class RouteDetailComponent implements OnInit {
 
   ngOnChanges(): void {
     this.getRoutesDetails();
+    this.testApiResponse = '';
+  }
+
+  testRoute(url: string) {
+    const method = this.route.method;
+
+    // Reemplazar los parámetros de la url
+    for(let param of this.input_params) {
+      url = url.replace(`:${param.name}`, '1');
+    }
+
+    // Hacer objeto de headers y query strings
+
+    this.apiService.testRoute(url, method, this.headers, this.query_strings).subscribe((data: any) => {
+      this.testApiResponse = data;
+    });
   }
 }
