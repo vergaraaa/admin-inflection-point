@@ -1,28 +1,72 @@
 <div class="container-fluid">
-    <div class="row row-height">
-        <div class="col-md-3 left">
-            <ul class="list-unstyled pt-3">
-                <li class="mb-1" *ngFor="let section of sections">
-                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" 
-                    [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
-                        {{ section.name }}
-                    </button>
-                    <div class="collapse collapse" [id]="'collapse'+section.id">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li *ngFor="let route of routes[section.id]">
-                                <a routerLink="./" [queryParams]="{ route: route.id }"
-                                    class="link-light rounded route-link">{{ route.route }}</a>
-                            </li>
-                            <li class="link-light bg-white text-black-50 add-route-link"></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="link-light bg-white add-route-button" [routerLink]="'/create-route/'+apiId">Agregar Ruta</li>
+  <div class="row row-height">
+    <div class="col-md-3 left">
+      <ul class="list-unstyled pt-3">
+        <li class="mb-1" *ngFor="let section of sections">
+          <button
+            class="btn btn-toggle align-items-center rounded"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapse' + section.id"
+            aria-expanded="true"
+          >
+            {{ section.name }}
+          </button>
+          <div class="collapse collapse" [id]="'collapse' + section.id">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li *ngIf="routes[section.id].length === 0">
+                <p class="empty-message">No hay rutas disponibles</p>
+              </li>
+              <li *ngFor="let route of routes[section.id]">
+                <a
+                  routerLink="./"
+                  [queryParams]="{ route: route.id }"
+                  class="link-light rounded route-link"
+                  >{{ route.route }}</a
+                >
+              </li>
+              <li
+                class="link-light bg-white text-black-50 add-route-link"
+                [routerLink]="['/create-route', apiId]"
+                [queryParams]="{ section: section.id }"
+                *ngIf="havePermissionToEdit"
+              ></li>
             </ul>
-        </div>
-        <div class="col-md right">
-            {{apiData.name}}
-            <app-route-detail *ngIf="routeId" [routeId]="routeId" (onDelete)="getApiDetails()"></app-route-detail>
-        </div>
+          </div>
+        </li>
+        <li
+          class="link-light bg-white add-route-button"
+          [routerLink]="'/create-route/' + apiId"
+          *ngIf="havePermissionToEdit"
+        >
+          Agregar Ruta
+        </li>
+      </ul>
     </div>
+    <div class="col-md right">
+      <div class="api-info" *ngIf="!routeId">
+        <div class="col-md-4 my-auto">
+          <h2>{{ apiData.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
+        </div>
+        <div class="row mt-3">
+          <h5>Descripción</h5>
+          <p class="p">
+            {{ apiData.description }}
+          </p>
+        </div>
+        <div class="row mt-3">
+          <h5>URL</h5>
+          <p class="p">
+            {{ apiData.url }}
+          </p>
+        </div>
+      </div>
+
+      <app-route-detail
+        *ngIf="routeId"
+        [routeId]="routeId"
+        [havePermissionToEdit]="havePermissionToEdit"
+        (onDelete)="getApiDetails()"
+      ></app-route-detail>
+    </div>
+  </div>
 </div>

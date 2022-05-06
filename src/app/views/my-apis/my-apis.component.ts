@@ -6,14 +6,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-apis',
   templateUrl: './my-apis.component.html',
-  styleUrls: ['./my-apis.component.css']
+  styleUrls: ['./my-apis.component.css'],
 })
 export class MyApisComponent implements OnInit {
-
   apisData: Api[] = [];
   idSelectedApi: number = 0;
   nameSelectedApi: string = '';
-  query: string = "";
+  query: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -23,33 +22,33 @@ export class MyApisComponent implements OnInit {
     });
   }
 
-  getApis(){
+  getApis() {
     this.apiService.getApisOfUser().subscribe((data: any) => {
       this.apisData = data;
     });
   }
 
-  onClickDelete(api_id : number, name: string) {
-      this.idSelectedApi = api_id;
-      this.nameSelectedApi = name;
+  onClickDelete(api_id: number, name: string) {
+    this.idSelectedApi = api_id;
+    this.nameSelectedApi = name;
   }
 
-
-  deleteApi(){
+  deleteApi() {
     this.apiService.deleteApi(this.idSelectedApi).subscribe((data: any) => {
       this.getApis();
     });
   }
 
-  edit(api_id: number){
+  edit(api_id: number) {
     this.router.navigate([`/edit-api/${api_id}`]);
   }
 
-  search(){
-    return this.apisData.filter(api => {
-      return api.name.toLowerCase().includes(this.query.toLowerCase()) 
-          || api.name.toLowerCase().includes(this.query.toLowerCase());
+  search() {
+    return this.apisData.filter((api) => {
+      return (
+        api.name.toLowerCase().includes(this.query.toLowerCase()) ||
+        api.name.toLowerCase().includes(this.query.toLowerCase())
+      );
     });
   }
-
 }

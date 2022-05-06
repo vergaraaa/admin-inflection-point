@@ -120,6 +120,11 @@ ul {
 }
 
 /* API DETAILS */
+.div-probar {
+  display: flex;
+  justify-content: center;
+}
+
 .btn-probar {
   color: white;
   font-size: 1.3em;
@@ -138,10 +143,20 @@ ul {
 
 .editar {
   font-size: 1.75em;
-  color: blue;
 }
 
 .borrar {
   font-size: 1.75em;
   color: #ce1010;
+}
+
+.options-route-details {
+  display: flex;
+  justify-content: end;
+}
+
+.options-route-details > i {
+  font-size: 1.8em;
+  margin-right: 1em;
+  cursor: pointer;
 }

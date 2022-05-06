@@ -685,9 +685,17 @@
         </div>
       </div>
       <div class="d-grid col-md-2 ms-auto mt-3">
-        <button class="btn btn-primary" type="button" (click)="addRoute()">
-          Agregar
-        </button>
+        <div *ngIf="!isEditing; then addButton; else editButton"></div>
+        <ng-template #addButton>
+          <button class="btn btn-primary" type="button" (click)="addRoute()">
+            Agregar
+          </button>
+        </ng-template>
+        <ng-template #editButton>
+          <button class="btn btn-primary" type="button" (click)="onEdit()">
+            Guardar
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>
