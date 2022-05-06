@@ -127,10 +127,15 @@ ul {
 
 /* API DETAILS */
 .api-info {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.options-row {
+  /* margin-top: 0; */
+  width: 100%;
 }
 
 .btn-probar {
@@ -151,10 +156,22 @@ ul {
 
 .editar {
   font-size: 1.75em;
-  color: blue;
+  /* color: blue; */
+  /* margin-right: 1rem; */
 }
 
 .borrar {
   font-size: 1.75em;
   color: #ce1010;
+}
+
+.options-route-details {
+  display: flex;
+  justify-content: end;
+}
+
+.options-route-details > i {
+  font-size: 1.8em;
+  margin-right: 1em;
+  cursor: pointer;
 }

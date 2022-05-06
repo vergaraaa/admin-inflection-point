@@ -1,5 +1,5 @@
 import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api-service.service';
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { RouteService } from 'src/app/services/route.service';
@@ -22,7 +22,8 @@ export class ApiDetailComponent implements OnInit, OnChanges {
   constructor(
     private apiService: ApiService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +52,15 @@ export class ApiDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.getApiDetails();
+  }
+
+  edit(api_id: number) {
+    this.router.navigate([`/edit-api/${api_id}`]);
+  }
+
+  deleteApi() {
+    this.apiService.deleteApi(this.apiId).subscribe((data: any) => {
+      this.router.navigate(['/home']);
+    });
   }
 }
