@@ -119,6 +119,42 @@ ul {
   margin-top: 20px;
 }
 
+/* MODAL PROBAR */
+.form-control {
+  border-radius: 0;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-group-name {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  max-height: 38px;
+  border-radius: 5px 0 0 5px;
+  background-color: rgba(40, 44, 56, 0.91);
+  color: white;
+}
+
+.form-group-data_type {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  max-height: 38px;
+  border-radius: 0 5px 5px 0;
+  background-color: rgba(40, 44, 56, 0.91);
+  color: white;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-checkbox-label {
+  margin-left: 0.5rem;
+}
+
 /* API DETAILS */
 .div-probar {
   display: flex;

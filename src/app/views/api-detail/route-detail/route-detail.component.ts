@@ -43,7 +43,6 @@ export class RouteDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.input_params)
   }
 
   deleteRoute() {
@@ -72,18 +71,37 @@ export class RouteDetailComponent implements OnInit {
     this.testApiResponse = '';
   }
 
+  getFormType(input: any) {
+    switch (input.data_type) {
+      case 'string':
+        return 'text';
+      case 'integer':
+        return 'number';
+      case 'boolean':
+        return 'checkbox';
+      case 'date':
+        return 'date';
+      case 'array':
+        return 'textarea';
+      default:
+        return 'text';
+    }
+  }
+
   testRoute(url: string) {
     const method = this.route.method;
 
     // Reemplazar los parámetros de la url
     for(let param of this.input_params) {
-      url = url.replace(`:${param.name}`, '1');
+      url = url.replace(`:${param.name}`, `${param.value}`);
     }
-
-    // Hacer objeto de headers y query strings
 
     this.apiService.testRoute(url, method, this.headers, this.query_strings).subscribe((data: any) => {
       this.testApiResponse = data;
     });
+  }
+
+  onChangeCheckbox(event: any, input: any) {
+    input.value = event.target.checked;
   }
 }
