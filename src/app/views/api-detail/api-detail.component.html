@@ -16,13 +16,14 @@
               <li *ngIf="routes[section.id].length === 0">
                 <p class="empty-message">No hay rutas disponibles</p>
               </li>
-              <li *ngFor="let route of routes[section.id]">
+              <li class="route-row" *ngFor="let route of routes[section.id]">
                 <a
                   routerLink="./"
                   [queryParams]="{ route: route.id }"
                   class="link-light rounded route-link"
                   >{{ route.route }}</a
                 >
+                <p class="route-method">{{ route.method }}</p>
               </li>
               <li
                 class="link-light bg-white text-black-50 add-route-link"
@@ -83,6 +84,7 @@
         *ngIf="routeId"
         [routeId]="routeId"
         [havePermissionToEdit]="havePermissionToEdit"
+        [apiUrl]="apiData.url"
         (onDelete)="getApiDetails()"
       ></app-route-detail>
     </div>
@@ -113,7 +115,7 @@
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            Cerrar
           </button>
           <button
             type="button"

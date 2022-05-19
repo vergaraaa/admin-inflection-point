@@ -20,6 +20,7 @@ import { RouteService } from 'src/app/services/route.service';
 export class RouteDetailComponent implements OnInit {
   @Input() routeId: any;
   @Input() havePermissionToEdit: boolean = false;
+  @Input() apiUrl: string = "";
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
   isLoading: boolean = true;
@@ -32,6 +33,8 @@ export class RouteDetailComponent implements OnInit {
   headers: any[] = [];
   query: string = '';
 
+  testApiResponse: string = '';
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -39,7 +42,8 @@ export class RouteDetailComponent implements OnInit {
     private routeService: RouteService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   deleteRoute() {
     this.routeService.deleteRoute(this.routeId).subscribe((data: any) => {
@@ -64,5 +68,40 @@ export class RouteDetailComponent implements OnInit {
 
   ngOnChanges(): void {
     this.getRoutesDetails();
+    this.testApiResponse = '';
+  }
+
+  getFormType(input: any) {
+    switch (input.data_type) {
+      case 'string':
+        return 'text';
+      case 'integer':
+        return 'number';
+      case 'boolean':
+        return 'checkbox';
+      case 'date':
+        return 'date';
+      case 'array':
+        return 'textarea';
+      default:
+        return 'text';
+    }
+  }
+
+  testRoute(url: string) {
+    const method = this.route.method;
+
+    // Reemplazar los parámetros de la url
+    for(let param of this.input_params) {
+      url = url.replace(`:${param.name}`, `${param.value}`);
+    }
+
+    this.apiService.testRoute(url, method, this.headers, this.query_strings).subscribe((data: any) => {
+      this.testApiResponse = data;
+    });
+  }
+
+  onChangeCheckbox(event: any, input: any) {
+    input.value = event.target.checked;
   }
 }

@@ -29,6 +29,7 @@ export interface QueryString {
     type_id: number;
     description: string;
     route_id?: number;
+    value?: any;
   }
   
   export interface Route {
