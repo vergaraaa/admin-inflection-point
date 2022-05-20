@@ -2,33 +2,33 @@
   <div class="row">
     <div class="row g-0">
       <div class="col-md-8 mx-auto">
-        <form>
+        <form ngNativeValidate (ngSubmit)=" !isEditing ? onSubmit() : onEdit()">
           <div class="mb-3">
             <label for="api-name" class="form-label">Nombre</label>
-            <input
+            <input required
               type="text"
               name="api-name"
               class="form-control"
               id="api-name"
               placeholder="Nombre"
-              [(ngModel)]="api.name"
+              [(ngModel)]="api.name"              
             />
           </div>
           <div class="mb-3">
             <label for="api-description" class="form-label"
               >Descripción...</label
             >
-            <textarea
+            <textarea required
               class="form-control"
               name="api-description"
               id="api-description"
               rows="3"
-              [(ngModel)]="api.description"
+              [(ngModel)]="api.description"              
             ></textarea>
           </div>
           <div class="mb-3">
             <label for="api-url" class="form-label">URL</label>
-            <input
+            <input required
               type="text"
               name="api-url"
               class="form-control"
@@ -40,18 +40,18 @@
           <div class="d-grid col-md-2 ms-auto">
             <div *ngIf="!isEditing; then addButton; else editButton"></div>
             <ng-template #addButton>
-              <button
+              <input
                 class="btn btn-primary"
-                type="button"
-                (click)="onSubmit()"
-              >
-                Agregar
-              </button>
+                type="submit"
+                value="Agregar"
+              />
             </ng-template>
             <ng-template #editButton>
-              <button class="btn btn-primary" type="button" (click)="onEdit()">
-                Guardar
-              </button>
+              <input 
+                class="btn btn-primary"
+                type="submit" 
+                value="Guardar"
+              />
             </ng-template>
           </div>
         </form>

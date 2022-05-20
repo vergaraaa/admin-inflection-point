@@ -1,6 +1,6 @@
 import { ApiService } from 'src/app/services/api-service.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
 import {
   Route,
   Section,
@@ -11,6 +11,7 @@ import {
   DataType,
 } from 'src/app/models/forms.model';
 import { RouteService } from 'src/app/services/route.service';
+//declare var $ : any;
 import { SectionService } from 'src/app/services/section.service';
 
 @Component({
@@ -18,6 +19,9 @@ import { SectionService } from 'src/app/services/section.service';
   templateUrl: './route-form.component.html',
   styleUrls: ['./route-form.component.css'],
 })
+
+
+
 export class RouteFormComponent implements OnInit {
   dataTypes: DataType[] = [];
   apiId: number = 0;
@@ -124,6 +128,7 @@ export class RouteFormComponent implements OnInit {
         this.iSectionAdd = '';
         this.getApiSections();
       });
+      //$('#sectionModal').modal('hide')
   }
 
   addHeader() {
