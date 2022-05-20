@@ -32,6 +32,7 @@
                   name="sectionModalName"
                   class="form-control"
                   [(ngModel)]="iSectionAdd"
+                  required
                 />
               </div>
             </div>
@@ -89,6 +90,7 @@
                   name="headerModalName"
                   class="form-control"
                   [(ngModel)]="iHeaderName"
+                  required
                 />
               </div>
             </div>
@@ -104,6 +106,7 @@
                   name="InputParameterModalType"
                   aria-label="Tipo"
                   [(ngModel)]="iHeaderType"
+                  required
                 >
                   <option value="" disabled selected hidden>
                     Seleccionar...
@@ -128,6 +131,7 @@
                 class="form-control"
                 rows="3"
                 [(ngModel)]="iHeaderDescription"
+                required
               ></textarea>
             </div>
           </form>
@@ -188,6 +192,7 @@
                   name="InputParameterModalName"
                   class="form-control"
                   [(ngModel)]="iInputParamName"
+                  required
                 />
               </div>
             </div>
@@ -203,6 +208,7 @@
                   name="InputParameterModalType"
                   aria-label="Tipo"
                   [(ngModel)]="iInputParamType"
+                  required
                 >
                   <option value="" disabled selected hidden>
                     Seleccionar...
@@ -227,6 +233,7 @@
                 class="form-control"
                 rows="3"
                 [(ngModel)]="iInputParamDescription"
+                required
               ></textarea>
             </div>
           </form>
@@ -287,6 +294,7 @@
                   name="OutputParameterModalName"
                   class="form-control"
                   [(ngModel)]="iOutputParamName"
+                  required
                 />
               </div>
             </div>
@@ -302,6 +310,7 @@
                   name="OutputParameterModalType"
                   aria-label="Tipo"
                   [(ngModel)]="iOutputParamType"
+                  required
                 >
                   <option value="" disabled selected hidden>
                     Seleccionar...
@@ -326,6 +335,7 @@
                 class="form-control"
                 rows="3"
                 [(ngModel)]="iOutputParamDescription"
+                required
               ></textarea>
             </div>
           </form>
@@ -386,6 +396,7 @@
                   name="queryStringModalName"
                   class="form-control"
                   [(ngModel)]="iQueryStringName"
+                  required
                 />
               </div>
             </div>
@@ -401,6 +412,7 @@
                   name="queryStringModalType"
                   aria-label="Tipo"
                   [(ngModel)]="iQueryStringType"
+                  required
                 >
                   <option value="" disabled selected hidden>
                     Seleccionar...
@@ -418,6 +430,8 @@
             <label for="InputParameterModalObligatory" class="form-label p-2"
               >Obligatorio:</label
             >
+
+            <!--Como poner required uno u otro-->
             <label class="radio-inline p-2">
               <input
                 class="form-check-input"
@@ -447,6 +461,7 @@
                 class="form-control"
                 rows="3"
                 [(ngModel)]="iQueryStringDescription"
+                required
               ></textarea>
             </div>
           </form>
@@ -486,6 +501,7 @@
               id="route-name"
               placeholder="Nombre"
               [(ngModel)]="iName"
+              required
             />
           </div>
           <div class="mb-3">
@@ -497,6 +513,7 @@
               id="route-url"
               placeholder="URL de la ruta"
               [(ngModel)]="iURL"
+              required
             />
           </div>
         </div>
@@ -510,6 +527,7 @@
                   name="route-section"
                   id="route-section"
                   [(ngModel)]="iSection"
+                  required
                 >
                   <option value="" disabled selected hidden>
                     Seleccionar...
@@ -538,6 +556,7 @@
               name="route-method"
               id="route-method"
               [(ngModel)]="iMethod"
+              required
             >
               <option value="" disabled selected hidden>Seleccionar...</option>
               <option value="GET">GET</option>
@@ -558,6 +577,7 @@
             rows="3"
             placeholder="Descripción..."
             [(ngModel)]="iDescription"
+            required
           ></textarea>
         </div>
       </div>
