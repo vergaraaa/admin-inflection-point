@@ -85,6 +85,19 @@
   margin: 0.5rem 3.5rem;
 }
 
+.route-row  {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+}
+
+.route-method {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+}
+
 ul {
   display: flex;
   flex-direction: column;

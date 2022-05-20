@@ -26,7 +26,7 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Cerrar
             </button>
             <button
               type="button"
@@ -41,12 +41,192 @@
       </div>
     </div>
 
+    <!-- TEST API MODAL -->
+    <div
+      class="modal fade"
+      id="testApiModal"
+      tabindex="-1"
+      aria-labelledby="testApiModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="testApiModalLabel">Probar endpoint</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- FORM VARIABLES -->
+            <div class="form-probar">
+              <h4>Variables</h4>
+              <p
+                *ngIf="
+                  input_params.length === 0 &&
+                  headers.length === 0 &&
+                  query_strings.length === 0
+                "
+              >
+                La ruta no contiene ninguna variable de entrada.
+              </p>
+              <!-- Input parameters -->
+              <div *ngIf="input_params.length > 0">
+                <h6 for="inputParameters">Parámetros de entrada</h6>
+                <div *ngFor="let input_param of input_params">
+                  <div class="form-group">
+                    <label class="form-group-name" for="inputParameters">
+                      {{ input_param.name }}
+                    </label>
+                    <input
+                      *ngIf="getFormType(input_param) !== 'checkbox'"
+                      [type]="getFormType(input_param)"
+                      class="form-control"
+                      id="inputParameters"
+                      placeholder="{{ input_param.description }}"
+                      [(ngModel)]="input_param.value"
+                    />
+                    <div
+                      class="form-checkbox form-control"
+                      *ngIf="getFormType(input_param) === 'checkbox'"
+                    >
+                      <input
+                        [type]="getFormType(input_param)"
+                        id="queryStrings"
+                        [required]="input_param.required"
+                        (change)="onChangeCheckbox($event, input_param)"
+                      />
+                      <label class="form-checkbox-label" for="queryStrings">
+                        {{ input_param.description }}
+                      </label>
+                    </div>
+                    <label class="form-group-data_type" for="inputParameters">
+                      {{ input_param.data_type }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Headers -->
+              <div *ngIf="headers.length > 0">
+                <h6 for="headers">Headers</h6>
+                <div *ngFor="let header of headers">
+                  <div class="form-group">
+                    <label class="form-group-name" for="headers">
+                      {{ header.name }}
+                    </label>
+                    <input
+                      *ngIf="getFormType(header) !== 'checkbox'"
+                      [type]="getFormType(header)"
+                      class="form-control"
+                      id="headers"
+                      placeholder="{{ header.description }}"
+                      [(ngModel)]="header.value"
+                    />
+                    <div
+                      class="form-checkbox form-control"
+                      *ngIf="getFormType(header) === 'checkbox'"
+                    >
+                      <input
+                        [type]="getFormType(header)"
+                        id="queryStrings"
+                        [required]="header.required"
+                        (change)="onChangeCheckbox($event, header)"
+                      />
+                      <label class="form-checkbox-label" for="queryStrings">
+                        {{ header.description }}
+                      </label>
+                    </div>
+                    <label class="form-group-data_type" for="headers">
+                      {{ header.data_type }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Query Strings -->
+              <div *ngIf="query_strings.length > 0">
+                <h6 for="queryStrings">Query Strings</h6>
+                <div *ngFor="let query_string of query_strings">
+                  <div class="form-group">
+                    <label class="form-group-name" for="queryStrings">
+                      {{ query_string.name }}
+                    </label>
+                    <input
+                      *ngIf="getFormType(query_string) !== 'checkbox'"
+                      [type]="getFormType(query_string)"
+                      class="form-control"
+                      id="queryStrings"
+                      [required]="query_string.required"
+                      placeholder="{{ query_string.description }}"
+                      [(ngModel)]="query_string.value"
+                    />
+                    <div
+                      class="form-checkbox form-control"
+                      *ngIf="getFormType(query_string) === 'checkbox'"
+                    >
+                      <input
+                        [type]="getFormType(query_string)"
+                        id="queryStrings"
+                        [required]="query_string.required"
+                        (change)="onChangeCheckbox($event, query_string)"
+                      />
+                      <label class="form-checkbox-label" for="queryStrings">
+                        {{ query_string.description }}
+                      </label>
+                    </div>
+                    <label class="form-group-data_type" for="queryStrings">
+                      {{ query_string.data_type }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h6>URL a probar</h6>
+            <p>{{ apiUrl + route.route }}</p>
+            <div *ngIf="testApiResponse">
+              <h6>Respuesta</h6>
+              <pre>{{ testApiResponse | json }}</pre>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary orange"
+              (click)="testRoute(apiUrl + route.route)"
+            >
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FIN TEST API MODAL -->
+
     <div class="col-md-4 my-auto">
       <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
     </div>
     <div class="col-md-4 my-3">
       <div class="div-probar">
-        <button class="btn btn-probar" type="button">Probar</button>
+        <button
+          class="btn btn-probar"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#testApiModal"
+        >
+          Probar
+        </button>
       </div>
     </div>
     <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
@@ -94,7 +274,7 @@
           <tr>
             <th>Nombre</th>
             <th>Tipo</th>
-            <th>Obligatorio</th>
+            <!-- <th>Obligatorio</th> -->
             <th>Descripción</th>
           </tr>
         </thead>
@@ -103,7 +283,7 @@
           <tr *ngFor="let input_param of input_params">
             <td>{{ input_param.name }}</td>
             <td>{{ input_param.data_type }}</td>
-            <td>{{ input_param.required ? "Si" : "No" }}</td>
+            <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
             <td>{{ input_param.description }}</td>
           </tr>
         </tbody>
