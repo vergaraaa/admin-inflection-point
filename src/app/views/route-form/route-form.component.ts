@@ -1,6 +1,7 @@
 import { ApiService } from 'src/app/services/api-service.service';
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Route,
   Section,
@@ -28,7 +29,9 @@ export class RouteFormComponent implements OnInit {
   routeId: string | null = null;
   sectionId: string | null = null;
   isEditing: boolean = false;
+  routeForm!: FormGroup;
 
+  //section: Section = {id: 0, iSectionAdd: '',}
   // Section Modal
   sections: Section[] = [];
   iSectionAdd: string = '';
@@ -70,7 +73,8 @@ export class RouteFormComponent implements OnInit {
     private sectionService: SectionService,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fb:FormBuilder,
   ) {}
 
   ngOnInit() {

@@ -55,7 +55,6 @@ export class ApiFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.apiForm)
     if (this.apiForm.invalid) {
       this.apiForm.controls['name'].markAsTouched();
       this.apiForm.controls['url'].markAsTouched();
@@ -71,12 +70,18 @@ export class ApiFormComponent implements OnInit {
   }
 
   onEdit() {
-    this.apiService.editApi(+this.api_id!, this.api).subscribe({
-      next: (res: any) => {
-        this.router.navigate(['home']);
-      },
-      error: (err) => console.error(err),
-    });
+    if (this.apiForm.invalid) {
+      this.apiForm.controls['name'].markAsTouched();
+      this.apiForm.controls['url'].markAsTouched();
+      this.apiForm.controls['description'].markAsTouched();
+     } else {
+      this.apiService.editApi(+this.api_id!, this.api).subscribe({
+        next: (res: any) => {
+          this.router.navigate(['home']);
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 
   getApi() {

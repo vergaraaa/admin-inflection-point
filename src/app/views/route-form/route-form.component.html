@@ -21,9 +21,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                          Cancelar
-                        </button>
                         <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="iSectionAdd == '' ? '': 'modal'" data-bs-dismiss="modal">
                           Agregar
                         </button>
@@ -74,13 +71,10 @@
                             <label for="headerModalDescription" class="form-label">Descripción:</label>
                         </div>
                         <div class="row align-items-center px-3">
-                            <textarea name="headerModalDescription" class="form-control" rows="3" [(ngModel)]="iHeaderDescription" required></textarea>
+                            <textarea name="headerModalDescription" class="form-control" rows="4" [(ngModel)]="iHeaderDescription" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
                         <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iHeaderName && iHeaderType && iHeaderDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
                             Agregar
                         </button>
@@ -133,13 +127,10 @@
                       </label>
                         </div>
                         <div class="row align-items-center px-3">
-                            <textarea name="InputParameterModalDescription" class="form-control" rows="3" [(ngModel)]="iInputParamDescription" required></textarea>
+                            <textarea name="InputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iInputParamDescription" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancelar
-                        </button>
                         <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iInputParamName && iInputParamType && iInputParamDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
                         Agregar
                         </button>
@@ -200,13 +191,10 @@
                                 </label>
                                 </div>
                                 <div class="row align-items-center px-3">
-                                    <textarea name="OutputParameterModalDescription" class="form-control" rows="3" [(ngModel)]="iOutputParamDescription" required></textarea>
+                                    <textarea name="OutputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iOutputParamDescription" required></textarea>
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Cancelar
-                            </button>
                             <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iOutputParamName && iOutputParamType && iOutputParamDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
                                 Agregar
                             </button>
@@ -289,13 +277,10 @@
                                 <label for="queryStringModalDescription" class="form-label">Descripción:</label>
                             </div>
                             <div class="row align-items-center px-3">
-                                <textarea name="queryStringModalDescription" class="form-control" rows="3" [(ngModel)]="iQueryStringDescription" required></textarea>
+                                <textarea name="queryStringModalDescription" class="form-control" rows="4" [(ngModel)]="iQueryStringDescription" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Cancelar
-                            </button>
                             <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iQueryStringName && iQueryStringType && iQueryStringRequired && iQueryStringDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
                                 Agregar
                             </button>
@@ -314,11 +299,11 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="route-name" class="form-label">Nombre</label>
-                                        <input type="text" name="route-name" class="form-control" id="route-name" placeholder="Nombre" [(ngModel)]="iName" required />
+                                        <input type="text" name="route-name" class="form-control" id="route-name" [(ngModel)]="iName" required />
                                     </div>
                                     <div class="mb-3">
                                         <label for="route-url" class="form-label">URL de la ruta</label>
-                                        <input type="text" name="route-url" class="form-control" id="route-url" placeholder="URL de la ruta" [(ngModel)]="iURL" required />
+                                        <input type="text" name="route-url" class="form-control" id="route-url"  [(ngModel)]="iURL" required />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -334,8 +319,7 @@
                                                         *ngFor="let section of sections"
                                                         [label]="section.name"
                                                         [value]="section.id"
-                                                    ></option>
-                                                    <!-- <option value="add">Añadir sección</option> -->
+                                                    ></option>                                                    
                                                 </select>
                                             </div>
                                             <div class="col-md-1 text-center">
@@ -358,7 +342,7 @@
                                     Descripción
                                 </label>
                                 <div class="mb-3">
-                                    <textarea class="form-control" name="route-description" id="route-description" rows="3" placeholder="Descripción..." [(ngModel)]="iDescription" required></textarea>
+                                    <textarea class="form-control" name="route-description" id="route-description" rows="4" [(ngModel)]="iDescription" required></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -438,7 +422,7 @@
                             <div class="d-grid col-md-2 ms-auto mt-3">
                                 <div *ngIf="!isEditing; then addButton; else editButton"></div>
                                 <ng-template #addButton>
-                                    <input class="btn btn-primary" type="submit" value="Agregar" />
+                                    <input class="btn btn-primary" type="submit" value="Agregar ruta" />
                                 </ng-template>
                                 <ng-template #editButton>
                                     <input class="btn btn-primary" type="submit" value="Guardar" />

@@ -12,11 +12,22 @@
 
 .form-control:focus,
 .form-select:focus {
-    border-color: #f1592A;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
+    border-color: var(--azul-inflection);
+    box-shadow: 0 0 0 0.2rem #2ab2f180;
 }
 
-.form-control-error {
+input.ng-touched.ng-invalid{
     border-color: red;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
+}
+
+textarea.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+textarea{
+    resize: none;
+}
+
+label{
+    font-weight: bold;
 }
