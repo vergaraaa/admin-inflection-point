@@ -2,17 +2,40 @@
   <div class="row">
     <div class="row g-0">
       <div class="col-md-8 mx-auto">
-        <form ngNativeValidate (ngSubmit)=" !isEditing ? onSubmit() : onEdit()">
+        <form [formGroup]="apiForm" (ngSubmit)=" !isEditing ? onSubmit() : onEdit()"  id="apiForm">
           <div class="mb-3">
-            <label for="api-name" class="form-label">Nombre</label>
-            <input required
+            <label for="name" class="form-label">Nombre</label>
+            <input 
               type="text"
-              name="api-name"
+              name="name"
+              formControlName="name"
               class="form-control"
-              id="api-name"
               placeholder="Nombre"
-              [(ngModel)]="api.name"              
+              id="name"
+              required
+              minlength="5"
+              [(ngModel)]="api.name"
             />
+            
+            <!-- <div *ngIf="this.apiForm.controls['name'].hasError('required') && (this.apiForm.controls['name'].touched)"> -->
+              <div *ngIf="this.apiForm.controls['name'].hasError('required') && (this.apiForm.controls['name'].touched)">
+                <p class="text-danger">
+                  Name is required. 
+                </p>
+              </div>
+              <div *ngIf="this.apiForm.controls['name'].hasError('minlength') && apiForm.controls['name'].touched">
+                <p class="text-danger">
+                  Name must be at least 4 characters long.  
+                </p>
+              </div>
+            <!-- </div> -->
+            <!-- <div class="error-text" *ngIf="apiForm.controls['name'].hasError('required') && apiForm.controls['name'].touched">
+              <p>Please enter first name</p>
+            </div>
+            <div class="error-text" *ngIf="apiForm.controls['name'].hasError('minlength') && apiForm.controls['name'].touched">
+              <p>Min length 5</p>
+            </div> -->
+
           </div>
           <div class="mb-3">
             <label for="api-description" class="form-label"
@@ -20,6 +43,7 @@
             >
             <textarea required
               class="form-control"
+              formControlName="description"
               name="api-description"
               id="api-description"
               rows="3"
@@ -30,6 +54,7 @@
             <label for="api-url" class="form-label">URL</label>
             <input required
               type="text"
+              formControlName="url"
               name="api-url"
               class="form-control"
               id="api-url"

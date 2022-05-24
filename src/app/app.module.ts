@@ -8,6 +8,7 @@ import { CoreModule } from './core.module';
 import { SharedModule } from './shared/shared.module';
 import { GoogleLoginProvider, MicrosoftLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         SharedModule,
         SocialLoginModule,
         CoreModule,
+        ReactiveFormsModule,
     ],
     bootstrap: [AppComponent],
     providers: [
