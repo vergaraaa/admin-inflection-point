@@ -49,12 +49,13 @@ export class ApiFormComponent implements OnInit {
 
     this.apiForm = this.fb.group({
       name: [null],
-
+      description: [null],
+      url: [null],
     });
   }
 
   onSubmit() {
-    
+    console.log(this.apiForm)
     if (this.apiForm.invalid) {
       this.apiForm.controls['name'].markAsTouched();
       this.apiForm.controls['url'].markAsTouched();

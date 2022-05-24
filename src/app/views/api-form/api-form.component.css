@@ -4,12 +4,19 @@
     border-color: #f1592A;
 }
 
-.btn-primary:focus, .btn-primary:active {
+.btn-primary:focus,
+.btn-primary:active {
     border-color: #f1592A;
     box-shadow: 0 0 0 0.2rem #f1582a80;
-} 
+}
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     border-color: #f1592A;
     box-shadow: 0 0 0 0.2rem #f1582a80;
-} 
+}
+
+.form-control-error {
+    border-color: red;
+    box-shadow: 0 0 0 0.2rem #f1582a80;
+}
