@@ -38,15 +38,6 @@ export class ApiFormComponent implements OnInit {
       this.isEditing = true;
       this.getApi();
     }
-    
-    // this.apiForm = new FormGroup({
-    //   name: new FormControl(this.api.name, { validators: [
-    //     Validators.required,
-    //     Validators.minLength(4),
-        
-    //   ], updateOn: 'blur' })
-    // });
-
     this.apiForm = this.fb.group({
       name: [null],
       description: [null],
