@@ -13,6 +13,7 @@ import { CollaboratorsService } from 'src/app/services/collaborators.service';
 })
 export class MyApisComponent implements OnInit {
   apisData: Api[] = [];
+  collaboratorApisData: Api[] = [];
   idSelectedApi: number = 0;
   nameSelectedApi: string = '';
   query: string = '';
@@ -28,9 +29,13 @@ export class MyApisComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getApisOfUser().subscribe((data: any) => {
-      this.apisData = data;
+      this.apisData = data.user_apis;
+      this.collaboratorApisData = data.collaborator_apis;
+      console.log(this.apisData);
+      console.log(this.collaboratorApisData);
     });
     this.getUsers();
+    // this.getCollaboratorApis();
   }
 
   getApis() {
@@ -38,6 +43,17 @@ export class MyApisComponent implements OnInit {
       this.apisData = data;
     });
   }
+
+  // getCollaboratorApis() {
+  //   // Get collaborator apis with token
+  //   this.collaboratorsService
+  //     .getCollaboratorApis(localStorage.getItem('token')!)
+  //     .subscribe((data: any) => {
+  //       console.log(data);
+  //       this.collaboratorApisData = data;
+  //       console.log(this.collaboratorApisData);
+  //     });
+  // }
 
   onClickDelete(api_id: number, name: string) {
     this.idSelectedApi = api_id;
@@ -47,6 +63,7 @@ export class MyApisComponent implements OnInit {
   deleteApi() {
     this.apiService.deleteApi(this.idSelectedApi).subscribe((data: any) => {
       this.getApis();
+      // this.getCollaboratorApis();
     });
   }
 
@@ -99,6 +116,7 @@ export class MyApisComponent implements OnInit {
       .setCollaborators(this.idSelectedApi, collaborators)
       .subscribe((data: any) => {
         this.getApis();
+        // this.getCollaboratorApis();
       });
   }
 

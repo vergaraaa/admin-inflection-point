@@ -83,7 +83,7 @@
           </div>
 
           <div class="row mt-3">
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12 mx-auto">
               <div class="table-responsive-md">
                 <table class="table text-start align-middle">
                   <tbody>
@@ -93,6 +93,9 @@
                     >
                       <td scope="row">
                         {{ user.first_name }} {{ user.last_name }}
+                      </td>
+                      <td scope="row">
+                        {{ user.email }}
                       </td>
                       <td class="text-start">
                         <div class="form-check">
@@ -168,10 +171,16 @@
       </div>
     </div>
   </div>
+
   <div class="row mt-3">
     <div class="col-md-10 mx-auto">
       <div class="table-responsive-md">
         <table class="table text-center align-middle">
+          <thead class="text-white" style="background-color: #282c38">
+            <tr>
+              <th [colSpan]="5" class="table-title">Mis Apis</th>
+            </tr>
+          </thead>
           <thead class="text-white" style="background-color: #282c38">
             <tr>
               <th class="col-2">API</th>
@@ -182,6 +191,9 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="apisData.length === 0">
+              <td colspan="5">Aún no has creado ninguna Api</td>
+            </tr>
             <tr *ngFor="let api of search(); let i = index">
               <td
                 scope="row"
@@ -239,6 +251,87 @@
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-10 mx-auto">
+      <div class="table-responsive-md">
+        <table class="table text-center align-middle">
+          <thead class="text-white" style="background-color: #282c38">
+            <tr>
+              <th [colSpan]="5" class="table-title">
+                Apis en las que colaboro
+              </th>
+            </tr>
+          </thead>
+          <thead class="text-white" style="background-color: #282c38">
+            <tr>
+              <th class="col-2">API</th>
+              <th class="col-3">Descripción</th>
+              <th class="col-3">URL</th>
+              <th class="col-2">Estatus</th>
+              <th class="col-2">Operaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="collaboratorApisData.length === 0">
+              <td colspan="5">Aún no colaboras en ninguna Api</td>
+            </tr>
+            <tr *ngFor="let api of collaboratorApisData; let i = index">
+              <td
+                scope="row"
+                class="clickable"
+                [routerLink]="['/api/', api.id]"
+              >
+                {{ api.name }}
+              </td>
+              <td>
+                <button
+                  class="btn btn-toggle align-items-center rounded collapsed"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#descripcion' + api.id"
+                  aria-expanded="false"
+                >
+                  Descripción
+                </button>
+                <div class="collapse" [attr.id]="'descripcion' + api.id">
+                  <p>
+                    {{ api.description }}
+                  </p>
+                </div>
+              </td>
+              <td>
+                {{ api.url }}
+              </td>
+              <td>
+                <div
+                  [ngClass]="
+                    api.id == 2 || api.id == 5 ? 'estatus-error' : 'estatus'
+                  "
+                  class="mx-auto"
+                ></div>
+              </td>
+
+              <td>
+                <i
+                  class="fa-solid fa-pen fa-lg mx-2"
+                  style="cursor: pointer"
+                  (click)="edit(api.id!)"
+                ></i>
+
+                <!-- <i
+                  class="fa-solid fa-trash fa-lg mx-2"
+                  style="color: #ce1010; cursor: pointer"
+                  (click)="onClickDelete(api.id!, api.name)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                ></i> -->
               </td>
             </tr>
           </tbody>

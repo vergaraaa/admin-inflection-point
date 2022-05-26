@@ -13,6 +13,12 @@ export class CollaboratorsService {
     );
   }
 
+  getCollaboratorApis(token: string) {
+    return this.http.get(
+      'http://localhost:3000/api/collaborators/getCollaboratorApis/' + token
+    );
+  }
+
   setCollaborators(api_id: number, collaborators: Array<number>) {
     var body = {
       data: {
