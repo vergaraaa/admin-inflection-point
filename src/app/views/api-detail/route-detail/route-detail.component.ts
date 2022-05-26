@@ -31,7 +31,7 @@ export class RouteDetailComponent implements OnInit {
     output_params: any[] = [];
     query_strings: any[] = [];
     headers: any[] = [];
-    body: any[] = [];
+    bodies: any[] = [];
     query: string = '';
 
     testApiResponse: string = '';
@@ -62,7 +62,7 @@ export class RouteDetailComponent implements OnInit {
             this.output_params = data.output_params;
             this.query_strings = data.query_string;
             this.headers = data.headers;
-            this.body = data.body;
+            this.bodies = data.bodies;
             this.isLoading = false;
         });
     }

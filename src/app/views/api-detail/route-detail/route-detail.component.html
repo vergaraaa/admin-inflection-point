@@ -125,25 +125,26 @@
                             </div>
 
                             <!-- Body -->
-                            <div *ngIf="body.length > 0">
+                            <div *ngIf="bodies.length > 0">
                                 <h6 for="queryStrings">Body</h6>
-                                <div *ngFor="let b of body">
+                                <div *ngFor="let body of bodies">
                                     <div class="form-group">
                                         <label class="form-group-name" for="queryStrings">
-                                            {{ b.name }}
+                                            {{ body.name }}
                                         </label>
-                                        <input *ngIf="getFormType(b) !== 'checkbox'" [type]="getFormType(b)"
-                                            class="form-control" id="queryStrings" [required]="b.required"
-                                            placeholder="{{ b.description }}" [(ngModel)]="b.value" />
-                                        <div class="form-checkbox form-control" *ngIf="getFormType(b) === 'checkbox'">
-                                            <input [type]="getFormType(b)" id="queryStrings" [required]="b.required"
-                                                (change)="onChangeCheckbox($event, b)" />
+                                        <input *ngIf="getFormType(body) !== 'checkbox'" [type]="getFormType(body)"
+                                            class="form-control" id="queryStrings" [required]="body.required"
+                                            placeholder="{{ body.description }}" [(ngModel)]="body.value" />
+                                        <div class="form-checkbox form-control"
+                                            *ngIf="getFormType(body) === 'checkbox'">
+                                            <input [type]="getFormType(body)" id="queryStrings"
+                                                [required]="body.required" (change)="onChangeCheckbox($event, body)" />
                                             <label class="form-checkbox-label" for="queryStrings">
-                                                {{ b.description }}
+                                                {{ body.description }}
                                             </label>
                                         </div>
                                         <label class="form-group-data_type" for="queryStrings">
-                                            {{ b.data_type }}
+                                            {{ body.data_type }}
                                         </label>
                                     </div>
                                 </div>
@@ -335,14 +336,14 @@
                         </tr>
                     </thead>
 
-                    <tbody *ngIf="body.length > 0">
-                        <tr *ngFor="let b of body">
-                            <td>{{ b.name }}</td>
-                            <td>{{ b.data_type }}</td>
-                            <td>{{ b.description }}</td>
+                    <tbody *ngIf="bodies.length > 0">
+                        <tr *ngFor="let body of bodies">
+                            <td>{{ body.name }}</td>
+                            <td>{{ body.data_type }}</td>
+                            <td>{{ body.description }}</td>
                         </tr>
                     </tbody>
-                    <tbody *ngIf="body.length == 0">
+                    <tbody *ngIf="bodies.length == 0">
                         <tr>
                             <td colspan="4">No hay body</td>
                         </tr>
