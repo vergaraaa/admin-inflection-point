@@ -212,14 +212,18 @@ export class RouteFormComponent implements OnInit {
   }
 
   addInputParameter() {
+    if (this.inputParamForm.invalid) {
+      this.inputParamForm.controls['name'].markAsTouched();
+      this.inputParamForm.controls['type_id'].markAsTouched();
+      this.inputParamForm.controls['description'].markAsTouched();
+     } else {
     this.input_parameters.push({
       name: this.iInputParamName,
       type_id: +this.iInputParamType,
       description: this.iInputParamDescription,
     });
-    this.iInputParamName = '';
-    this.iInputParamType = '';
-    this.iInputParamDescription = '';
+    this.inputParamForm.reset();
+  }
   }
 
   deleteInputParameter(index: number) {
@@ -227,14 +231,21 @@ export class RouteFormComponent implements OnInit {
   }
 
   addOutputParameter() {
+    if (this.outputParamForm.invalid) {
+      this.outputParamForm.controls['name'].markAsTouched();
+      this.outputParamForm.controls['type_id'].markAsTouched();
+      this.outputParamForm.controls['description'].markAsTouched();
+     } else {
     this.output_parameters.push({
       name: this.iOutputParamName,
       type_id: +this.iOutputParamType,
       description: this.iOutputParamDescription,
     });
-    this.iOutputParamName = '';
-    this.iOutputParamType = '';
-    this.iOutputParamDescription = '';
+    this.outputParamForm.reset();
+  }
+    // this.iOutputParamName = '';
+    // this.iOutputParamType = '';
+    // this.iOutputParamDescription = '';
   }
 
   deleteOutputParameter(index: number) {
@@ -242,16 +253,24 @@ export class RouteFormComponent implements OnInit {
   }
 
   addQueryString() {
+    if (this.queryStringForm.invalid) {
+      this.queryStringForm.controls['name'].markAsTouched();
+      this.queryStringForm.controls['type_id'].markAsTouched();
+      this.queryStringForm.controls['description'].markAsTouched();
+      this.queryStringForm.controls['required'].markAsTouched();
+     } else {
     this.query_strings.push({
       name: this.iQueryStringName,
       type_id: +this.iQueryStringType,
       required: this.iQueryStringRequired === '1' ? true : false,
       description: this.iQueryStringDescription,
     });
-    this.iQueryStringName = '';
-    this.iQueryStringType = '';
-    this.iQueryStringDescription = '';
-    this.iQueryStringRequired = '';
+    this.queryStringForm.reset();
+  }
+    // this.iQueryStringName = '';
+    // this.iQueryStringType = '';
+    // this.iQueryStringDescription = '';
+    // this.iQueryStringRequired = '';
   }
 
   deleteQueryString(index: number) {
@@ -259,6 +278,13 @@ export class RouteFormComponent implements OnInit {
   }
 
   addRoute() {
+    if (this.routeForm.invalid) {
+      this.routeForm.controls['name'].markAsTouched();
+      this.routeForm.controls['route'].markAsTouched();
+      this.routeForm.controls['section'].markAsTouched();
+      this.routeForm.controls['method'].markAsTouched();
+      this.routeForm.controls['description'].markAsTouched();
+     } else {
     const route: Route = {
       name: this.iName,
       route: this.iURL,
@@ -275,6 +301,7 @@ export class RouteFormComponent implements OnInit {
     this.routeService.addRoute(route).subscribe((data: any) => {});
 
     this.router.navigate(['/api/' + this.apiId]);
+  }
   }
 
   onEdit() {

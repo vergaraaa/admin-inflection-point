@@ -115,14 +115,19 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form ngNativeValidate (ngSubmit)="addInputParameter()">
+                <form [formGroup]="inputParamForm" (ngSubmit)="addInputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
                                 <label for="InputParameterModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" name="InputParameterModalName" class="form-control" [(ngModel)]="iInputParamName" required />
+                                <input formControlName="name" type="text" name="InputParameterModalName" class="form-control" [(ngModel)]="iInputParamName" required />
+                            </div>
+                            <div *ngIf="this.inputParamForm.controls['name'].hasError('required') && (this.inputParamForm.controls['name'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un nombre.
+                                </p>
                             </div>
                         </div>
                         <div class="row align-items-center p-2">
@@ -130,7 +135,7 @@
                                 <label for="InputParameterModalType" class="form-label">Tipo:</label>
                             </div>
                             <div class="col-md-10">
-                                <select class="form-select" name="InputParameterModalType" aria-label="Tipo" [(ngModel)]="iInputParamType" required>
+                                <select formControlName="type_id" class="form-select" name="InputParameterModalType" aria-label="Tipo" [(ngModel)]="iInputParamType" required>
                                 <option value="" disabled selected hidden>
                                   Seleccionar...
                                 </option>
@@ -141,13 +146,23 @@
                                 ></option>
                               </select>
                             </div>
+                            <div *ngIf="this.inputParamForm.controls['type_id'].hasError('required') && (this.inputParamForm.controls['type_id'].touched)">
+                                <p class="text-danger">
+                                    Por favor seleccione una opción.
+                                </p>
+                            </div>
                         </div>
                         <div class="row align-items-center ps-2 pt-2">
                             <label for="InputParameterModalDescription" class="form-label">Descripción:
                       </label>
                         </div>
                         <div class="row align-items-center px-3">
-                            <textarea name="InputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iInputParamDescription" required></textarea>
+                            <textarea formControlName="description" name="InputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iInputParamDescription" required></textarea>
+                        </div>
+                        <div *ngIf="this.inputParamForm.controls['description'].hasError('required') && (this.inputParamForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -171,14 +186,19 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form ngNativeValidate (ngSubmit)="addOutputParameter()">
+                <form [formGroup]="outputParamForm" (ngSubmit)="addOutputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
                                 <label for="OutputParameterModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input type="text" name="OutputParameterModalName" class="form-control" [(ngModel)]="iOutputParamName" required />
+                                <input formControlName="name" type="text" name="OutputParameterModalName" class="form-control" [(ngModel)]="iOutputParamName" required />
+                            </div>
+                            <div *ngIf="this.outputParamForm.controls['name'].hasError('required') && (this.outputParamForm.controls['name'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un nombre.
+                                </p>
                             </div>
                         </div>
                         <div class="row align-items-center p-2">
@@ -187,6 +207,7 @@
                             </div>
                             <div class="col-md-10">
                                 <select
+                                formControlName="type_id"
                                 class="form-select"
                                 name="OutputParameterModalType"
                                 aria-label="Tipo"
@@ -204,6 +225,11 @@
                                 ></option>
                                 </select>
                             </div>
+                            <div *ngIf="this.outputParamForm.controls['type_id'].hasError('required') && (this.outputParamForm.controls['type_id'].touched)">
+                                <p class="text-danger">
+                                    Por favor selecciones una opción.
+                                </p>
+                            </div>
                             </div>
                                 <div class="row align-items-center ps-2 pt-2">
                                 <label for="OutputParameterModalDescription" class="form-label"
@@ -211,7 +237,12 @@
                                 </label>
                             </div>
                             <div class="row align-items-center px-3">
-                                <textarea name="OutputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iOutputParamDescription" required></textarea>
+                                <textarea formControlName="description" name="OutputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iOutputParamDescription" required></textarea>
+                            </div>
+                            <div *ngIf="this.outputParamForm.controls['description'].hasError('required') && (this.outputParamForm.controls['description'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese una descripción.
+                                </p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -235,14 +266,19 @@
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form ngNativeValidate (ngSubmit)="addQueryString()">
+                    <form [formGroup]="queryStringForm" (ngSubmit)="addQueryString()">
                         <div class="modal-body">
                             <div class="row align-items-center p-2">
                                 <div class="col-md-2">
                                     <label for="queryStringModalName" class="form-label">Nombre:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <input type="text" name="queryStringModalName" class="form-control" [(ngModel)]="iQueryStringName" required />
+                                    <input formControlName="name" type="text" name="queryStringModalName" class="form-control" [(ngModel)]="iQueryStringName" required />
+                                </div>
+                                <div *ngIf="this.queryStringForm.controls['name'].hasError('required') && (this.queryStringForm.controls['name'].touched)">
+                                    <p class="text-danger">
+                                        Por favor ingrese un nombre.
+                                    </p>
                                 </div>
                             </div>
                             <div class="row align-items-center p-2">
@@ -250,7 +286,7 @@
                                     <label for="queryStringModalType" class="form-label">Tipo:</label>
                                 </div>
                                 <div class="col-md-10">
-                                    <select class="form-select" name="queryStringModalType" aria-label="Tipo" [(ngModel)]="iQueryStringType" required>
+                                    <select formControlName="type_id" class="form-select" name="queryStringModalType" aria-label="Tipo" [(ngModel)]="iQueryStringType" required>
                                     <option value="" disabled selected hidden>
                                         Seleccionar...
                                     </option>
@@ -262,12 +298,18 @@
                                     ></option>
                                     </select>
                                 </div>
+                                <div *ngIf="this.queryStringForm.controls['type_id'].hasError('required') && (this.queryStringForm.controls['type_id'].touched)">
+                                    <p class="text-danger">
+                                        Por favor selecciones una opción.
+                                    </p>
+                                </div>
                             </div>
                             <label for="queryStringModalObligatory" class="form-label p-2">Obligatorio:</label>
 
                             <!--Como poner required uno u otro-->
                             <label class="radio-inline p-2">
                             <input
+                                formControlName="required"
                                 class="form-check-input"
                                 type="radio"
                                 name="inlineRadioOptions"
@@ -286,11 +328,21 @@
                                 required
                             />No
                             </label>
+                            <div *ngIf="this.queryStringForm.controls['required'].hasError('required') && (this.queryStringForm.controls['required'].touched)">
+                                <p class="text-danger">
+                                    Por favor seleccione una opción.
+                                </p>
+                            </div>
                             <div class="row align-items-center ps-2 pt-2">
                                 <label for="queryStringModalDescription" class="form-label">Descripción:</label>
                             </div>
                             <div class="row align-items-center px-3">
-                                <textarea name="queryStringModalDescription" class="form-control" rows="4" [(ngModel)]="iQueryStringDescription" required></textarea>
+                                <textarea formControlName="description" name="queryStringModalDescription" class="form-control" rows="4" [(ngModel)]="iQueryStringDescription" required></textarea>
+                            </div>
+                            <div *ngIf="this.queryStringForm.controls['description'].hasError('required') && (this.queryStringForm.controls['description'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese una descripción.
+                                </p>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -307,16 +359,16 @@
         <!-- FORM -->
         <div class="row">
             <div class="col-md-11 mx-auto">
-                <form ngNativeValidate (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
+                <form [formGroup]="routeForm" (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="route-name" class="form-label">Nombre</label>
-                                <input type="text" name="route-name" class="form-control" id="route-name" [(ngModel)]="iName" required />
+                                <input formControlName="name" type="text" name="route-name" class="form-control" id="route-name" [(ngModel)]="iName" required />
                             </div>
                             <div class="mb-3">
                                 <label for="route-url" class="form-label">URL de la ruta</label>
-                                <input type="text" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
+                                <input formControlName="route" type="url" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -324,7 +376,7 @@
                             <div class="mb-3">
                                 <div class="row align-items-center g-0">
                                     <div class="col-md-11">
-                                        <select class="form-select" name="route-section" id="route-section" [(ngModel)]="iSection" required>
+                                        <select formControlName="section" class="form-select" name="route-section" id="route-section" [(ngModel)]="iSection" required>
                                                     <option value="" disabled selected hidden>
                                                         Seleccionar...
                                                     </option>
@@ -342,7 +394,7 @@
                             </div>
                             <label for="route-method" class="form-label">Método</label>
                             <div class="mb-3">
-                                <select class="form-select" name="route-method" id="route-method" [(ngModel)]="iMethod" required>
+                                <select formControlName="method" class="form-select" name="route-method" id="route-method" [(ngModel)]="iMethod" required>
                                         <option value="" disabled selected hidden>Seleccionar...</option>
                                         <option value="GET">GET</option>
                                         <option value="POST">POST</option>
@@ -355,7 +407,7 @@
                                     Descripción
                                 </label>
                         <div class="mb-3">
-                            <textarea class="form-control" name="route-description" id="route-description" rows="4" [(ngModel)]="iDescription" required></textarea>
+                            <textarea formControlName="description" class="form-control" name="route-description" id="route-description" rows="4" [(ngModel)]="iDescription" required></textarea>
                         </div>
                     </div>
                     <div class="row">
