@@ -66,13 +66,15 @@
         <table class="table text-center align-middle">
           <thead class="text-white" style="background-color: #282c38">
             <tr>
-              <th class="col-6">Nombre</th>
-              <th class="col-6">Rol</th>
+              <th class="col-4">Nombre</th>
+              <th class="col-4">Email</th>
+              <th class="col-4">Rol</th>
             </tr>
           </thead>
           <tbody>
             <tr class="noborder" *ngFor="let user of search(); let i = index">
               <td scope="row">{{ user.first_name }} {{ user.last_name }}</td>
+              <td>{{ user.email }}</td>
               <td scope="row">
                 <select
                   [(ngModel)]="roleIds[i]"
