@@ -45,6 +45,18 @@
     box-shadow: 0 0 0 0.2rem #2ab2f180;
 } 
 
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+textarea.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+select.ng-touched.ng-invalid{
+    border-color: red;
+}
+
 .fa-square-plus {
     cursor: pointer;
 }

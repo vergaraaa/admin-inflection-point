@@ -92,12 +92,12 @@ export class RouteDetailComponent implements OnInit {
     testRoute(url: string) {
         const method = this.route.method;
 
-        // Reemplazar los parámetros de la url
+        // Reemplazar los parámetros de la url  
         for (let param of this.input_params) {
             url = url.replace(`:${param.name}`, `${param.value}`);
         }
 
-        this.apiService.testRoute(url, method, this.headers, this.query_strings).subscribe((data: any) => {
+        this.apiService.testRoute(url, method, this.headers, this.query_strings, this.bodies).subscribe((data: any) => {
             this.testApiResponse = data;
         });
     }
