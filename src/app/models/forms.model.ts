@@ -56,3 +56,11 @@ export interface QueryString {
     id: number,
     name: string
   }
+
+  export interface Body {
+    id: number;
+    route_id?: number;
+    name: string;
+    description: string;
+    type_id: number;
+  }

@@ -10,6 +10,7 @@ import {
   OutputParameter,
   QueryString,
   DataType,
+  Body,
 } from 'src/app/models/forms.model';
 import { RouteService } from 'src/app/services/route.service';
 //declare var $ : any;
@@ -36,11 +37,18 @@ export class RouteFormComponent implements OnInit {
   inputParamForm!: FormGroup;
   outputParamForm!: FormGroup;
   queryStringForm!: FormGroup;
+  bodyForm!: FormGroup;
 
   //Data Types
   dataType: DataType ={id:0, name:''}
   dataTypes: DataType[] = [];
 
+  //Body Modal
+  body: Body = {id: 0, name: '', type_id: 0, description: '', route_id: 0}
+  bodies: Body[] = [];
+  iBodyName: string = '';
+  iBodyType: string = '';
+  iBodyDescription: string = '';
 
   // Section Modal
   section: Section = {id: 0, name: '', api_id: 0}
@@ -110,7 +118,7 @@ export class RouteFormComponent implements OnInit {
     this.routeForm = this.fb.group({
       name: [null],
       description: [null],
-      url: [null],
+      route: [null],
       method: [null],
       section_id: [null],
     });
@@ -142,6 +150,12 @@ export class RouteFormComponent implements OnInit {
       description: [null],
       type_id: [null],
       required: [null],
+    });
+    
+    this.bodyForm = this.fb.group({
+      name: [null],
+      description: [null],
+      type_id: [null],      
     });
 
     this.getApiSections();
@@ -243,9 +257,6 @@ export class RouteFormComponent implements OnInit {
     });
     this.outputParamForm.reset();
   }
-    // this.iOutputParamName = '';
-    // this.iOutputParamType = '';
-    // this.iOutputParamDescription = '';
   }
 
   deleteOutputParameter(index: number) {
@@ -267,21 +278,37 @@ export class RouteFormComponent implements OnInit {
     });
     this.queryStringForm.reset();
   }
-    // this.iQueryStringName = '';
-    // this.iQueryStringType = '';
-    // this.iQueryStringDescription = '';
-    // this.iQueryStringRequired = '';
   }
 
   deleteQueryString(index: number) {
     this.query_strings.splice(index, 1);
   }
 
+  addBody() {
+    if (this.bodyForm.invalid) {
+      this.bodyForm.controls['name'].markAsTouched();
+      this.bodyForm.controls['type_id'].markAsTouched();
+      this.bodyForm.controls['description'].markAsTouched();
+     } else {
+    this.output_parameters.push({
+      name: this.iBodyName,
+      type_id: +this.iBodyType,
+      description: this.iBodyDescription,
+    });
+    this.bodyForm.reset();
+  }
+  
+  }
+
+  deleteBody(index: number) {
+    this.bodies.splice(index, 1);
+  }
+
   addRoute() {
     if (this.routeForm.invalid) {
       this.routeForm.controls['name'].markAsTouched();
       this.routeForm.controls['route'].markAsTouched();
-      this.routeForm.controls['section'].markAsTouched();
+      this.routeForm.controls['section_id'].markAsTouched();
       this.routeForm.controls['method'].markAsTouched();
       this.routeForm.controls['description'].markAsTouched();
      } else {
