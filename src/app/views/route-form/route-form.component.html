@@ -227,7 +227,7 @@
                             </div>
                             <div *ngIf="this.outputParamForm.controls['type_id'].hasError('required') && (this.outputParamForm.controls['type_id'].touched)">
                                 <p class="text-danger">
-                                    Por favor selecciones una opción.
+                                    Por favor seleccione una opción.
                                 </p>
                             </div>
                             </div>
@@ -300,7 +300,7 @@
                                 </div>
                                 <div *ngIf="this.queryStringForm.controls['type_id'].hasError('required') && (this.queryStringForm.controls['type_id'].touched)">
                                     <p class="text-danger">
-                                        Por favor selecciones una opción.
+                                        Por favor seleccione una opción.
                                     </p>
                                 </div>
                             </div>
@@ -406,7 +406,7 @@
                             </div>
                             <div *ngIf="this.bodyForm.controls['type_id'].hasError('required') && (this.bodyForm.controls['type_id'].touched)">
                                 <p class="text-danger">
-                                    Por favor selecciones una opción.
+                                    Por favor seleccione una opción.
                                 </p>
                             </div>
                             </div>
@@ -451,7 +451,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="route-url" class="form-label">URL de la ruta</label>
-                                    <input formControlName="route" type="url" pattern="/.*" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
+                                    <input formControlName="route" type="url" pattern="/.*" placeholder="/ejemplo/ex" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
                                     <div *ngIf="this.routeForm.controls['route'].hasError('required') && (this.routeForm.controls['route'].touched)">
                                         <p class="text-danger">
                                             Por favor ingrese un URL.
@@ -522,6 +522,9 @@
                             <!--VALIDAR 1 o mas headers-->
                             <div class="col-md">
                                 <h6 class="text-center">Headers</h6>
+                                <div class="col-md-12 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#headerModal" class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
                                 <div class="max-height">
                                     <div *ngFor="let header of headers; let i = index" class="row">
                                         <div class="input-group mb-3">
@@ -533,13 +536,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#headerModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
                             </div>
                             <!--VALIDAR 1 o mas parametros de entrada-->
                             <div class="col-md">
                                 <h6 class="text-center">Parámetros de entrada</h6>
+                                <div class="col-md-12 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#inputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
                                 <div class="max-height">
                                     <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
@@ -551,13 +554,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#inputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
                             </div>
                             <!--VALIDAR 1 o mas parametros de salido-->
                             <div class="col-md">
                                 <h6 class="text-center">Parámetros de salida</h6>
+                                <div class="col-md-12 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#outputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
                                 <div class="max-height">
                                     <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
@@ -569,13 +572,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#outputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
                             </div>
                             <!--VALIDAR 0 o mas query strings-->
                             <div class="col-md">
                                 <h6 class="text-center">Query strings</h6>
+                                <div class="col-md-12 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#queryStringModal" class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
                                 <div class="max-height">
                                     <div *ngFor="let query_string of query_strings; let i = index" class="row">
                                         <div class="input-group mb-3">
@@ -587,12 +590,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#queryStringModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
                             </div>
+                            <!--BODY-->
                             <div class="col-md">
                                 <h6 class="text-center">Body</h6>
+                                <div class="col-md-12 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#BodyModal" class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
                                 <div class="max-height">
                                     <div *ngFor="let body of bodies; let i = index" class="row">
                                         <div class="input-group mb-3">
@@ -603,9 +607,6 @@
                                         </i></span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#BodyModal" class="fa-solid fa-square-plus fa-lg"></i>
                                 </div>
                             </div>
                         </div>

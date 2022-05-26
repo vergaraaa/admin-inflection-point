@@ -334,6 +334,13 @@ export class RouteFormComponent implements OnInit {
     }
 
     onEdit() {
+        if (this.routeForm.invalid) {
+            this.routeForm.controls['name'].markAsTouched();
+            this.routeForm.controls['route'].markAsTouched();
+            this.routeForm.controls['section_id'].markAsTouched();
+            this.routeForm.controls['method'].markAsTouched();
+            this.routeForm.controls['description'].markAsTouched();
+        } else {
         const route: Route = {
             name: this.iName,
             route: this.iURL,
@@ -358,5 +365,6 @@ export class RouteFormComponent implements OnInit {
             },
             error: (err: any) => console.error(err),
         });
+    }
     }
 }
