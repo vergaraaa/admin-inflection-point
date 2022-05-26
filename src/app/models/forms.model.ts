@@ -5,34 +5,34 @@ export interface QueryString {
     description: string;
     required: boolean;
     route_id?: number;
-  }
-  
-  export interface OutputParameter {
+}
+
+export interface OutputParameter {
     id?: number;
     name: string;
     type_id: number;
     description: string;
     route_id?: number;
-  }
-  
-  export interface InputParameter {
+}
+
+export interface InputParameter {
     id?: number;
     name: string;
     type_id: number;
     description: string;
     route_id?: number;
-  }
-  
-  export interface Header {
+}
+
+export interface Header {
     id?: number;
     name: string;
     type_id: number;
     description: string;
     route_id?: number;
     value?: any;
-  }
-  
-  export interface Route {
+}
+
+export interface Route {
     id?: number;
     name: string;
     route: string;
@@ -44,23 +44,24 @@ export interface QueryString {
     input_parameters: InputParameter[];
     output_parameters: OutputParameter[];
     query_strings: QueryString[];
-  }
+    bodies: Body[];
+}
 
-  export interface Section {
+export interface Section {
     id: number,
     name: string,
     api_id: number
-  }
-  
-  export interface DataType {
+}
+
+export interface DataType {
     id: number,
     name: string
-  }
+}
 
-  export interface Body {
-    id: number;
+export interface Body {
+    id?: number;
     route_id?: number;
     name: string;
     description: string;
     type_id: number;
-  }
+}
