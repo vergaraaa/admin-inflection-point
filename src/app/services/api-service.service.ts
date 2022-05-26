@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/api.user';
 import { Api } from '../models/api.model'
-import {Header} from '../models/forms.model'
+import { Header } from '../models/forms.model'
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 @Injectable({
@@ -69,7 +69,7 @@ export class ApiService {
         return this.http.get(`http://localhost:3000/api/apis/getOneApi/${apiId}`);
     }
 
-    testRoute(url: string, method: string, headers: any, queryString: any) {
+    testRoute(url: string, method: string, headers: any, queryString: any, bodies: any) {
         let headersObj: {
             [key: string]: string
         } = {}
@@ -84,26 +84,31 @@ export class ApiService {
             queryStringObj[query.name] = query.value
         });
 
-        // TODO Body
-        const body = {}
+        let bodyObj: {
+            [key: string]: string
+        } = {}
+        bodies.forEach((body: Header) => {
+            bodyObj[body.name] = body.value
+        });
+
 
         switch (method) {
             case 'GET':
-                return this.http.get(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.get(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'POST':
-                return this.http.post(url, body, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.post(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'PUT':
-                return this.http.put(url, body, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.put(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'DELETE':
-                return this.http.delete(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.delete(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'PATCH':
-                return this.http.patch(url, body, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.patch(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'HEAD':
-                return this.http.head(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.head(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             case 'OPTIONS':
-                return this.http.options(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.options(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
             default:
-                return this.http.get(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
+                return this.http.get(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
         }
     }
 }
