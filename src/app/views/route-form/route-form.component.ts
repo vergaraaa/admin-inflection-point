@@ -173,6 +173,7 @@ export class RouteFormComponent implements OnInit {
             this.input_parameters = data.input_params;
             this.output_parameters = data.output_params;
             this.query_strings = data.query_string;
+            this.bodies = data.bodies;
         });
     }
 
