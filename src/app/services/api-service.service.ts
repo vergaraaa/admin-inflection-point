@@ -106,4 +106,8 @@ export class ApiService {
                 return this.http.get(url, {headers: new HttpHeaders(headersObj), params: queryStringObj});
         }
     }
+
+    getStatus() {
+        return this.http.get(`http://localhost:3000/api/apis/getStatus`);
+    }
 }

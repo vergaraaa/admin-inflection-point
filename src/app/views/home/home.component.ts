@@ -9,11 +9,13 @@ import { Api } from 'src/app/models/api.model';
 })
 export class HomeComponent implements OnInit {
   apisData: Api[] = [];
+  statusData: any = {};
   query: string = "";
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.getApis();
+    this.getStatus();
   }
   
   getApis() {
@@ -26,6 +28,13 @@ export class HomeComponent implements OnInit {
     return this.apisData.filter(api => {
       return api.name.toLowerCase().includes(this.query.toLowerCase()) 
           || api.description.toLowerCase().includes(this.query.toLowerCase());
+    });
+  }
+
+  getStatus() {
+    this.apiService.getStatus().subscribe((data: any) => {
+      this.statusData = data; 
+      console.log(this.statusData)
     });
   }
 }
