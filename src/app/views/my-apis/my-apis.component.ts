@@ -4,7 +4,7 @@ import { Api } from 'src/app/models/api.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/api.user';
-
+import { CollaboratorsService } from 'src/app/services/collaborators.service';
 
 @Component({
   selector: 'app-my-apis',
@@ -20,9 +20,11 @@ export class MyApisComponent implements OnInit {
   usersData: User[] = [];
 
   constructor(
-    private apiService: ApiService, private router: Router,
-    private userService: UserService) {}
-  
+    private apiService: ApiService,
+    private router: Router,
+    private userService: UserService,
+    private collaboratorsService: CollaboratorsService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getApisOfUser().subscribe((data: any) => {
@@ -61,17 +63,56 @@ export class MyApisComponent implements OnInit {
     });
   }
 
-  getUsers(){
+  getUsers() {
     this.userService.getUsers().subscribe((data: any) => {
       this.usersData = data;
     });
   }
-  
+
   searchUsers() {
-    return this.usersData.filter(user => {
-      return user.first_name.toLowerCase().includes(this.queryColaboradores.toLowerCase()) 
-          || user.last_name.toLowerCase().includes(this.queryColaboradores.toLowerCase());
+    return this.usersData.filter((user) => {
+      return (
+        user.first_name
+          .toLowerCase()
+          .includes(this.queryColaboradores.toLowerCase()) ||
+        user.last_name
+          .toLowerCase()
+          .includes(this.queryColaboradores.toLowerCase())
+      );
     });
   }
 
+  onClickColaborators(api_id: number) {
+    this.idSelectedApi = api_id;
+    this.getCollaborators();
+  }
+
+  setCollaborators() {
+    const collaborators = this.usersData
+      .filter((user) => {
+        return user.selected;
+      })
+      .map((user) => {
+        return user.id;
+      });
+    this.collaboratorsService
+      .setCollaborators(this.idSelectedApi, collaborators)
+      .subscribe((data: any) => {
+        this.getApis();
+      });
+  }
+
+  getCollaborators() {
+    return this.collaboratorsService
+      .getCollaborators(this.idSelectedApi)
+      .subscribe((data: any) => {
+        this.usersData.forEach((user) => {
+          data.forEach((collaborator: any) => {
+            if (user.id === collaborator.user_id) {
+              user.selected = true;
+            }
+          });
+        });
+      });
+  }
 }
