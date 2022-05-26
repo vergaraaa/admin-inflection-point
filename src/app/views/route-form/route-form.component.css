@@ -41,10 +41,25 @@
 } 
 
 .form-control:focus, .form-select:focus {
-    border-color: #f1592A;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
+    border-color: var(--azul-inflection);
+    box-shadow: 0 0 0 0.2rem #2ab2f180;
 } 
 
 .fa-square-plus {
     cursor: pointer;
+}
+
+label{
+    font-weight: bold
+}
+
+label.radio-inline.p-2{
+    font-weight: normal;
+}
+h6{
+    font-weight: bold;
+}
+
+textarea{
+    resize: none;
 }

@@ -4,12 +4,30 @@
     border-color: #f1592A;
 }
 
-.btn-primary:focus, .btn-primary:active {
+.btn-primary:focus,
+.btn-primary:active {
     border-color: #f1592A;
     box-shadow: 0 0 0 0.2rem #f1582a80;
-} 
+}
 
-.form-control:focus, .form-select:focus {
-    border-color: #f1592A;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
-} 
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--azul-inflection);
+    box-shadow: 0 0 0 0.2rem #2ab2f180;
+}
+
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+textarea.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+textarea{
+    resize: none;
+}
+
+label{
+    font-weight: bold;
+}

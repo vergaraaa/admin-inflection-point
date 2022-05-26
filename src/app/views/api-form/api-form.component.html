@@ -1,61 +1,60 @@
 <div class="container mt-3">
-  <div class="row">
-    <div class="row g-0">
-      <div class="col-md-8 mx-auto">
-        <form ngNativeValidate (ngSubmit)=" !isEditing ? onSubmit() : onEdit()">
-          <div class="mb-3">
-            <label for="api-name" class="form-label">Nombre</label>
-            <input required
-              type="text"
-              name="api-name"
-              class="form-control"
-              id="api-name"
-              placeholder="Nombre"
-              [(ngModel)]="api.name"              
-            />
-          </div>
-          <div class="mb-3">
-            <label for="api-description" class="form-label"
-              >Descripción...</label
-            >
-            <textarea required
-              class="form-control"
-              name="api-description"
-              id="api-description"
-              rows="3"
-              [(ngModel)]="api.description"              
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="api-url" class="form-label">URL</label>
-            <input required
-              type="text"
-              name="api-url"
-              class="form-control"
-              id="api-url"
-              placeholder="URL"
-              [(ngModel)]="api.url"
-            />
-          </div>
-          <div class="d-grid col-md-2 ms-auto">
-            <div *ngIf="!isEditing; then addButton; else editButton"></div>
-            <ng-template #addButton>
-              <input
-                class="btn btn-primary"
-                type="submit"
-                value="Agregar"
-              />
-            </ng-template>
-            <ng-template #editButton>
-              <input 
-                class="btn btn-primary"
-                type="submit" 
-                value="Guardar"
-              />
-            </ng-template>
-          </div>
-        </form>
-      </div>
+    <div class="row">
+        <div class="row g-0">
+            <div class="col-md-8 mx-auto">
+                <form [formGroup]="apiForm" (ngSubmit)=" !isEditing ? onSubmit() : onEdit()" id="apiForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre *</label>
+                        <input autofocus type="text" name="name" formControlName="name" class="form-control" id="name" required minlength="4" [(ngModel)]="api.name" />
+                        <div *ngIf="this.apiForm.controls['name'].hasError('required') && (this.apiForm.controls['name'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese un nombre.
+                            </p>
+                        </div>
+                        <div *ngIf="this.apiForm.controls['name'].hasError('minlength') && apiForm.controls['name'].touched">
+                            <p class="text-danger">
+                                El nombre tiene que tener al menos 4 caracteres.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="api-description" class="form-label">Descripción *</label>
+                        <textarea required class="form-control" formControlName="description" name="api-description" id="api-description" rows="4" [(ngModel)]="api.description"></textarea>
+                        <div *ngIf="this.apiForm.controls['description'].hasError('required') && (this.apiForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="api-url" class="form-label">URL *</label>
+                        <!--En el pattern  poner la regex de las urls validas-->
+                        <input required type="url" pattern="https?://.+" placeholder="http:// o https://" formControlName="url" name="api-url" class="form-control" id="api-url" [(ngModel)]="api.url" />
+                        <div *ngIf="this.apiForm.controls['url'].hasError('required') && (this.apiForm.controls['url'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese un URL.
+                            </p>
+                        </div>
+                        <div *ngIf="this.apiForm.controls['url'].hasError('pattern') && (this.apiForm.controls['url'].touched)">
+                            <p class="text-danger">
+                                El URL tiene que comenzar con http:// o https://
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-muted">* obligatorio</p>
+                    </div>
+                    <div class="d-grid col-md-2 ms-auto">
+                        <div *ngIf="!isEditing; then addButton; else editButton"></div>
+                        <ng-template #addButton>
+                            <input class="btn btn-primary" type="submit" value="Crear API" />
+                        </ng-template>
+                        <ng-template #editButton>
+                            <input class="btn btn-primary" type="submit" value="Guardar" />
+                        </ng-template>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

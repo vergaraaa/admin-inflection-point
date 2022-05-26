@@ -1,3 +1,6 @@
+:root{
+    --azul-inflection: rgb(37, 169, 224);
+}
 .btn-primary {
     color: #fff;
     background-color: #f1592A;
@@ -10,6 +13,6 @@
 } 
 
 .form-control:focus {
-    border-color: #f1592A;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
+    border-color: var(--azul-inflection);
+    box-shadow: 0 0 0 0.2rem #2ab2f180;
 }
