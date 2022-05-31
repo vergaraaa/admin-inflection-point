@@ -16,6 +16,12 @@
   box-shadow: none;
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: #f1592A;
+  border-color: #f1592A;
+}
+
 .btn-toggle::before {
   display: inline-block;
   width: 1.25em;
