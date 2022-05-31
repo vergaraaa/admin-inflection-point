@@ -207,7 +207,26 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    deleteSection(index: number) {
+        this.sections.splice(index, 1);
+    }
+
     addHeader() {
+        if (this.headerForm.invalid) {
+            this.headerForm.controls['name'].markAsTouched();
+            this.headerForm.controls['type_id'].markAsTouched();
+            this.headerForm.controls['description'].markAsTouched();
+        } else {
+            this.headers.push({
+                name: this.iHeaderName,
+                type_id: +this.iHeaderType,
+                description: this.iHeaderDescription,
+            });
+            this.headerForm.reset();
+        }
+    }
+
+    editHeader() {
         if (this.headerForm.invalid) {
             this.headerForm.controls['name'].markAsTouched();
             this.headerForm.controls['type_id'].markAsTouched();
@@ -241,11 +260,41 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    editInputParameter() {
+        if (this.inputParamForm.invalid) {
+            this.inputParamForm.controls['name'].markAsTouched();
+            this.inputParamForm.controls['type_id'].markAsTouched();
+            this.inputParamForm.controls['description'].markAsTouched();
+        } else {
+            this.input_parameters.push({
+                name: this.iInputParamName,
+                type_id: +this.iInputParamType,
+                description: this.iInputParamDescription,
+            });
+            this.inputParamForm.reset();
+        }
+    }
+
     deleteInputParameter(index: number) {
         this.input_parameters.splice(index, 1);
     }
 
     addOutputParameter() {
+        if (this.outputParamForm.invalid) {
+            this.outputParamForm.controls['name'].markAsTouched();
+            this.outputParamForm.controls['type_id'].markAsTouched();
+            this.outputParamForm.controls['description'].markAsTouched();
+        } else {
+            this.output_parameters.push({
+                name: this.iOutputParamName,
+                type_id: +this.iOutputParamType,
+                description: this.iOutputParamDescription,
+            });
+            this.outputParamForm.reset();
+        }
+    }
+
+    editOutputParameter() {
         if (this.outputParamForm.invalid) {
             this.outputParamForm.controls['name'].markAsTouched();
             this.outputParamForm.controls['type_id'].markAsTouched();
@@ -281,6 +330,23 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    editQueryString() {
+        if (this.queryStringForm.invalid) {
+            this.queryStringForm.controls['name'].markAsTouched();
+            this.queryStringForm.controls['type_id'].markAsTouched();
+            this.queryStringForm.controls['description'].markAsTouched();
+            this.queryStringForm.controls['required'].markAsTouched();
+        } else {
+            this.query_strings.push({
+                name: this.iQueryStringName,
+                type_id: +this.iQueryStringType,
+                required: this.iQueryStringRequired === '1' ? true : false,
+                description: this.iQueryStringDescription,
+            });
+            this.queryStringForm.reset();
+        }
+    }
+
     deleteQueryString(index: number) {
         this.query_strings.splice(index, 1);
     }
@@ -298,7 +364,21 @@ export class RouteFormComponent implements OnInit {
             });
             this.bodyForm.reset();
         }
+    }
 
+    editBody() {
+        if (this.bodyForm.invalid) {
+            this.bodyForm.controls['name'].markAsTouched();
+            this.bodyForm.controls['type_id'].markAsTouched();
+            this.bodyForm.controls['description'].markAsTouched();
+        } else {
+            this.bodies.push({
+                name: this.iBodyName,
+                type_id: +this.iBodyType,
+                description: this.iBodyDescription,
+            });
+            this.bodyForm.reset();
+        }
     }
 
     deleteBody(index: number) {
