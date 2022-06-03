@@ -21,7 +21,25 @@
                   routerLink="./"
                   [queryParams]="{ route: route.id }"
                   class="link-light rounded route-link"
-                  >{{ route.route }}</a
+                >
+                  <i
+                    class="ms-3 fas fa-circle"
+                    [ngClass]="
+                      routeStatuses[route.id].status === 200
+                        ? 'estatus'
+                        : 'estatus-error'
+                    "
+                    *ngIf="route.method === 'GET'"
+                    [tooltip]="
+                      'Última vez actualizado: ' +
+                      routeStatuses[route.id].lastSeen
+                    "
+                  ></i>
+                  <i
+                    class="ms-3 fas fa-circle estatus-invisible"
+                    *ngIf="route.method !== 'GET'"
+                  ></i>
+                  {{ route.route }}</a
                 >
                 <p class="route-method">{{ route.method }}</p>
               </li>
@@ -48,7 +66,11 @@
         <div class="row mt-4 align-items-center options-row">
           <div class="col-md-8 my-auto">
             <h2>
-              {{ apiData.name }} <i class="ms-3 fas fa-circle estatus"></i>
+              {{ apiData.name }}
+              <i
+                class="ms-3 fas fa-circle"
+                [ngClass]="apiStatus ? 'estatus' : 'estatus-error'"
+              ></i>
             </h2>
           </div>
           <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
@@ -85,6 +107,7 @@
         [routeId]="routeId"
         [havePermissionToEdit]="havePermissionToEdit"
         [apiUrl]="apiData.url"
+        [routeStatus]="routeStatuses[routeId]"
         (onDelete)="getApiDetails()"
       ></app-route-detail>
     </div>

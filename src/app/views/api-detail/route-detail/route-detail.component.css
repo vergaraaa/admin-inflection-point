@@ -175,6 +175,18 @@ ul {
 .estatus {
   /* font-size: 1.75em; */
   color: #1aa028;
+  margin-right: 1rem;
+}
+
+.estatus-error {
+  color: #ce1010;
+  margin-right: 1rem;
+}
+
+.estatus-invisible {
+  color: #000000;
+  margin-right: 1rem;
+  opacity: 0;
 }
 
 .editar {
@@ -203,9 +215,9 @@ ul {
 }
 
 pre {
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
- }
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}

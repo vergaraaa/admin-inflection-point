@@ -70,7 +70,7 @@
 .route-link {
   color: white;
   text-decoration: none;
-  margin-left: 3.5em;
+  margin-left: 3em;
   font-size: 1.2em;
 }
 
@@ -85,7 +85,7 @@
   margin: 0.5rem 3.5rem;
 }
 
-.route-row  {
+.route-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -165,6 +165,18 @@ ul {
 .estatus {
   /* font-size: 1.75em; */
   color: #1aa028;
+  margin-right: 1rem;
+}
+
+.estatus-error {
+  color: #ce1010;
+  margin-right: 1rem;
+}
+
+.estatus-invisible {
+  color: #000000;
+  margin-right: 1rem;
+  opacity: 0;
 }
 
 .editar {
