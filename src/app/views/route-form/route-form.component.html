@@ -436,9 +436,11 @@
 
             <!-- FORM -->
             <div class="row">
-                <div class="col-md-11 mx-auto">
+                <div class="col-md-11 mx-auto mt-3">
+                    <h2>Ruta</h2>
                     <form [formGroup]="routeForm" (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
-                        <div class="row">
+                        <div class="row detalles">
+                            <!--Division superior-->
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="route-name" class="form-label">Nombre</label>
@@ -476,7 +478,7 @@
                                                 <option
                                                     *ngFor="let section of sections"
                                                     [label]="section.name"
-                                                    [value]="section.id"
+                                                    [value]="section.id"                                                    
                                                 ></option>                                                    
                                             </select>
                                         </div>
@@ -518,9 +520,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row extras">
                             <!--VALIDAR 1 o mas headers-->
-                            <div class="col-md">
+                            <div class="col-md border">
                                 <h6 class="text-center">Headers</h6>
                                 <div class="col-md-12 text-center">
                                     <i data-bs-toggle="modal" data-bs-target="#headerModal" class="fa-solid fa-square-plus fa-lg"></i>
@@ -529,16 +531,25 @@
                                     <div *ngFor="let header of headers; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="header.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteHeader(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#headerModal"
+                                                (click)="selectEditHeader(i)">
+                                                </i>
+                                                <i
+                                                (click)="deleteHeader(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--VALIDAR 1 o mas parametros de entrada-->
-                            <div class="col-md">
+                            <div class="col-md border">
                                 <h6 class="text-center">Parámetros de entrada</h6>
                                 <div class="col-md-12 text-center">
                                     <i data-bs-toggle="modal" data-bs-target="#inputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
@@ -547,16 +558,25 @@
                                     <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="input_parameter.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteInputParameter(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#inputParameterModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteInputParameter(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--VALIDAR 1 o mas parametros de salido-->
-                            <div class="col-md">
+                            <div class="col-md border">
                                 <h6 class="text-center">Parámetros de salida</h6>
                                 <div class="col-md-12 text-center">
                                     <i data-bs-toggle="modal" data-bs-target="#outputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
@@ -565,16 +585,25 @@
                                     <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="output_parameter.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteOutputParameter(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#outputParameterModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteOutputParameter(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--VALIDAR 0 o mas query strings-->
-                            <div class="col-md">
+                            <div class="col-md border">
                                 <h6 class="text-center">Query strings</h6>
                                 <div class="col-md-12 text-center">
                                     <i data-bs-toggle="modal" data-bs-target="#queryStringModal" class="fa-solid fa-square-plus fa-lg"></i>
@@ -583,16 +612,25 @@
                                     <div *ngFor="let query_string of query_strings; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="query_string.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteQueryString(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#queryStringModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteQueryString(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--BODY-->
-                            <div class="col-md">
+                            <div class="col-md border">
                                 <h6 class="text-center">Body</h6>
                                 <div class="col-md-12 text-center">
                                     <i data-bs-toggle="modal" data-bs-target="#BodyModal" class="fa-solid fa-square-plus fa-lg"></i>
@@ -601,10 +639,19 @@
                                     <div *ngFor="let body of bodies; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="body.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteBody(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#BodyModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteBody(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -613,7 +660,7 @@
                         <div class="d-grid col-md-2 ms-auto mt-3">
                             <div *ngIf="!isEditing; then addButton; else editButton"></div>
                             <ng-template #addButton>
-                                <input class="btn btn-primary" type="submit" value="Agregar ruta" />
+                                <input class="btn btn-primary" type="submit" value="Agregar" />
                             </ng-template>
                             <ng-template #editButton>
                                 <input class="btn btn-primary" type="submit" value="Guardar" />

@@ -1,4 +1,4 @@
-.max-height{
+.max-height {
     height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -7,12 +7,12 @@
 .max-height::-webkit-scrollbar {
     width: 10px;
 }
- 
+
 .max-height::-webkit-scrollbar-track {
     background-color: #e4e4e4;
     border-radius: 100px;
 }
- 
+
 .max-height::-webkit-scrollbar-thumb {
     background-color: #282c3880;
     border-radius: 100px;
@@ -24,54 +24,93 @@
     border-color: #f1592A;
 }
 
-.btn-secondary {
-    color: #fff;
-    background-color: #282c38;
-    border-color: #282c38;
-}
-
-.btn-primary:focus, .btn-primary:active {
-    border-color: #f1592A;
-    box-shadow: 0 0 0 0.2rem #f1582a80;
-} 
-
-.btn-scondary:focus, .btn-scondary:active {
-    border-color: #282c38;
-    box-shadow: 0 0 0 0.2rem #282c3880;
-} 
-
-.form-control:focus, .form-select:focus {
+.btn-primary:focus,
+.btn-primary:active {
     border-color: var(--azul-inflection);
     box-shadow: 0 0 0 0.2rem #2ab2f180;
-} 
+}
 
-input.ng-touched.ng-invalid{
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--azul-inflection);
+    box-shadow: 0 0 0 0.2rem #2ab2f180;
+}
+
+input.ng-touched.ng-invalid {
     border-color: red;
 }
 
-textarea.ng-touched.ng-invalid{
+textarea.ng-touched.ng-invalid {
     border-color: red;
 }
 
-select.ng-touched.ng-invalid{
+select.ng-touched.ng-invalid {
     border-color: red;
+}
+
+.row.detalles {
+    /*border: 1px solid;
+    border-radius: 10px;*/
+    margin-bottom: 30px;
+    background: rgb(238, 235, 235);
+    /*padding: 10px;*/
+}
+
+
+/*
+.row.extras {
+    border: 1px solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: rgb(238, 235, 235);
+    padding: 10px;
+}*/
+
+.col-md-11.mx-auto.mt-3 {
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background: rgb(238, 235, 235);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+.col-md.border {
+    border-bottom: 0px;
+    border-top: 0px;
+    background-color: #fff;
+    margin: 0 2px;
 }
 
 .fa-square-plus {
     cursor: pointer;
 }
 
-label{
+p.text-danger {
+    margin-bottom: 0;
+}
+
+i.fa-solid.fa-square-plus.fa-lg {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+label {
     font-weight: bold
 }
 
-label.radio-inline.p-2{
+label.radio-inline.p-2 {
     font-weight: normal;
 }
-h6{
+
+h6 {
+    margin-top: 10px;
     font-weight: bold;
 }
 
-textarea{
+h2 {
+    text-align: center;
+}
+
+textarea {
     resize: none;
 }
