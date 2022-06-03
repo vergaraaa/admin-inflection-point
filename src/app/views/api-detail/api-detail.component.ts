@@ -16,6 +16,8 @@ export class ApiDetailComponent implements OnInit, OnChanges {
   apiData: any;
   routes: any[] = [];
   sections: any[] = [];
+  routeStatuses: any = {};
+  apiStatus: boolean = false;
 
   havePermissionToEdit: boolean = false;
 
@@ -40,6 +42,7 @@ export class ApiDetailComponent implements OnInit, OnChanges {
       });
 
     this.getApiDetails();
+    this.getStatus();
   }
 
   getApiDetails() {
@@ -61,6 +64,27 @@ export class ApiDetailComponent implements OnInit, OnChanges {
   deleteApi() {
     this.apiService.deleteApi(this.apiId).subscribe((data: any) => {
       this.router.navigate(['/home']);
+    });
+  }
+
+  getStatus() {
+    this.apiService.getStatus().subscribe((data: any) => {
+      const statusData = data[this.apiId].routes;
+      if (data[this.apiId].status) {
+        this.apiStatus = data[this.apiId].status;
+      } else {
+        this.apiStatus = false;
+      }
+
+      const routeStatusesObj: {
+        [key: string]: string;
+      } = {};
+      // Add routes to object with route id as key
+      statusData.forEach((route: any) => {
+        routeStatusesObj[route.route_id] = route;
+      });
+      this.routeStatuses = routeStatusesObj;
+      console.log(this.apiStatus);
     });
   }
 }

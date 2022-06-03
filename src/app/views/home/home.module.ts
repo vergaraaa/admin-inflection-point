@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../../directives/directives.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild([{ path: '', component: HomeComponent }]),
     SharedModule,
-    FormsModule
+    FormsModule,
+    DirectivesModule,
   ],
 })
 export class HomeModule {}

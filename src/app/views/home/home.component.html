@@ -65,6 +65,14 @@
                       : 'estatus-error'
                   "
                   class="mx-auto"
+                  [tooltip]="
+                    statusData[api.id!]
+                      ? statusData[api.id!].status
+                        ? 'Última vez actualizado: ' +
+                          statusData[api.id!].routes[0].lastSeen
+                        : 'Última vez actualizado: No Disponible'
+                      : 'Última vez actualizado: No Disponible'
+                  "
                 ></div>
               </td>
             </tr>
