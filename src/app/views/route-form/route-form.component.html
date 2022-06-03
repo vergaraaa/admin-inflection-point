@@ -436,8 +436,8 @@
 
             <!-- FORM -->
             <div class="row">
-                <h2>Ruta</h2>
                 <div class="col-md-11 mx-auto mt-3">
+                    <h2>Ruta</h2>
                     <form [formGroup]="routeForm" (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
                         <div class="row detalles">
                             <!--Division superior-->
@@ -531,10 +531,19 @@
                                     <div *ngFor="let header of headers; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="header.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteHeader(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#headerModal"
+                                                (click)="selectEditHeader(i)">
+                                                </i>
+                                                <i
+                                                (click)="deleteHeader(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -549,10 +558,19 @@
                                     <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="input_parameter.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteInputParameter(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#inputParameterModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteInputParameter(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -567,10 +585,19 @@
                                     <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="output_parameter.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteOutputParameter(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#outputParameterModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteOutputParameter(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -585,10 +612,19 @@
                                     <div *ngFor="let query_string of query_strings; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="query_string.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteQueryString(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#queryStringModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteQueryString(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -603,10 +639,19 @@
                                     <div *ngFor="let body of bodies; let i = index" class="row">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" [value]="body.name" disabled />
-                                            <span class="input-group-text"><i
-                                            (click)="deleteBody(i)"
-                                            class="fa-solid fa-circle-xmark fa-lg">
-                                        </i></span>
+                                            <span class="input-group-text">
+                                                <i
+                                                class="fa-solid fa-pen fa-lg me-2"
+                                                style="cursor: pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#BodyModal"
+                                                (click)="{}">
+                                                </i>
+                                                <i
+                                                (click)="deleteBody(i)"
+                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                                </i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

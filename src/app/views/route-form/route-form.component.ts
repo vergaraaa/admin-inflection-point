@@ -61,6 +61,7 @@ export class RouteFormComponent implements OnInit {
     iHeaderName: string = '';
     iHeaderType: string = '';
     iHeaderDescription: string = '';
+    editHeaderIndex: number = 0;
 
     // Input Param Modal
     inputParameter: InputParameter = { id: 0, name: '', type_id: 0, description: '', route_id: 0 }
@@ -224,6 +225,13 @@ export class RouteFormComponent implements OnInit {
             });
             this.headerForm.reset();
         }
+    }
+
+    selectEditHeader(index: number){
+        this.editHeaderIndex = index;
+        this.iHeaderName = this.headers[index].name;
+        this.iHeaderType = this.headers[index].type_id.toString();
+        this.iHeaderDescription = this.headers[index].description;
     }
 
     editHeader() {
