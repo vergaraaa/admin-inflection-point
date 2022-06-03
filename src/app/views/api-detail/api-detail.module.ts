@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../../directives/directives.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     ]),
     SharedModule,
     FormsModule,
+    DirectivesModule,
   ],
 })
 export class ApiDetailModule {}

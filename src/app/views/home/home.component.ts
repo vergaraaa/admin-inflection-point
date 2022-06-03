@@ -10,14 +10,14 @@ import { Api } from 'src/app/models/api.model';
 export class HomeComponent implements OnInit {
   apisData: Api[] = [];
   statusData: any = {};
-  query: string = "";
+  query: string = '';
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.getApis();
     this.getStatus();
   }
-  
+
   getApis() {
     this.apiService.getApisData().subscribe((data: any) => {
       this.apisData = data;
@@ -25,16 +25,18 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
-    return this.apisData.filter(api => {
-      return api.name.toLowerCase().includes(this.query.toLowerCase()) 
-          || api.description.toLowerCase().includes(this.query.toLowerCase());
+    return this.apisData.filter((api) => {
+      return (
+        api.name.toLowerCase().includes(this.query.toLowerCase()) ||
+        api.description.toLowerCase().includes(this.query.toLowerCase())
+      );
     });
   }
 
   getStatus() {
     this.apiService.getStatus().subscribe((data: any) => {
-      this.statusData = data; 
-      console.log(this.statusData)
+      this.statusData = data;
+      console.log(this.statusData);
     });
   }
 }
