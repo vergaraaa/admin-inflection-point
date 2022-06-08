@@ -10,11 +10,11 @@
                     </div>
                     <div class="modal-body">¿Seguro que quieres eliminar esta ruta?</div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteRoute()">
                             Borrar
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
                         </button>
                     </div>
                 </div>
@@ -48,15 +48,9 @@
                                         <label class="form-group-name" for="inputParameters">
                                             {{ input_param.name }}
                                         </label>
-                                        <input *ngIf="getFormType(input_param) !== 'checkbox'"
-                                            [type]="getFormType(input_param)" class="form-control" id="inputParameters"
-                                            placeholder="{{ input_param.description }}"
-                                            [(ngModel)]="input_param.value" />
-                                        <div class="form-checkbox form-control"
-                                            *ngIf="getFormType(input_param) === 'checkbox'">
-                                            <input [type]="getFormType(input_param)" id="queryStrings"
-                                                [required]="input_param.required"
-                                                (change)="onChangeCheckbox($event, input_param)" />
+                                        <input *ngIf="getFormType(input_param) !== 'checkbox'" [type]="getFormType(input_param)" class="form-control" id="inputParameters" placeholder="{{ input_param.description }}" [(ngModel)]="input_param.value" />
+                                        <div class="form-checkbox form-control" *ngIf="getFormType(input_param) === 'checkbox'">
+                                            <input [type]="getFormType(input_param)" id="queryStrings" [required]="input_param.required" (change)="onChangeCheckbox($event, input_param)" />
                                             <label class="form-checkbox-label" for="queryStrings">
                                                 {{ input_param.description }}
                                             </label>
@@ -76,14 +70,9 @@
                                         <label class="form-group-name" for="headers">
                                             {{ header.name }}
                                         </label>
-                                        <input *ngIf="getFormType(header) !== 'checkbox'" [type]="getFormType(header)"
-                                            class="form-control" id="headers" placeholder="{{ header.description }}"
-                                            [(ngModel)]="header.value" />
-                                        <div class="form-checkbox form-control"
-                                            *ngIf="getFormType(header) === 'checkbox'">
-                                            <input [type]="getFormType(header)" id="queryStrings"
-                                                [required]="header.required"
-                                                (change)="onChangeCheckbox($event, header)" />
+                                        <input *ngIf="getFormType(header) !== 'checkbox'" [type]="getFormType(header)" class="form-control" id="headers" placeholder="{{ header.description }}" [(ngModel)]="header.value" />
+                                        <div class="form-checkbox form-control" *ngIf="getFormType(header) === 'checkbox'">
+                                            <input [type]="getFormType(header)" id="queryStrings" [required]="header.required" (change)="onChangeCheckbox($event, header)" />
                                             <label class="form-checkbox-label" for="queryStrings">
                                                 {{ header.description }}
                                             </label>
@@ -103,16 +92,9 @@
                                         <label class="form-group-name" for="queryStrings">
                                             {{ query_string.name }}
                                         </label>
-                                        <input *ngIf="getFormType(query_string) !== 'checkbox'"
-                                            [type]="getFormType(query_string)" class="form-control" id="queryStrings"
-                                            [required]="query_string.required"
-                                            placeholder="{{ query_string.description }}"
-                                            [(ngModel)]="query_string.value" />
-                                        <div class="form-checkbox form-control"
-                                            *ngIf="getFormType(query_string) === 'checkbox'">
-                                            <input [type]="getFormType(query_string)" id="queryStrings"
-                                                [required]="query_string.required"
-                                                (change)="onChangeCheckbox($event, query_string)" />
+                                        <input *ngIf="getFormType(query_string) !== 'checkbox'" [type]="getFormType(query_string)" class="form-control" id="queryStrings" [required]="query_string.required" placeholder="{{ query_string.description }}" [(ngModel)]="query_string.value" />
+                                        <div class="form-checkbox form-control" *ngIf="getFormType(query_string) === 'checkbox'">
+                                            <input [type]="getFormType(query_string)" id="queryStrings" [required]="query_string.required" (change)="onChangeCheckbox($event, query_string)" />
                                             <label class="form-checkbox-label" for="queryStrings">
                                                 {{ query_string.description }}
                                             </label>
@@ -132,13 +114,9 @@
                                         <label class="form-group-name" for="queryStrings">
                                             {{ body.name }}
                                         </label>
-                                        <input *ngIf="getFormType(body) !== 'checkbox'" [type]="getFormType(body)"
-                                            class="form-control" id="queryStrings" [required]="body.required"
-                                            placeholder="{{ body.description }}" [(ngModel)]="body.value" />
-                                        <div class="form-checkbox form-control"
-                                            *ngIf="getFormType(body) === 'checkbox'">
-                                            <input [type]="getFormType(body)" id="queryStrings"
-                                                [required]="body.required" (change)="onChangeCheckbox($event, body)" />
+                                        <input *ngIf="getFormType(body) !== 'checkbox'" [type]="getFormType(body)" class="form-control" id="queryStrings" [required]="body.required" placeholder="{{ body.description }}" [(ngModel)]="body.value" />
+                                        <div class="form-checkbox form-control" *ngIf="getFormType(body) === 'checkbox'">
+                                            <input [type]="getFormType(body)" id="queryStrings" [required]="body.required" (change)="onChangeCheckbox($event, body)" />
                                             <label class="form-checkbox-label" for="queryStrings">
                                                 {{ body.description }}
                                             </label>
@@ -159,9 +137,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
                         <button type="button" class="btn btn-primary orange" (click)="testRoute(apiUrl + route.route)">
                             Enviar
                         </button>

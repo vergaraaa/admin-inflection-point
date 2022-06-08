@@ -268,6 +268,13 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    selectInputParameter(index: number){
+        this.editHeaderIndex = index;
+        this.iInputParamName = this.input_parameters[index].name;
+        this.iInputParamType = this.input_parameters[index].type_id.toString();
+        this.iInputParamDescription = this.input_parameters[index].description;
+    }
+
     editInputParameter() {
         if (this.inputParamForm.invalid) {
             this.inputParamForm.controls['name'].markAsTouched();
@@ -300,6 +307,13 @@ export class RouteFormComponent implements OnInit {
             });
             this.outputParamForm.reset();
         }
+    }
+
+    selectOutputParameter(index: number){
+        this.editHeaderIndex = index;
+        this.iOutputParamName = this.output_parameters[index].name;
+        this.iOutputParamType = this.output_parameters[index].type_id.toString();
+        this.iOutputParamDescription = this.output_parameters[index].description;
     }
 
     editOutputParameter() {
@@ -338,6 +352,14 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    selectQueryString(index: number){
+        this.editHeaderIndex = index;
+        this.iQueryStringName = this.query_strings[index].name;
+        this.iQueryStringType = this.query_strings[index].type_id.toString();
+        this.iQueryStringRequired = this.query_strings[index].required.toString();
+        this.iQueryStringDescription = this.query_strings[index].description;
+    }
+
     editQueryString() {
         if (this.queryStringForm.invalid) {
             this.queryStringForm.controls['name'].markAsTouched();
@@ -372,6 +394,13 @@ export class RouteFormComponent implements OnInit {
             });
             this.bodyForm.reset();
         }
+    }
+
+    selectBody(index: number){
+        this.editHeaderIndex = index;
+        this.iBodyName = this.bodies[index].name;
+        this.iBodyType = this.bodies[index].type_id.toString();
+        this.iBodyDescription = this.bodies[index].description;
     }
 
     editBody() {
