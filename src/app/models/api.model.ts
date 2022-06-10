@@ -4,5 +4,6 @@ export interface Api {
   description: string;
   url: string;
   user_id: number;
+  status?: boolean;
 }
 

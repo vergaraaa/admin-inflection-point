@@ -5,4 +5,6 @@ export interface User {
   role_id: number;
   email: string;
   selected?: boolean;
+  roleChanged?: boolean;
+  newRole?: number;
 }
