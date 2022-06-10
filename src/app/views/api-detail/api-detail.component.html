@@ -1,29 +1,25 @@
 <div class="container-fluid">
-  <div class="row row-height">
-    <div class="col-md-3 left">
-      <ul class="list-unstyled pt-3">
-        <li class="mb-1" *ngFor="let section of sections">
-          <button
-            class="btn btn-toggle align-items-center rounded"
-            data-bs-toggle="collapse"
-            [attr.data-bs-target]="'#collapse' + section.id"
-            aria-expanded="true"
-          >
+    <div class="row row-height">
+        <div class="col-md-3 left">
+            <ul class="list-unstyled pt-3">
+                <li class="mb-1" *ngFor="let section of sections">
+                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
             {{ section.name }}
           </button>
-          <div class="collapse collapse" [id]="'collapse' + section.id">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li *ngIf="routes[section.id].length === 0">
-                <p class="empty-message">No hay rutas disponibles</p>
-              </li>
-              <li class="route-row" *ngFor="let route of routes[section.id]">
-                <a
-                  routerLink="./"
-                  [queryParams]="{ route: route.id }"
-                  class="link-light rounded route-link"
-                  >{{ route.route }}</a
+                    <div class="collapse collapse" [id]="'collapse' + section.id">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li *ngIf="routes[section.id].length === 0">
+                                <p class="empty-message">No hay rutas disponibles</p>
+                            </li>
+                            <li class="route-row mb-2" *ngFor="let route of routes[section.id]">
+                                <a routerLink="./" [queryParams]="{ route: route.id }" class="link-light rounded route-link">{{ route.route }}</a
                 >
-                <p class="route-method">{{ route.method }}</p>
+                <div [ngSwitch]="route.method">
+                  <p *ngSwitchCase="'GET'" class="route-method badge bg-info p-2">{{ route.method }}</p>
+                  <p *ngSwitchCase="'POST'" class="route-method badge bg-success p-2">{{ route.method }}</p>
+                  <p *ngSwitchCase="'PUT'" class="route-method badge bg-warning p-2">{{ route.method }}</p>
+                  <p *ngSwitchCase="'DELETE'" class="route-method badge bg-danger p-2">{{ route.method }}</p>
+                </div>
               </li>
               <li
                 class="link-light bg-white text-black-50 add-route-link"
