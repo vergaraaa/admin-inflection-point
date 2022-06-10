@@ -175,8 +175,21 @@ ul {
 }
 
 .estatus {
-    /* font-size: 1.75em; */
-    color: #1aa028;
+
+  /* font-size: 1.75em; */
+  color: #1aa028;
+  margin-right: 1rem;
+}
+
+.estatus-error {
+  color: #ce1010;
+  margin-right: 1rem;
+}
+
+.estatus-invisible {
+  color: #000000;
+  margin-right: 1rem;
+  opacity: 0;
 }
 
 .editar {
@@ -195,8 +208,8 @@ ul {
     justify-content: end;
 }
 
-.options-route-details>i {
-    font-size: 1.8em;
-    margin-right: 1em;
-    cursor: pointer;
+.options-route-details > i {
+  font-size: 1.8em;
+  margin-right: 1em;
+  cursor: pointer;
 }

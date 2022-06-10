@@ -19,8 +19,8 @@
         </div>
         <div class="modal-body">
           ¿Seguro que quieres cambiar el rol de
-          {{ usersData[indexSelectedUser].first_name }}
-          {{ usersData[indexSelectedUser].last_name }}?
+          {{ selectedUser.first_name }}
+          {{ selectedUser.last_name }}?
         </div>
         <div class="modal-footer">
           <button
@@ -66,9 +66,21 @@
         <table class="table text-center align-middle">
           <thead class="text-white" style="background-color: #282c38">
             <tr>
-              <th class="col-4">Nombre</th>
-              <th class="col-4">Email</th>
-              <th class="col-4">Rol</th>
+              <th
+                class="col-4 clickable"
+                (click)="sort('first_name', ascDescBool)"
+              >
+                Nombre
+              </th>
+              <th class="col-4 clickable" (click)="sort('email', ascDescBool)">
+                Email
+              </th>
+              <th
+                class="col-4 clickable"
+                (click)="sort('role_id', ascDescBool)"
+              >
+                Rol
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -77,22 +89,17 @@
               <td>{{ user.email }}</td>
               <td scope="row">
                 <select
-                  [(ngModel)]="roleIds[i]"
-                  (change)="onRoleChange(user.id, roleIds[i], i)"
+                  [ngModel]="user.role_id"
+                  (change)="onRoleChange(user.id, $event.target)"
                 >
-                  <option [ngValue]="1" [selected]="user.role_id == 1">
-                    Master
-                  </option>
-                  <option [ngValue]="2" [selected]="user.role_id == 2">
-                    Admin
-                  </option>
-                  <option [ngValue]="3" [selected]="user.role_id == 3">
-                    Usuario
-                  </option>
+                  <option value="1">Master</option>
+                  <option value="2">Admin</option>
+                  <option value="3">Usuario</option>
                 </select>
-                <div
+                <!-- <div
                   *ngIf="user.role_id != roleIds[i]; then thenBlockImage"
-                ></div>
+                ></div> -->
+                <div *ngIf="user.roleChanged; then thenBlockImage"></div>
                 <ng-template #thenBlockImage>
                   <i
                     class="fa-solid fa-floppy-disk ms-3"

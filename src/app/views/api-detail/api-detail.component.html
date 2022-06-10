@@ -6,13 +6,37 @@
                     <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
             {{ section.name }}
           </button>
-                    <div class="collapse collapse" [id]="'collapse' + section.id">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li *ngIf="routes[section.id].length === 0">
-                                <p class="empty-message">No hay rutas disponibles</p>
-                            </li>
-                            <li class="route-row mb-2" *ngFor="let route of routes[section.id]">
-                                <a routerLink="./" [queryParams]="{ route: route.id }" class="link-light rounded route-link">{{ route.route }}</a
+
+          <div class="collapse collapse" [id]="'collapse' + section.id">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li *ngIf="routes[section.id].length === 0">
+                <p class="empty-message">No hay rutas disponibles</p>
+              </li>
+              <li class="route-row" *ngFor="let route of routes[section.id]">
+                <a
+                  routerLink="./"
+                  [queryParams]="{ route: route.id }"
+                  class="link-light rounded route-link"
+                >
+                  <i
+                    class="ms-3 fas fa-circle"
+                    [ngClass]="
+                      routeStatuses[route.id].status === 200
+                        ? 'estatus'
+                        : 'estatus-error'
+                    "
+                    *ngIf="route.method === 'GET'"
+                    [tooltip]="
+                      'Última vez actualizado: ' +
+                      routeStatuses[route.id].lastSeen
+                    "
+                  ></i>
+                  <i
+                    class="ms-3 fas fa-circle estatus-invisible"
+                    *ngIf="route.method !== 'GET'"
+                  ></i>
+                  {{ route.route }}</a
+
                 >
                 <div [ngSwitch]="route.method">
                   <p *ngSwitchCase="'GET'" class="route-method badge bg-info p-2">{{ route.method }}</p>
@@ -44,7 +68,11 @@
         <div class="row mt-4 align-items-center options-row">
           <div class="col-md-8 my-auto">
             <h2>
-              {{ apiData.name }} <i class="ms-3 fas fa-circle estatus"></i>
+              {{ apiData.name }}
+              <i
+                class="ms-3 fas fa-circle"
+                [ngClass]="apiStatus ? 'estatus' : 'estatus-error'"
+              ></i>
             </h2>
           </div>
           <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
@@ -81,6 +109,7 @@
         [routeId]="routeId"
         [havePermissionToEdit]="havePermissionToEdit"
         [apiUrl]="apiData.url"
+        [routeStatus]="routeStatuses[routeId]"
         (onDelete)="getApiDetails()"
       ></app-route-detail>
     </div>

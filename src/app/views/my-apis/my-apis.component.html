@@ -22,26 +22,26 @@
         </div>
         <div class="modal-footer">
           <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          (click)="deleteApi()"
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="deleteApi()"
           >
-          Borrar
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Cerrar
-        </button>
+            Borrar
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-<!--Modal colaboradoes-->
+  <!--Modal colaboradoes-->
   <div
     class="modal fade"
     id="modalColaboradores"
@@ -177,10 +177,25 @@
           </thead>
           <thead class="text-white" style="background-color: #282c38">
             <tr>
-              <th class="col-2">API</th>
-              <th class="col-3">Descripción</th>
-              <th class="col-3">URL</th>
-              <th class="col-2">Estatus</th>
+              <th
+                class="col-2 clickable"
+                (click)="sortMyApis('name', ascDescBool)"
+              >
+                API
+              </th>
+              <th
+                class="col-3 clickable"
+                (click)="sortMyApis('description', ascDescBool)"
+              >
+                Descripción
+              </th>
+              <th
+                class="col-3 clickable"
+                (click)="sortMyApis('url', ascDescBool)"
+              >
+                URL
+              </th>
+              <th class="col-2 clickable">Estatus</th>
               <th class="col-2">Operaciones</th>
             </tr>
           </thead>
@@ -188,7 +203,7 @@
             <tr *ngIf="apisData.length === 0">
               <td colspan="5">Aún no has creado ninguna Api</td>
             </tr>
-            <tr *ngFor="let api of search(); let i = index">
+            <tr *ngFor="let api of searchMyApis(); let i = index">
               <td
                 scope="row"
                 class="clickable"
@@ -266,18 +281,33 @@
           </thead>
           <thead class="text-white" style="background-color: #282c38">
             <tr>
-              <th class="col-2">API</th>
-              <th class="col-3">Descripción</th>
-              <th class="col-3">URL</th>
-              <th class="col-2">Estatus</th>
-              <th class="col-2">Operaciones</th>
+              <th
+                class="col-2 clickable"
+                (click)="sortCollaboratorApis('name', ascDescBool)"
+              >
+                API
+              </th>
+              <th
+                class="col-3 clickable"
+                (click)="sortCollaboratorApis('description', ascDescBool)"
+              >
+                Descripción
+              </th>
+              <th
+                class="col-3 clickable"
+                (click)="sortCollaboratorApis('url', ascDescBool)"
+              >
+                URL
+              </th>
+              <th class="col-2 clickable">Estatus</th>
+              <th class="col-2 clickable">Operaciones</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngIf="collaboratorApisData.length === 0">
               <td colspan="5">Aún no colaboras en ninguna Api</td>
             </tr>
-            <tr *ngFor="let api of collaboratorApisData; let i = index">
+            <tr *ngFor="let api of searchCollaboratorApis(); let i = index">
               <td
                 scope="row"
                 class="clickable"

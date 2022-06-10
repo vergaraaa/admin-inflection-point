@@ -19,6 +19,7 @@ export class MyApisComponent implements OnInit {
   query: string = '';
   queryColaboradores: string = '';
   usersData: User[] = [];
+  ascDescBool: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -71,8 +72,17 @@ export class MyApisComponent implements OnInit {
     this.router.navigate([`/edit-api/${api_id}`]);
   }
 
-  search() {
+  searchMyApis() {
     return this.apisData.filter((api) => {
+      return (
+        api.name.toLowerCase().includes(this.query.toLowerCase()) ||
+        api.name.toLowerCase().includes(this.query.toLowerCase())
+      );
+    });
+  }
+
+  searchCollaboratorApis() {
+    return this.collaboratorApisData.filter((api) => {
       return (
         api.name.toLowerCase().includes(this.query.toLowerCase()) ||
         api.name.toLowerCase().includes(this.query.toLowerCase())
@@ -132,5 +142,105 @@ export class MyApisComponent implements OnInit {
           });
         });
       });
+  }
+
+  sortMyApis(colName: any, boolean: boolean) {
+    // if(colName == 'status'){
+    //   const statusDataArray = Object.values(this.statusData);
+
+    //   statusDataArray.forEach((apiStatus: any) => {
+    //     this.apisData.find(api => {
+    //       if (api.id == apiStatus.api_id) {
+    //         api.status = apiStatus.status;
+    //       }
+    //     })
+    //   });
+
+    //   this.apisData.forEach((api: any) => {
+    //     if (!api.status) {
+    //       api.status = false;
+    //     }
+    //   }
+    //   );
+    // } 
+
+    if (boolean == true){
+      this.apisData.sort((a: any, b: any): number => {
+        if(typeof a[colName] === 'string') {
+          let aName = a[colName].toLowerCase();
+          let bName = b[colName].toLowerCase();
+          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          return aName < bName ? 1 : aName > bName ? -1 : 0;
+        } else {
+          return a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0;
+        }
+        })        
+        this.ascDescBool = !this.ascDescBool
+    }
+    else{
+      this.apisData.sort((a: any, b: any): number => {
+        if(typeof a[colName] === 'string') {
+          let aName = a[colName].toLowerCase();
+          let bName = b[colName].toLowerCase();
+          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          return aName < bName ? -1 : aName > bName ? 1 : 0;
+        } else {
+          return a[colName] < b[colName] ? -1 : a[colName] > b[colName] ? 1 : 0;
+        }
+        })  
+      this.ascDescBool = !this.ascDescBool
+    }
+  }
+
+  sortCollaboratorApis(colName: any, boolean: boolean) {
+    // if(colName == 'status'){
+    //   const statusDataArray = Object.values(this.statusData);
+
+    //   statusDataArray.forEach((apiStatus: any) => {
+    //     this.apisData.find(api => {
+    //       if (api.id == apiStatus.api_id) {
+    //         api.status = apiStatus.status;
+    //       }
+    //     })
+    //   });
+
+    //   this.apisData.forEach((api: any) => {
+    //     if (!api.status) {
+    //       api.status = false;
+    //     }
+    //   }
+    //   );
+    // } 
+
+    if (boolean == true){
+      this.collaboratorApisData.sort((a: any, b: any): number => {
+        if(typeof a[colName] === 'string') {
+          let aName = a[colName].toLowerCase();
+          let bName = b[colName].toLowerCase();
+          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          return aName < bName ? 1 : aName > bName ? -1 : 0;
+        } else {
+          return a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0;
+        }
+        })        
+        this.ascDescBool = !this.ascDescBool
+    }
+    else{
+      this.collaboratorApisData.sort((a: any, b: any): number => {
+        if(typeof a[colName] === 'string') {
+          let aName = a[colName].toLowerCase();
+          let bName = b[colName].toLowerCase();
+          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+          return aName < bName ? -1 : aName > bName ? 1 : 0;
+        } else {
+          return a[colName] < b[colName] ? -1 : a[colName] > b[colName] ? 1 : 0;
+        }
+        })  
+      this.ascDescBool = !this.ascDescBool
+    }
   }
 }
