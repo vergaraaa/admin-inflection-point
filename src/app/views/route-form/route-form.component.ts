@@ -49,19 +49,22 @@ export class RouteFormComponent implements OnInit {
     iBodyName: string = '';
     iBodyType: string = '';
     iBodyDescription: string = '';
+    isEditingBody: boolean = false;
 
     // Section Modal
     section: Section = { id: 0, name: '', api_id: 0 }
     sections: Section[] = [];
     iSectionAdd: string = '';
-
+    isEditingSection: boolean = false;
+    
     // Header Modal
     header: Header = { id: 0, name: '', type_id: 0, description: '', route_id: 0, value: 0 }
     headers: Header[] = [];
     iHeaderName: string = '';
     iHeaderType: string = '';
     iHeaderDescription: string = '';
-    editHeaderIndex: number = 0;
+    editIndex: number = 0;
+    isEditingHeader: boolean = false;
 
     // Input Param Modal
     inputParameter: InputParameter = { id: 0, name: '', type_id: 0, description: '', route_id: 0 }
@@ -69,6 +72,7 @@ export class RouteFormComponent implements OnInit {
     iInputParamName: string = '';
     iInputParamType: string = '';
     iInputParamDescription: string = '';
+    isEditingInput: boolean = false;
 
     // Output Param Modal
     outputParameter: OutputParameter = { id: 0, name: '', type_id: 0, description: '', route_id: 0 }
@@ -76,6 +80,7 @@ export class RouteFormComponent implements OnInit {
     iOutputParamName: string = '';
     iOutputParamType: string = '';
     iOutputParamDescription: string = '';
+    isEditingOutput: boolean = false;
 
     // Query String Modal
     queryString: QueryString = { id: 0, name: '', type_id: 0, description: '', required: false, route_id: 0 }
@@ -84,6 +89,7 @@ export class RouteFormComponent implements OnInit {
     iQueryStringType: string = '';
     iQueryStringRequired: string = '';
     iQueryStringDescription: string = '';
+    isEditingQuery: boolean = false;
 
     // Form
     routeRoute: Route = { id: 0, name: '', route: '', description: '', method: '', section_id: 0, api_id: 0, headers: [], input_parameters: [], output_parameters: [], query_strings: [], bodies: [] }
@@ -175,6 +181,8 @@ export class RouteFormComponent implements OnInit {
             this.output_parameters = data.output_params;
             this.query_strings = data.query_string;
             this.bodies = data.bodies;
+            console.log(this.query_strings);
+            
         });
     }
 
@@ -228,10 +236,16 @@ export class RouteFormComponent implements OnInit {
     }
 
     selectEditHeader(index: number){
-        this.editHeaderIndex = index;
+        this.editIndex = index;
         this.iHeaderName = this.headers[index].name;
         this.iHeaderType = this.headers[index].type_id.toString();
         this.iHeaderDescription = this.headers[index].description;
+        this.isEditingHeader = true;
+    }
+
+    cancelEditHeader(){
+        this.isEditingHeader = false;
+        this.headerForm.reset()
     }
 
     editHeader() {
@@ -240,12 +254,11 @@ export class RouteFormComponent implements OnInit {
             this.headerForm.controls['type_id'].markAsTouched();
             this.headerForm.controls['description'].markAsTouched();
         } else {
-            this.headers.push({
-                name: this.iHeaderName,
-                type_id: +this.iHeaderType,
-                description: this.iHeaderDescription,
-            });
+            this.headers[this.editIndex].name = this.iHeaderName
+            this.headers[this.editIndex].type_id = +this.iHeaderType
+            this.headers[this.editIndex].description = this.iHeaderDescription
             this.headerForm.reset();
+            this.isEditingHeader = false;
         }
     }
 
@@ -268,18 +281,36 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    selectInputParameter(index: number){
+        this.editIndex = index;
+        this.iInputParamName = this.input_parameters[index].name;
+        this.iInputParamType = this.input_parameters[index].type_id.toString();
+        this.iInputParamDescription = this.input_parameters[index].description;
+        this.isEditingInput = true;
+    }
+
+    cancelEditInput(){
+        this.isEditingInput = false;
+        this.iInputParamName = "";
+        this.iInputParamType = "";
+        this.iInputParamDescription = "";
+        this.inputParamForm.reset();
+    }
+
     editInputParameter() {
         if (this.inputParamForm.invalid) {
             this.inputParamForm.controls['name'].markAsTouched();
             this.inputParamForm.controls['type_id'].markAsTouched();
             this.inputParamForm.controls['description'].markAsTouched();
         } else {
-            this.input_parameters.push({
-                name: this.iInputParamName,
-                type_id: +this.iInputParamType,
-                description: this.iInputParamDescription,
-            });
+            this.input_parameters[this.editIndex].name = this.iInputParamName;
+            this.input_parameters[this.editIndex].type_id = +this.iInputParamType;
+            this.input_parameters[this.editIndex].description = this.iInputParamDescription;
+            this.iInputParamName = "";
+            this.iInputParamType = "";
+            this.iInputParamDescription = "";
             this.inputParamForm.reset();
+            this.isEditingInput = false;
         }
     }
 
@@ -302,17 +333,32 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    selectOutputParameter(index: number){
+        this.editIndex = index;
+        this.iOutputParamName = this.output_parameters[index].name;
+        this.iOutputParamType = this.output_parameters[index].type_id.toString();
+        this.iOutputParamDescription = this.output_parameters[index].description;
+        this.isEditingOutput = true;
+    }
+
+    cancelEditOutput(){
+        this.isEditingOutput = false;
+        this.iOutputParamName = "";
+        this.iOutputParamType = "";
+        this.iOutputParamDescription = "";
+        this.outputParamForm.reset();
+    }
+
     editOutputParameter() {
         if (this.outputParamForm.invalid) {
             this.outputParamForm.controls['name'].markAsTouched();
             this.outputParamForm.controls['type_id'].markAsTouched();
             this.outputParamForm.controls['description'].markAsTouched();
         } else {
-            this.output_parameters.push({
-                name: this.iOutputParamName,
-                type_id: +this.iOutputParamType,
-                description: this.iOutputParamDescription,
-            });
+            this.output_parameters[this.editIndex].name = this.iOutputParamName;
+            this.output_parameters[this.editIndex].type_id = +this.iOutputParamType;
+            this.output_parameters[this.editIndex].description = this.iOutputParamDescription;
+            this.isEditingOutput = false;
             this.outputParamForm.reset();
         }
     }
@@ -331,11 +377,29 @@ export class RouteFormComponent implements OnInit {
             this.query_strings.push({
                 name: this.iQueryStringName,
                 type_id: +this.iQueryStringType,
-                required: this.iQueryStringRequired === '1' ? true : false,
+                required: this.iQueryStringRequired === 'true' ? true : false,
                 description: this.iQueryStringDescription,
             });
             this.queryStringForm.reset();
         }
+    }
+
+    selectQueryString(index: number){
+        this.editIndex = index;
+        this.iQueryStringName = this.query_strings[index].name;
+        this.iQueryStringType = this.query_strings[index].type_id.toString();
+        this.iQueryStringRequired = this.query_strings[index].required.toString();
+        this.iQueryStringDescription = this.query_strings[index].description;
+        this.isEditingQuery = true;
+    }
+
+    cancelEditQuery(){
+        this.isEditingQuery = false;
+        this.iQueryStringName = "";
+        this.iQueryStringType = "";
+        this.iQueryStringRequired = "";
+        this.iQueryStringDescription = "";
+        this.queryStringForm.reset();
     }
 
     editQueryString() {
@@ -345,12 +409,11 @@ export class RouteFormComponent implements OnInit {
             this.queryStringForm.controls['description'].markAsTouched();
             this.queryStringForm.controls['required'].markAsTouched();
         } else {
-            this.query_strings.push({
-                name: this.iQueryStringName,
-                type_id: +this.iQueryStringType,
-                required: this.iQueryStringRequired === '1' ? true : false,
-                description: this.iQueryStringDescription,
-            });
+            this.query_strings[this.editIndex].name = this.iQueryStringName;
+            this.query_strings[this.editIndex].type_id = +this.iQueryStringType;
+            this.query_strings[this.editIndex].required = this.iQueryStringRequired === '1' ? true : false;
+            this.query_strings[this.editIndex].description = this.iQueryStringDescription;
+            this.isEditingQuery = false;
             this.queryStringForm.reset();
         }
     }
@@ -374,17 +437,32 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
+    selectBody(index: number){
+        this.editIndex = index;
+        this.iBodyName = this.bodies[index].name;
+        this.iBodyType = this.bodies[index].type_id.toString();
+        this.iBodyDescription = this.bodies[index].description;
+        this.isEditingBody = true;
+    }
+
+    cancelEditBody(){
+        this.isEditingBody = false;
+        this.iBodyName = "";
+        this.iBodyType = "";
+        this.iBodyDescription = "";
+        this.bodyForm.reset();
+    }
+
     editBody() {
         if (this.bodyForm.invalid) {
             this.bodyForm.controls['name'].markAsTouched();
             this.bodyForm.controls['type_id'].markAsTouched();
             this.bodyForm.controls['description'].markAsTouched();
         } else {
-            this.bodies.push({
-                name: this.iBodyName,
-                type_id: +this.iBodyType,
-                description: this.iBodyDescription,
-            });
+            this.bodies[this.editIndex].name = this.iBodyName;
+            this.bodies[this.editIndex].type_id = +this.iBodyType;
+            this.bodies[this.editIndex].description = this.iBodyDescription;
+            this.isEditingBody = false;
             this.bodyForm.reset();
         }
     }

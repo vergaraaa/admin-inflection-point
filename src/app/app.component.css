@@ -1,6 +1,8 @@
 :root {
-  --azul-inflection: rgb(37, 169, 224);
+    --azul-inflection: rgb(37, 169, 224);
+
 }
+
 .btn-primary {
   color: #fff;
   background-color: #f1592a;
@@ -9,6 +11,7 @@
 
 .btn-primary:focus,
 .btn-primary:active {
+
   border-color: #f1592a;
   box-shadow: 0 0 0 0.2rem #f1582a80;
 }

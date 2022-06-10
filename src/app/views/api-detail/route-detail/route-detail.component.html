@@ -1,42 +1,24 @@
 <!-- NAME, TEST, OPERATIONS -->
 <div *ngIf="!isLoading">
-  <div class="row mt-4 align-items-center">
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">¿Seguro que quieres eliminar esta ruta?</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
-              (click)="deleteRoute()"
-            >
-              Borrar
-            </button>
-          </div>
+    <div class="row mt-4 align-items-center">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">¿Seguro que quieres eliminar esta ruta?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteRoute()">
+                            Borrar
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -178,6 +160,7 @@
                         {{ query_string.description }}
                       </label>
                     </div>
+
                     <label class="form-group-data_type" for="queryStrings">
                       {{ query_string.data_type }}
                     </label>
@@ -215,6 +198,7 @@
                       <label class="form-checkbox-label" for="queryStrings">
                         {{ body.description }}
                       </label>
+
                     </div>
                     <label class="form-group-data_type" for="queryStrings">
                       {{ body.data_type }}
@@ -223,6 +207,7 @@
                 </div>
               </div>
             </div>
+
 
             <h6>URL a probar</h6>
             <p>{{ apiUrl + route.route }}</p>
@@ -251,69 +236,48 @@
       </div>
     </div>
     <!-- FIN TEST API MODAL -->
-
-    <div class="col-md-4 my-auto">
-      <h2>
-        {{ route.name }}
-        <i
-          class="ms-3 fas fa-circle"
-          [ngClass]="routeStatus.status === 200 ? 'estatus' : 'estatus-error'"
-          *ngIf="route.method === 'GET'"
-          [tooltip]="'Última vez actualizado: ' + routeStatus.lastSeen"
-        ></i>
-        <i
-          class="ms-3 fas fa-circle estatus-invisible"
-          *ngIf="route.method !== 'GET'"
-        ></i>
-      </h2>
-    </div>
-    <div class="col-md-4 my-3">
-      <div class="div-probar">
-        <button
-          class="btn btn-probar"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#testApiModal"
-        >
-          Probar
-        </button>
-      </div>
-    </div>
-    <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
-      <div class="row">
-        <div class="col options-route-details">
-          <i
-            class="fa-solid fa-pen editar"
-            [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"
-          ></i>
-
-          <i
-            class="fa-solid fa-trash borrar"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          ></i>
+	        <div class="row">
+            <div class="col-md-6">
+                <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
+            </div>
+            <!-- <div class="col-md-4">
+                <div class="div-probar">
+                    <button class="btn btn-probar" type="button" data-bs-toggle="modal" data-bs-target="#testApiModal">
+                        Probar
+                    </button>
+                </div>
+            </div> -->
+            <div class="col-md-6 mt-1" *ngIf="havePermissionToEdit">
+                <div class="row">
+                    <div class="col options-route-details">
+                        <i class="fa-solid fa-flask-vial" data-bs-toggle="modal" data-bs-target="#testApiModal"></i>
+                        <i class="fa-solid fa-pen editar" [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"></i>
+                        <i class="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- METHOD -->
-  <div class="row mt-3">
-    <h5>Método: {{ route.method }}</h5>
-  </div>
+    <!-- METHOD -->
+    <div class="row">
+        <div [ngSwitch]="route.method">
+            <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
+                <span class="badge route-method bg-info p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'POST'" class="alert alert-success p-2" role="alert">
+                <span class="badge route-method bg-success p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'PUT'" class="alert alert-warning p-2" role="alert">
+                <span class="badge route-method bg-warning p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'DELETE'" class="alert alert-danger p-2" role="alert">
+                <span class="badge route-method bg-danger p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+        </div>
 
-  <!-- RUTA -->
-  <div class="row mt-3">
-    <h5>{{ route.route }}</h5>
-  </div>
-
-  <!-- DESCRIPCIÓN -->
-  <div class="row mt-3">
-    <h5>Descripción</h5>
-    <p class="p">
-      {{ route.description }}
-    </p>
-  </div>
 
   <!-- PARÁMETROS DE ENTRADA -->
   <div class="row mt-3">
@@ -343,6 +307,7 @@
           </tr>
         </tbody>
       </table>
+
     </div>
   </div>
 
@@ -400,7 +365,6 @@
         </table>
       </div>
     </div>
-
     <div class="row mt-3">
       <h5>Parámetros de salida</h5>
       <div class="col-12">
