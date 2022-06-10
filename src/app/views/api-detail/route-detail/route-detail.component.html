@@ -20,405 +20,319 @@
                 </div>
             </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- TEST API MODAL -->
-    <div
-      class="modal fade"
-      id="testApiModal"
-      tabindex="-1"
-      aria-labelledby="testApiModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
+<!-- TEST API MODAL -->
+<div class="modal fade" id="testApiModal" tabindex="-1" aria-labelledby="testApiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="testApiModalLabel">Probar endpoint</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <!-- FORM VARIABLES -->
-            <div class="form-probar">
-              <h4>Variables</h4>
-              <p
-                *ngIf="
+            <div class="modal-header">
+                <h5 class="modal-title" id="testApiModalLabel">Probar endpoint</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- FORM VARIABLES -->
+                <div class="form-probar">
+                    <h4>Variables</h4>
+                    <p *ngIf="
                   input_params.length === 0 &&
                   headers.length === 0 &&
                   query_strings.length === 0
-                "
-              >
-                La ruta no contiene ninguna variable de entrada.
-              </p>
-              <!-- Input parameters -->
-              <div *ngIf="input_params.length > 0">
-                <h6 for="inputParameters">Parámetros de entrada</h6>
-                <div *ngFor="let input_param of input_params">
-                  <div class="form-group">
-                    <label class="form-group-name" for="inputParameters">
+                ">
+                        La ruta no contiene ninguna variable de entrada.
+                    </p>
+                    <!-- Input parameters -->
+                    <div *ngIf="input_params.length > 0">
+                        <h6 for="inputParameters">Parámetros de entrada</h6>
+                        <div *ngFor="let input_param of input_params">
+                            <div class="form-group">
+                                <label class="form-group-name" for="inputParameters">
                       {{ input_param.name }}
                     </label>
-                    <input
-                      *ngIf="getFormType(input_param) !== 'checkbox'"
-                      [type]="getFormType(input_param)"
-                      class="form-control"
-                      id="inputParameters"
-                      placeholder="{{ input_param.description }}"
-                      [(ngModel)]="input_param.value"
-                    />
-                    <div
-                      class="form-checkbox form-control"
-                      *ngIf="getFormType(input_param) === 'checkbox'"
-                    >
-                      <input
-                        [type]="getFormType(input_param)"
-                        id="queryStrings"
-                        [required]="input_param.required"
-                        (change)="onChangeCheckbox($event, input_param)"
-                      />
-                      <label class="form-checkbox-label" for="queryStrings">
+                                <input *ngIf="getFormType(input_param) !== 'checkbox'" [type]="getFormType(input_param)" class="form-control" id="inputParameters" placeholder="{{ input_param.description }}" [(ngModel)]="input_param.value" />
+                                <div class="form-checkbox form-control" *ngIf="getFormType(input_param) === 'checkbox'">
+                                    <input [type]="getFormType(input_param)" id="queryStrings" [required]="input_param.required" (change)="onChangeCheckbox($event, input_param)" />
+                                    <label class="form-checkbox-label" for="queryStrings">
                         {{ input_param.description }}
                       </label>
-                    </div>
-                    <label class="form-group-data_type" for="inputParameters">
+                                </div>
+                                <label class="form-group-data_type" for="inputParameters">
                       {{ input_param.data_type }}
                     </label>
-                  </div>
-                </div>
-              </div>
+                            </div>
+                        </div>
+                    </div>
 
-              <!-- Headers -->
-              <div *ngIf="headers.length > 0">
-                <h6 for="headers">Headers</h6>
-                <div *ngFor="let header of headers">
-                  <div class="form-group">
-                    <label class="form-group-name" for="headers">
+                    <!-- Headers -->
+                    <div *ngIf="headers.length > 0">
+                        <h6 for="headers">Headers</h6>
+                        <div *ngFor="let header of headers">
+                            <div class="form-group">
+                                <label class="form-group-name" for="headers">
                       {{ header.name }}
                     </label>
-                    <input
-                      *ngIf="getFormType(header) !== 'checkbox'"
-                      [type]="getFormType(header)"
-                      class="form-control"
-                      id="headers"
-                      placeholder="{{ header.description }}"
-                      [(ngModel)]="header.value"
-                    />
-                    <div
-                      class="form-checkbox form-control"
-                      *ngIf="getFormType(header) === 'checkbox'"
-                    >
-                      <input
-                        [type]="getFormType(header)"
-                        id="queryStrings"
-                        [required]="header.required"
-                        (change)="onChangeCheckbox($event, header)"
-                      />
-                      <label class="form-checkbox-label" for="queryStrings">
+                                <input *ngIf="getFormType(header) !== 'checkbox'" [type]="getFormType(header)" class="form-control" id="headers" placeholder="{{ header.description }}" [(ngModel)]="header.value" />
+                                <div class="form-checkbox form-control" *ngIf="getFormType(header) === 'checkbox'">
+                                    <input [type]="getFormType(header)" id="queryStrings" [required]="header.required" (change)="onChangeCheckbox($event, header)" />
+                                    <label class="form-checkbox-label" for="queryStrings">
                         {{ header.description }}
                       </label>
-                    </div>
-                    <label class="form-group-data_type" for="headers">
+                                </div>
+                                <label class="form-group-data_type" for="headers">
                       {{ header.data_type }}
                     </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Query Strings -->
-              <div *ngIf="query_strings.length > 0">
-                <h6 for="queryStrings">Query Strings</h6>
-                <div *ngFor="let query_string of query_strings">
-                  <div class="form-group">
-                    <label class="form-group-name" for="queryStrings">
-                      {{ query_string.name }}
-                    </label>
-                    <input
-                      *ngIf="getFormType(query_string) !== 'checkbox'"
-                      [type]="getFormType(query_string)"
-                      class="form-control"
-                      id="queryStrings"
-                      [required]="query_string.required"
-                      placeholder="{{ query_string.description }}"
-                      [(ngModel)]="query_string.value"
-                    />
-                    <div
-                      class="form-checkbox form-control"
-                      *ngIf="getFormType(query_string) === 'checkbox'"
-                    >
-                      <input
-                        [type]="getFormType(query_string)"
-                        id="queryStrings"
-                        [required]="query_string.required"
-                        (change)="onChangeCheckbox($event, query_string)"
-                      />
-                      <label class="form-checkbox-label" for="queryStrings">
-                        {{ query_string.description }}
-                      </label>
+                            </div>
+                        </div>
                     </div>
 
-                    <label class="form-group-data_type" for="queryStrings">
+                    <!-- Query Strings -->
+                    <div *ngIf="query_strings.length > 0">
+                        <h6 for="queryStrings">Query Strings</h6>
+                        <div *ngFor="let query_string of query_strings">
+                            <div class="form-group">
+                                <label class="form-group-name" for="queryStrings">
+                      {{ query_string.name }}
+                    </label>
+                                <input *ngIf="getFormType(query_string) !== 'checkbox'" [type]="getFormType(query_string)" class="form-control" id="queryStrings" [required]="query_string.required" placeholder="{{ query_string.description }}" [(ngModel)]="query_string.value" />
+                                <div class="form-checkbox form-control" *ngIf="getFormType(query_string) === 'checkbox'">
+                                    <input [type]="getFormType(query_string)" id="queryStrings" [required]="query_string.required" (change)="onChangeCheckbox($event, query_string)" />
+                                    <label class="form-checkbox-label" for="queryStrings">
+                        {{ query_string.description }}
+                      </label>
+                                </div>
+
+                                <label class="form-group-data_type" for="queryStrings">
                       {{ query_string.data_type }}
                     </label>
-                  </div>
-                </div>
-              </div>
+                            </div>
+                        </div>
+                    </div>
 
-              <!-- Body -->
-              <div *ngIf="bodies.length > 0">
-                <h6 for="queryStrings">Body</h6>
-                <div *ngFor="let body of bodies">
-                  <div class="form-group">
-                    <label class="form-group-name" for="queryStrings">
+                    <!-- Body -->
+                    <div *ngIf="bodies.length > 0">
+                        <h6 for="queryStrings">Body</h6>
+                        <div *ngFor="let body of bodies">
+                            <div class="form-group">
+                                <label class="form-group-name" for="queryStrings">
                       {{ body.name }}
                     </label>
-                    <input
-                      *ngIf="getFormType(body) !== 'checkbox'"
-                      [type]="getFormType(body)"
-                      class="form-control"
-                      id="queryStrings"
-                      [required]="body.required"
-                      placeholder="{{ body.description }}"
-                      [(ngModel)]="body.value"
-                    />
-                    <div
-                      class="form-checkbox form-control"
-                      *ngIf="getFormType(body) === 'checkbox'"
-                    >
-                      <input
-                        [type]="getFormType(body)"
-                        id="queryStrings"
-                        [required]="body.required"
-                        (change)="onChangeCheckbox($event, body)"
-                      />
-                      <label class="form-checkbox-label" for="queryStrings">
+                                <input *ngIf="getFormType(body) !== 'checkbox'" [type]="getFormType(body)" class="form-control" id="queryStrings" [required]="body.required" placeholder="{{ body.description }}" [(ngModel)]="body.value" />
+                                <div class="form-checkbox form-control" *ngIf="getFormType(body) === 'checkbox'">
+                                    <input [type]="getFormType(body)" id="queryStrings" [required]="body.required" (change)="onChangeCheckbox($event, body)" />
+                                    <label class="form-checkbox-label" for="queryStrings">
                         {{ body.description }}
                       </label>
 
-                    </div>
-                    <label class="form-group-data_type" for="queryStrings">
+                                </div>
+                                <label class="form-group-data_type" for="queryStrings">
                       {{ body.data_type }}
                     </label>
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
 
 
-            <h6>URL a probar</h6>
-            <p>{{ apiUrl + route.route }}</p>
-            <div *ngIf="testApiResponse">
-              <h6>Respuesta</h6>
-              <pre>{{ testApiResponse | json }}</pre>
+                <h6>URL a probar</h6>
+                <p>{{ apiUrl + route.route }}</p>
+                <div *ngIf="testApiResponse">
+                    <h6>Respuesta</h6>
+                    <pre>{{ testApiResponse | json }}</pre>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Cerrar
             </button>
-            <button
-              type="button"
-              class="btn btn-primary orange"
-              (click)="testRoute(apiUrl + route.route)"
-            >
+                <button type="button" class="btn btn-primary orange" (click)="testRoute(apiUrl + route.route)">
               Enviar
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- FIN TEST API MODAL -->
-	        <div class="row">
-            <div class="col-md-6">
-                <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
             </div>
-            <!-- <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<!-- FIN TEST API MODAL -->
+<div class="row">
+    <div class="col-md-6">
+        <h2>{{ route.name }} <i class="ms-3 fas fa-circle estatus"></i></h2>
+    </div>
+    <!-- <div class="col-md-4">
                 <div class="div-probar">
                     <button class="btn btn-probar" type="button" data-bs-toggle="modal" data-bs-target="#testApiModal">
                         Probar
                     </button>
                 </div>
             </div> -->
-            <div class="col-md-6 mt-1" *ngIf="havePermissionToEdit">
-                <div class="row">
-                    <div class="col options-route-details">
-                        <i class="fa-solid fa-flask-vial" data-bs-toggle="modal" data-bs-target="#testApiModal"></i>
-                        <i class="fa-solid fa-pen editar" [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"></i>
-                        <i class="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-                    </div>
-                </div>
+    <div class="col-md-6 mt-1" *ngIf="havePermissionToEdit">
+        <div class="row">
+            <div class="col options-route-details">
+                <i class="fa-solid fa-flask-vial" data-bs-toggle="modal" data-bs-target="#testApiModal"></i>
+                <i class="fa-solid fa-pen editar" [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"></i>
+                <i class="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-    <!-- METHOD -->
-    <div class="row">
-        <div [ngSwitch]="route.method">
-            <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
-                <span class="badge route-method bg-info p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+<!-- METHOD -->
+<div class="row">
+    <div [ngSwitch]="route.method">
+        <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
+            <span class="badge route-method bg-info p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+        </div>
+        <div *ngSwitchCase="'POST'" class="alert alert-success p-2" role="alert">
+            <span class="badge route-method bg-success p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+        </div>
+        <div *ngSwitchCase="'PUT'" class="alert alert-warning p-2" role="alert">
+            <span class="badge route-method bg-warning p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+        </div>
+        <div *ngSwitchCase="'DELETE'" class="alert alert-danger p-2" role="alert">
+            <span class="badge route-method bg-danger p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+        </div>
+    </div>
+
+
+    <!-- PARÁMETROS DE ENTRADA -->
+    <div class="row mt-3">
+        <h5>Parámetros de entrada</h5>
+        <div class="col-12">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <!-- <th>Obligatorio</th> -->
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngIf="input_params.length > 0">
+                    <tr *ngFor="let input_param of input_params">
+                        <td>{{ input_param.name }}</td>
+                        <td>{{ input_param.data_type }}</td>
+                        <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
+                        <td>{{ input_param.description }}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="input_params.length == 0">
+                    <tr>
+                        <td colspan="4">No hay parámetros de entrada</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <h5>Query Strings</h5>
+        <div class="col-12">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Obligatorio</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="query_strings.length > 0">
+                    <tr *ngFor="let query_string of query_strings">
+                        <td>{{ query_string.name }}</td>
+                        <td>{{ query_string.data_type }}</td>
+                        <td>{{ query_string.required ? "Si" : "No" }}</td>
+                        <td>{{ query_string.description }}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="query_strings.length == 0">
+                    <tr>
+                        <td colspan="4">No hay query strings</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-3">
+            <h5>Headers</h5>
+            <div class="col-12">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="headers.length > 0">
+                        <tr *ngFor="let header of headers">
+                            <td>{{ header.name }}</td>
+                            <td>{{ header.data_type }}</td>
+                            <td>{{ header.description }}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="headers.length == 0">
+                        <tr>
+                            <td colspan="3">No hay headers</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div *ngSwitchCase="'POST'" class="alert alert-success p-2" role="alert">
-                <span class="badge route-method bg-success p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-            </div>
-            <div *ngSwitchCase="'PUT'" class="alert alert-warning p-2" role="alert">
-                <span class="badge route-method bg-warning p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-            </div>
-            <div *ngSwitchCase="'DELETE'" class="alert alert-danger p-2" role="alert">
-                <span class="badge route-method bg-danger p-2 me-3">{{ route.method }}</span> <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+        </div>
+        <div class="row mt-3">
+            <h5>Parámetros de salida</h5>
+            <div class="col-12">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngIf="output_params.length > 0">
+                        <tr *ngFor="let output_param of output_params">
+                            <td>{{ output_param.name }}</td>
+                            <td>{{ output_param.data_type }}</td>
+                            <td>{{ output_param.description }}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="output_params.length == 0">
+                        <tr>
+                            <td colspan="4">No hay parámetros de entrada</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
+        <div class="row mt-3">
+            <h5>Body</h5>
+            <div class="col-12">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
 
-  <!-- PARÁMETROS DE ENTRADA -->
-  <div class="row mt-3">
-    <h5>Parámetros de entrada</h5>
-    <div class="col-12">
-      <table class="table table-sm table-striped">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <!-- <th>Obligatorio</th> -->
-            <th>Descripción</th>
-          </tr>
-        </thead>
-
-        <tbody *ngIf="input_params.length > 0">
-          <tr *ngFor="let input_param of input_params">
-            <td>{{ input_param.name }}</td>
-            <td>{{ input_param.data_type }}</td>
-            <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
-            <td>{{ input_param.description }}</td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="input_params.length == 0">
-          <tr>
-            <td colspan="4">No hay parámetros de entrada</td>
-          </tr>
-        </tbody>
-      </table>
-
+                    <tbody *ngIf="bodies.length > 0">
+                        <tr *ngFor="let body of bodies">
+                            <td>{{ body.name }}</td>
+                            <td>{{ body.data_type }}</td>
+                            <td>{{ body.description }}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="bodies.length == 0">
+                        <tr>
+                            <td colspan="4">No hay body</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="row mt-3">
-    <h5>Query Strings</h5>
-    <div class="col-12">
-      <table class="table table-sm table-striped">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Obligatorio</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="query_strings.length > 0">
-          <tr *ngFor="let query_string of query_strings">
-            <td>{{ query_string.name }}</td>
-            <td>{{ query_string.data_type }}</td>
-            <td>{{ query_string.required ? "Si" : "No" }}</td>
-            <td>{{ query_string.description }}</td>
-          </tr>
-        </tbody>
-        <tbody *ngIf="query_strings.length == 0">
-          <tr>
-            <td colspan="4">No hay query strings</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="row mt-3">
-      <h5>Headers</h5>
-      <div class="col-12">
-        <table class="table table-sm table-striped">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="headers.length > 0">
-            <tr *ngFor="let header of headers">
-              <td>{{ header.name }}</td>
-              <td>{{ header.data_type }}</td>
-              <td>{{ header.description }}</td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="headers.length == 0">
-            <tr>
-              <td colspan="3">No hay headers</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <h5>Parámetros de salida</h5>
-      <div class="col-12">
-        <table class="table table-sm table-striped">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-
-          <tbody *ngIf="output_params.length > 0">
-            <tr *ngFor="let output_param of output_params">
-              <td>{{ output_param.name }}</td>
-              <td>{{ output_param.data_type }}</td>
-              <td>{{ output_param.description }}</td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="output_params.length == 0">
-            <tr>
-              <td colspan="4">No hay parámetros de entrada</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <h5>Body</h5>
-      <div class="col-12">
-        <table class="table table-sm table-striped">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Descripción</th>
-            </tr>
-          </thead>
-
-          <tbody *ngIf="bodies.length > 0">
-            <tr *ngFor="let body of bodies">
-              <td>{{ body.name }}</td>
-              <td>{{ body.data_type }}</td>
-              <td>{{ body.description }}</td>
-            </tr>
-          </tbody>
-          <tbody *ngIf="bodies.length == 0">
-            <tr>
-              <td colspan="4">No hay body</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 </div>
