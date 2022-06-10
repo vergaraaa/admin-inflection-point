@@ -22,10 +22,21 @@
         <table class="table text-center align-middle">
           <thead class="text-white" style="background-color: #282c38">
             <tr>
-              <th class="col-2">API</th>
-              <th class="col-5">Descripción</th>
-              <th class="col-3">URL</th>
-              <th class="col-2">Estatus</th>
+              <th class="col-2 clickable" (click)="sort('name', ascDescBool)">
+                API
+              </th>
+              <th
+                class="col-5 clickable"
+                (click)="sort('description', ascDescBool)"
+              >
+                Descripción
+              </th>
+              <th class="col-3 clickable" (click)="sort('url', ascDescBool)">
+                URL
+              </th>
+              <th class="col-2 clickable" (click)="sort('status', ascDescBool)">
+                Estatus
+              </th>
             </tr>
           </thead>
           <tbody>
