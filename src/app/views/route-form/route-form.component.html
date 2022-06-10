@@ -1,11 +1,11 @@
 <div class="container mt-3">
     <!-- SECTION MODAL -->
-    <div class="modal fade" id="sectionModal" tabindex="-1" aria-labelledby="sectionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="sectionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="sectionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="sectionModalLabel">
-                        Nueva sección
+                        Sección
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -26,11 +26,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="iSectionAdd == '' ? '': 'modal'" data-bs-dismiss="modal">
-                          Agregar
+                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.sectionForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingSection; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
                         </button>
-                        <!--<input type="submit" class="btn btn-primary" value="Save changes" />-->
-                        <!-- data-bs-dismiss="modal" para que se cierre -->
                     </div>
                 </form>
             </div>
@@ -38,14 +42,14 @@
     </div>
 
     <!-- HEADER MODAL -->
-    <div class="modal fade" id="headerModal" tabindex="-1" aria-labelledby="headerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="headerModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="headerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="headerModalLabel">Nuevo header</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditHeader()"></button>
                 </div>
-                <form [formGroup]="headerForm" (ngSubmit)="addHeader()" id="headerForm">
+                <form [formGroup]="headerForm" (ngSubmit)="!isEditingHeader ? addHeader() : editHeader()" id="headerForm">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
@@ -95,8 +99,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iHeaderName && iHeaderType && iHeaderDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
-                            Agregar
+                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.headerForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingHeader; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
                         </button>
                         <!--data-bs-dismiss="modal"-->
                     </div>
@@ -106,16 +116,16 @@
     </div>
 
     <!-- INPUT PARAMETER MODAL -->
-    <div class="modal fade" id="inputParameterModal" tabindex="-1" aria-labelledby="inputParameterModalLabel" aria-hidden="true">
+    <div class="modal fade" id="inputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="inputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="inputParameterModalLabel">
-                        Nuevo parámetro de entrada
+                        Parámetro de entrada
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditInput()"></button>
                 </div>
-                <form [formGroup]="inputParamForm" (ngSubmit)="addInputParameter()">
+                <form [formGroup]="inputParamForm" (ngSubmit)="!isEditingInput ? addInputParameter() : editInputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
@@ -166,8 +176,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iInputParamName && iInputParamType && iInputParamDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
-                        Agregar
+
+                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.inputParamForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingInput; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
                         </button>
                         <!--data-bs-dismiss="modal"-->
                     </div>
@@ -177,16 +194,16 @@
     </div>
 
     <!-- OUTPUT PARAMETER MODAL -->
-    <div class="modal fade" id="outputParameterModal" tabindex="-1" aria-labelledby="outputParameterModalLabel" aria-hidden="true">
+    <div class="modal fade" id="outputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="outputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="outputParameterModalLabel">
-                        Nuevo parámetro de salida
+                        Parámetro de salida
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditOutput()"></button>
                 </div>
-                <form [formGroup]="outputParamForm" (ngSubmit)="addOutputParameter()">
+                <form [formGroup]="outputParamForm" (ngSubmit)="!isEditingOutput ? addOutputParameter() : editOutputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
@@ -246,8 +263,14 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iOutputParamName && iOutputParamType && iOutputParamDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
-                                Agregar
+                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.outputParamForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                                <div *ngIf="!isEditingOutput; then addButton; else editButton"></div>
+                                <ng-template #addButton>
+                                    Agregar
+                                </ng-template>
+                                <ng-template #editButton>
+                                    Editar
+                                </ng-template>
                             </button>
                             <!--data-bs-dismiss="modal"-->
                         </div>
@@ -257,16 +280,16 @@
         </div>
 
         <!-- QUERY STRING MODAL -->
-        <div class="modal fade" id="queryStringModal" tabindex="-1" aria-labelledby="queryStringModalLabel" aria-hidden="true">
+        <div class="modal fade" id="queryStringModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="queryStringModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <h5 class="modal-title w-100" id="queryStringModalLabel">
-                            Nuevo query string
+                            Query string
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditQuery()"></button>
                     </div>
-                    <form [formGroup]="queryStringForm" (ngSubmit)="addQueryString()">
+                    <form [formGroup]="queryStringForm" (ngSubmit)="!isEditingQuery ? addQueryString() : editQueryString()">
                         <div class="modal-body">
                             <div class="row align-items-center p-2">
                                 <div class="col-md-2">
@@ -311,7 +334,7 @@
                                 class="form-check-input"
                                 type="radio"
                                 name="required"
-                                value="1"
+                                value="true"
                                 [(ngModel)]="iQueryStringRequired"
                                 required
                             />Sí
@@ -322,7 +345,7 @@
                                 class="form-check-input"
                                 type="radio"
                                 name="required"
-                                value="0"
+                                value="false"
                                 [(ngModel)]="iQueryStringRequired"
                                 required
                             />No
@@ -345,8 +368,14 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iQueryStringName && iQueryStringType && iQueryStringRequired && iQueryStringDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
-                                Agregar
+                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.queryStringForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                                <div *ngIf="!isEditingQuery; then addButton; else editButton"></div>
+                                <ng-template #addButton>
+                                    Agregar
+                                </ng-template>
+                                <ng-template #editButton>
+                                    Editar
+                                </ng-template>
                             </button>
                             <!--data-bs-dismiss="modal"-->
                         </div>
@@ -356,16 +385,16 @@
         </div>
 
         <!-- BODY MODAL -->
-        <div class="modal fade" id="BodyModal" tabindex="-1" aria-labelledby="BodyModalLabel" aria-hidden="true">
+        <div class="modal fade" id="BodyModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="BodyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <h5 class="modal-title w-100" id="BodyModalLabel">
-                            Nuevo body
+                            Body
                         </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditBody()"></button>
                     </div>
-                    <form [formGroup]="bodyForm" (ngSubmit)="addBody()">
+                    <form [formGroup]="bodyForm" (ngSubmit)="!isEditingBody ? addBody() : editBody()">
                         <div class="modal-body">
                             <div class="row align-items-center p-2">
                                 <div class="col-md-2">
@@ -425,9 +454,15 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(iBodyName && iBodyType && iBodyDescription) == '' ? '': 'modal'" data-bs-dismiss="modal">
-                                Agregar
-                            </button>
+                                <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.bodyForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                                    <div *ngIf="!isEditingBody; then addButton; else editButton"></div>
+                                    <ng-template #addButton>
+                                        Agregar
+                                    </ng-template>
+                                    <ng-template #editButton>
+                                        Editar
+                                    </ng-template>
+                                </button>
                             </div>
                     </form>
                     </div>
@@ -663,13 +698,15 @@
                             </div>
                         </div>
                         <div class="d-grid col-md-2 ms-auto mt-3">
-                            <div *ngIf="!isEditing; then addButton; else editButton"></div>
-                            <ng-template #addButton>
-                                <input class="btn btn-primary" type="submit" value="Agregar" />
-                            </ng-template>
-                            <ng-template #editButton>
-                                <input class="btn btn-primary" type="submit" value="Guardar" />
-                            </ng-template>
+                            <button type="input" class="btn btn-primary">
+                                <div *ngIf="!isEditing; then addButton; else editButton"></div>
+                                <ng-template #addButton>
+                                    Agregar
+                                </ng-template>
+                                <ng-template #editButton>
+                                    Editar
+                                </ng-template>
+                            </button>
                         </div>
                     </form>
                 </div>
