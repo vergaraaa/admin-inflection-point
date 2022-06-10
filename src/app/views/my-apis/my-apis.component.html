@@ -206,7 +206,7 @@
             <tr *ngFor="let api of searchMyApis(); let i = index">
               <td
                 scope="row"
-                class="clickable"
+                class="clickable align-left"
                 [routerLink]="['/api/', api.id]"
               >
                 {{ api.name }}
@@ -310,7 +310,7 @@
             <tr *ngFor="let api of searchCollaboratorApis(); let i = index">
               <td
                 scope="row"
-                class="clickable"
+                class="clickable align-left"
                 [routerLink]="['/api/', api.id]"
               >
                 {{ api.name }}

@@ -35,6 +35,10 @@
   pointer-events: none;
 }
 
+.align-left {
+  text-align: left;
+}
+
 @keyframes tooltip-slide {
   0% {
     opacity: 0;

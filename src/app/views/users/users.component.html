@@ -85,7 +85,9 @@
           </thead>
           <tbody>
             <tr class="noborder" *ngFor="let user of search(); let i = index">
-              <td scope="row">{{ user.first_name }} {{ user.last_name }}</td>
+              <td scope="row" class="align-left">
+                {{ user.first_name }} {{ user.last_name }}
+              </td>
               <td>{{ user.email }}</td>
               <td scope="row">
                 <select

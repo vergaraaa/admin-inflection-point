@@ -43,7 +43,7 @@
             <tr *ngFor="let api of search()">
               <td
                 scope="row"
-                class="clickable"
+                class="clickable align-left"
                 [routerLink]="['/api/', api.id]"
               >
                 {{ api.name }}
