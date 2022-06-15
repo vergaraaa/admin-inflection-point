@@ -56,7 +56,7 @@ export class RouteFormComponent implements OnInit {
     sections: Section[] = [];
     iSectionAdd: string = '';
     isEditingSection: boolean = false;
-    
+
     // Header Modal
     header: Header = { id: 0, name: '', type_id: 0, description: '', route_id: 0, value: 0 }
     headers: Header[] = [];
@@ -182,7 +182,7 @@ export class RouteFormComponent implements OnInit {
             this.query_strings = data.query_string;
             this.bodies = data.bodies;
             console.log(this.query_strings);
-            
+
         });
     }
 
@@ -235,7 +235,7 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
-    selectEditHeader(index: number){
+    selectEditHeader(index: number) {
         this.editIndex = index;
         this.iHeaderName = this.headers[index].name;
         this.iHeaderType = this.headers[index].type_id.toString();
@@ -243,7 +243,7 @@ export class RouteFormComponent implements OnInit {
         this.isEditingHeader = true;
     }
 
-    cancelEditHeader(){
+    cancelEditHeader() {
         this.isEditingHeader = false;
         this.headerForm.reset()
     }
@@ -281,7 +281,7 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
-    selectInputParameter(index: number){
+    selectInputParameter(index: number) {
         this.editIndex = index;
         this.iInputParamName = this.input_parameters[index].name;
         this.iInputParamType = this.input_parameters[index].type_id.toString();
@@ -289,11 +289,8 @@ export class RouteFormComponent implements OnInit {
         this.isEditingInput = true;
     }
 
-    cancelEditInput(){
+    cancelEditInput() {
         this.isEditingInput = false;
-        this.iInputParamName = "";
-        this.iInputParamType = "";
-        this.iInputParamDescription = "";
         this.inputParamForm.reset();
     }
 
@@ -306,9 +303,6 @@ export class RouteFormComponent implements OnInit {
             this.input_parameters[this.editIndex].name = this.iInputParamName;
             this.input_parameters[this.editIndex].type_id = +this.iInputParamType;
             this.input_parameters[this.editIndex].description = this.iInputParamDescription;
-            this.iInputParamName = "";
-            this.iInputParamType = "";
-            this.iInputParamDescription = "";
             this.inputParamForm.reset();
             this.isEditingInput = false;
         }
@@ -333,7 +327,7 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
-    selectOutputParameter(index: number){
+    selectOutputParameter(index: number) {
         this.editIndex = index;
         this.iOutputParamName = this.output_parameters[index].name;
         this.iOutputParamType = this.output_parameters[index].type_id.toString();
@@ -341,11 +335,8 @@ export class RouteFormComponent implements OnInit {
         this.isEditingOutput = true;
     }
 
-    cancelEditOutput(){
+    cancelEditOutput() {
         this.isEditingOutput = false;
-        this.iOutputParamName = "";
-        this.iOutputParamType = "";
-        this.iOutputParamDescription = "";
         this.outputParamForm.reset();
     }
 
@@ -384,7 +375,7 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
-    selectQueryString(index: number){
+    selectQueryString(index: number) {
         this.editIndex = index;
         this.iQueryStringName = this.query_strings[index].name;
         this.iQueryStringType = this.query_strings[index].type_id.toString();
@@ -393,12 +384,8 @@ export class RouteFormComponent implements OnInit {
         this.isEditingQuery = true;
     }
 
-    cancelEditQuery(){
+    cancelEditQuery() {
         this.isEditingQuery = false;
-        this.iQueryStringName = "";
-        this.iQueryStringType = "";
-        this.iQueryStringRequired = "";
-        this.iQueryStringDescription = "";
         this.queryStringForm.reset();
     }
 
@@ -437,7 +424,7 @@ export class RouteFormComponent implements OnInit {
         }
     }
 
-    selectBody(index: number){
+    selectBody(index: number) {
         this.editIndex = index;
         this.iBodyName = this.bodies[index].name;
         this.iBodyType = this.bodies[index].type_id.toString();
@@ -445,11 +432,8 @@ export class RouteFormComponent implements OnInit {
         this.isEditingBody = true;
     }
 
-    cancelEditBody(){
+    cancelEditBody() {
         this.isEditingBody = false;
-        this.iBodyName = "";
-        this.iBodyType = "";
-        this.iBodyDescription = "";
         this.bodyForm.reset();
     }
 
@@ -507,30 +491,30 @@ export class RouteFormComponent implements OnInit {
             this.routeForm.controls['method'].markAsTouched();
             this.routeForm.controls['description'].markAsTouched();
         } else {
-        const route: Route = {
-            name: this.iName,
-            route: this.iURL,
-            method: this.iMethod,
-            description: this.iDescription,
-            section_id: +this.iSection,
-            api_id: this.apiId,
-            headers: this.headers,
-            input_parameters: this.input_parameters,
-            output_parameters: this.output_parameters,
-            query_strings: this.query_strings,
-            bodies: this.bodies
-        };
+            const route: Route = {
+                name: this.iName,
+                route: this.iURL,
+                method: this.iMethod,
+                description: this.iDescription,
+                section_id: +this.iSection,
+                api_id: this.apiId,
+                headers: this.headers,
+                input_parameters: this.input_parameters,
+                output_parameters: this.output_parameters,
+                query_strings: this.query_strings,
+                bodies: this.bodies
+            };
 
-        this.routeService.editRoute(+this.routeId!, route).subscribe({
-            next: (res: any) => {
-                this.router.navigate(['/api/' + this.apiId], {
-                    queryParams: {
-                        route: this.routeId,
-                    },
-                });
-            },
-            error: (err: any) => console.error(err),
-        });
-    }
+            this.routeService.editRoute(+this.routeId!, route).subscribe({
+                next: (res: any) => {
+                    this.router.navigate(['/api/' + this.apiId], {
+                        queryParams: {
+                            route: this.routeId,
+                        },
+                    });
+                },
+                error: (err: any) => console.error(err),
+            });
+        }
     }
 }

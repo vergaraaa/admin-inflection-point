@@ -6,13 +6,16 @@
                     <h2>API</h2>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nombre *</label>
-                        <input autofocus type="text" name="name" formControlName="name" class="form-control" id="name" required minlength="4" [(ngModel)]="api.name" />
-                        <div *ngIf="this.apiForm.controls['name'].hasError('required') && (this.apiForm.controls['name'].touched)">
+                        <input autofocus type="text" name="name" formControlName="name" class="form-control" id="name"
+                            required minlength="4" />
+                        <div
+                            *ngIf="this.apiForm.controls['name'].hasError('required') && (this.apiForm.controls['name'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese un nombre.
                             </p>
                         </div>
-                        <div *ngIf="this.apiForm.controls['name'].hasError('minlength') && apiForm.controls['name'].touched">
+                        <div
+                            *ngIf="this.apiForm.controls['name'].hasError('minlength') && apiForm.controls['name'].touched">
                             <p class="text-danger">
                                 El nombre tiene que tener al menos 4 caracteres.
                             </p>
@@ -20,8 +23,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="api-description" class="form-label">Descripción *</label>
-                        <textarea required class="form-control" formControlName="description" name="api-description" id="api-description" rows="4" [(ngModel)]="api.description"></textarea>
-                        <div *ngIf="this.apiForm.controls['description'].hasError('required') && (this.apiForm.controls['description'].touched)">
+                        <textarea required class="form-control" formControlName="description" name="api-description"
+                            id="api-description" rows="4"></textarea>
+                        <div
+                            *ngIf="this.apiForm.controls['description'].hasError('required') && (this.apiForm.controls['description'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese una descripción.
                             </p>
@@ -30,13 +35,16 @@
                     <div class="mb-3">
                         <label for="api-url" class="form-label">URL *</label>
                         <!--En el pattern  poner la regex de las urls validas-->
-                        <input required type="url" pattern="https?://.+" placeholder="http:// o https://" formControlName="url" name="api-url" class="form-control" id="api-url" [(ngModel)]="api.url" />
-                        <div *ngIf="this.apiForm.controls['url'].hasError('required') && (this.apiForm.controls['url'].touched)">
+                        <input required type="url" pattern="https?://.+" placeholder="http:// o https://"
+                            formControlName="url" name="api-url" class="form-control" id="api-url" />
+                        <div
+                            *ngIf="this.apiForm.controls['url'].hasError('required') && (this.apiForm.controls['url'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese un URL.
                             </p>
                         </div>
-                        <div *ngIf="this.apiForm.controls['url'].hasError('pattern') && (this.apiForm.controls['url'].touched)">
+                        <div
+                            *ngIf="this.apiForm.controls['url'].hasError('pattern') && (this.apiForm.controls['url'].touched)">
                             <p class="text-danger">
                                 El URL tiene que comenzar con http:// o https://
                             </p>
