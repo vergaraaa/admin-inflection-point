@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api-service.service';
 import { Api } from 'src/app/models/api.model';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/api.user';
 import { CollaboratorsService } from 'src/app/services/collaborators.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-my-apis',
@@ -21,6 +24,14 @@ export class MyApisComponent implements OnInit {
   usersData: User[] = [];
   ascDescBool: boolean = false;
 
+  displayedColumns = ["name", "description", "url", "status", "operations"];
+  dataSource: MatTableDataSource<Api> = new MatTableDataSource;
+  dataSourceCollab: MatTableDataSource<Api> = new MatTableDataSource;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sortPaginator!: MatSort;
+  @ViewChild(MatPaginator) paginatorCollab!: MatPaginator;
+  @ViewChild(MatSort) sortPaginatorCollab!: MatSort;
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -32,11 +43,21 @@ export class MyApisComponent implements OnInit {
     this.apiService.getApisOfUser().subscribe((data: any) => {
       this.apisData = data.user_apis;
       this.collaboratorApisData = data.collaborator_apis;
+      this.dataSource = new MatTableDataSource(this.apisData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sortPaginator;
+      this.dataSourceCollab = new MatTableDataSource(this.collaboratorApisData);
+      this.dataSourceCollab.paginator = this.paginatorCollab;
+      this.dataSourceCollab.sort = this.sortPaginatorCollab;
       console.log(this.apisData);
       console.log(this.collaboratorApisData);
     });
     this.getUsers();
-    // this.getCollaboratorApis();
+  }
+
+  filterData($event : any){
+    this.dataSource.filter = $event.target.value;
+    this.dataSourceCollab.filter = $event.target.value;
   }
 
   getApis() {
@@ -44,17 +65,6 @@ export class MyApisComponent implements OnInit {
       this.apisData = data;
     });
   }
-
-  // getCollaboratorApis() {
-  //   // Get collaborator apis with token
-  //   this.collaboratorsService
-  //     .getCollaboratorApis(localStorage.getItem('token')!)
-  //     .subscribe((data: any) => {
-  //       console.log(data);
-  //       this.collaboratorApisData = data;
-  //       console.log(this.collaboratorApisData);
-  //     });
-  // }
 
   onClickDelete(api_id: number, name: string) {
     this.idSelectedApi = api_id;
@@ -64,30 +74,11 @@ export class MyApisComponent implements OnInit {
   deleteApi() {
     this.apiService.deleteApi(this.idSelectedApi).subscribe((data: any) => {
       this.getApis();
-      // this.getCollaboratorApis();
     });
   }
 
   edit(api_id: number) {
     this.router.navigate([`/edit-api/${api_id}`]);
-  }
-
-  searchMyApis() {
-    return this.apisData.filter((api) => {
-      return (
-        api.name.toLowerCase().includes(this.query.toLowerCase()) ||
-        api.name.toLowerCase().includes(this.query.toLowerCase())
-      );
-    });
-  }
-
-  searchCollaboratorApis() {
-    return this.collaboratorApisData.filter((api) => {
-      return (
-        api.name.toLowerCase().includes(this.query.toLowerCase()) ||
-        api.name.toLowerCase().includes(this.query.toLowerCase())
-      );
-    });
   }
 
   getUsers() {
@@ -142,105 +133,5 @@ export class MyApisComponent implements OnInit {
           });
         });
       });
-  }
-
-  sortMyApis(colName: any, boolean: boolean) {
-    // if(colName == 'status'){
-    //   const statusDataArray = Object.values(this.statusData);
-
-    //   statusDataArray.forEach((apiStatus: any) => {
-    //     this.apisData.find(api => {
-    //       if (api.id == apiStatus.api_id) {
-    //         api.status = apiStatus.status;
-    //       }
-    //     })
-    //   });
-
-    //   this.apisData.forEach((api: any) => {
-    //     if (!api.status) {
-    //       api.status = false;
-    //     }
-    //   }
-    //   );
-    // } 
-
-    if (boolean == true){
-      this.apisData.sort((a: any, b: any): number => {
-        if(typeof a[colName] === 'string') {
-          let aName = a[colName].toLowerCase();
-          let bName = b[colName].toLowerCase();
-          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          return aName < bName ? 1 : aName > bName ? -1 : 0;
-        } else {
-          return a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0;
-        }
-        })        
-        this.ascDescBool = !this.ascDescBool
-    }
-    else{
-      this.apisData.sort((a: any, b: any): number => {
-        if(typeof a[colName] === 'string') {
-          let aName = a[colName].toLowerCase();
-          let bName = b[colName].toLowerCase();
-          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          return aName < bName ? -1 : aName > bName ? 1 : 0;
-        } else {
-          return a[colName] < b[colName] ? -1 : a[colName] > b[colName] ? 1 : 0;
-        }
-        })  
-      this.ascDescBool = !this.ascDescBool
-    }
-  }
-
-  sortCollaboratorApis(colName: any, boolean: boolean) {
-    // if(colName == 'status'){
-    //   const statusDataArray = Object.values(this.statusData);
-
-    //   statusDataArray.forEach((apiStatus: any) => {
-    //     this.apisData.find(api => {
-    //       if (api.id == apiStatus.api_id) {
-    //         api.status = apiStatus.status;
-    //       }
-    //     })
-    //   });
-
-    //   this.apisData.forEach((api: any) => {
-    //     if (!api.status) {
-    //       api.status = false;
-    //     }
-    //   }
-    //   );
-    // } 
-
-    if (boolean == true){
-      this.collaboratorApisData.sort((a: any, b: any): number => {
-        if(typeof a[colName] === 'string') {
-          let aName = a[colName].toLowerCase();
-          let bName = b[colName].toLowerCase();
-          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          return aName < bName ? 1 : aName > bName ? -1 : 0;
-        } else {
-          return a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0;
-        }
-        })        
-        this.ascDescBool = !this.ascDescBool
-    }
-    else{
-      this.collaboratorApisData.sort((a: any, b: any): number => {
-        if(typeof a[colName] === 'string') {
-          let aName = a[colName].toLowerCase();
-          let bName = b[colName].toLowerCase();
-          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          return aName < bName ? -1 : aName > bName ? 1 : 0;
-        } else {
-          return a[colName] < b[colName] ? -1 : a[colName] > b[colName] ? 1 : 0;
-        }
-        })  
-      this.ascDescBool = !this.ascDescBool
-    }
   }
 }

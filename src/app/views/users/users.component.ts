@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/api.user';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-users',
@@ -14,8 +17,11 @@ export class UserComponent implements OnInit {
   idSelectedUser: number = 0;
   indexSelectedUser: number = 0;
   selectedUser: User = {} as User;
-  query: string = "";
-  ascDescBool: boolean = false;
+
+  displayedColumns = ["first_name", "email", "role_id"];
+  dataSource: MatTableDataSource<User> = new MatTableDataSource;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sortPaginator!: MatSort;
 
   constructor(private userService: UserService) {}
 
@@ -26,19 +32,16 @@ export class UserComponent implements OnInit {
   getUsers(){
     this.userService.getUsers().subscribe((data: any) => {
       this.usersData = data;
+      this.dataSource = new MatTableDataSource(this.usersData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sortPaginator;
       console.log(this.usersData)
     });
   }
 
-  // onRoleChange(idSelectedUser : number, newRole : number, indexSelectedUser : number) {
-  //   if(this.idSelectedUser != idSelectedUser){
-  //     this.roleIds[this.indexSelectedUser] = this.usersData[this.indexSelectedUser].role_id;
-  //   }
-  //   this.idSelectedUser = idSelectedUser;
-  //   this.newRole = newRole;
-  //   this.indexSelectedUser = indexSelectedUser;
-  //   this.roleIds[indexSelectedUser] = newRole;
-  // }
+  filterData($event : any){
+    this.dataSource.filter = $event.target.value;
+  }
 
   onRoleChange(idSelectedUser: number, newRole: any) {
     // Set roleChanged to true in user of id idSelectedUser
@@ -62,47 +65,5 @@ export class UserComponent implements OnInit {
     this.userService.editRole(this.idSelectedUser, this.newRole).subscribe((data: any) => {
       this.getUsers();
     });
-  }
-
-  search() {
-    return this.usersData.filter(user => {
-      return user.first_name.toLowerCase().includes(this.query.toLowerCase()) ||
-      user.last_name.toLowerCase().includes(this.query.toLowerCase()) ||
-      user.email.toLowerCase().includes(this.query.toLowerCase()) ||
-      user.first_name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.query.toLowerCase()) ||
-      user.last_name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.query.toLowerCase()) ||
-      user.email.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.query.toLowerCase());
-    });
-  }
-
-  sort(colName: any, boolean: boolean) {
-    if (boolean == true){
-        this.usersData.sort((a: any, b: any): number => {
-          if(typeof a[colName] === 'string') {
-            let aName = a[colName].toLowerCase();
-            let bName = b[colName].toLowerCase();
-            aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-            bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-            return aName < bName ? 1 : aName > bName ? -1 : 0;
-          } else {
-            return a[colName] < b[colName] ? 1 : a[colName] > b[colName] ? -1 : 0;
-          }
-          })
-        this.ascDescBool = !this.ascDescBool
-    }
-    else{
-      this.usersData.sort((a: any, b: any): number => {
-        if(typeof a[colName] === 'string') {
-          let aName = a[colName].toLowerCase();
-          let bName = b[colName].toLowerCase();
-          aName = aName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          bName = bName.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-          return aName < bName ? -1 : aName > bName ? 1 : 0;
-        } else {
-          return a[colName] < b[colName] ? -1 : a[colName] > b[colName] ? 1 : 0;
-        }
-        })
-        this.ascDescBool = !this.ascDescBool
-    }
   }
 }
