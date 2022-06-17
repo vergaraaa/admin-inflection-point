@@ -1,6 +1,7 @@
 <div class="container mt-3">
     <!-- SECTION MODAL -->
-    <div class="modal fade" id="sectionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="sectionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="sectionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="sectionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -16,9 +17,11 @@
                                 <label for="sectionModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input formControlName="name" type="text" name="sectionModalName" class="form-control" [(ngModel)]="iSectionAdd" required />
+                                <input formControlName="name" type="text" name="sectionModalName" class="form-control"
+                                    [(ngModel)]="iSectionAdd" required />
                             </div>
-                            <div *ngIf="this.sectionForm.controls['name'].hasError('required') && (this.sectionForm.controls['name'].touched)">
+                            <div
+                                *ngIf="this.sectionForm.controls['name'].hasError('required') && (this.sectionForm.controls['name'].touched)">
                                 <p class="text-danger">
                                     Por favor ingrese un nombre.
                                 </p>
@@ -26,7 +29,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.sectionForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.sectionForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
                             <div *ngIf="!isEditingSection; then addButton; else editButton"></div>
                             <ng-template #addButton>
                                 Agregar
@@ -42,23 +46,28 @@
     </div>
 
     <!-- HEADER MODAL -->
-    <div class="modal fade" id="headerModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="headerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="headerModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="headerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="headerModalLabel">Nuevo header</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditHeader()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="cancelEditHeader()"></button>
                 </div>
-                <form [formGroup]="headerForm" (ngSubmit)="!isEditingHeader ? addHeader() : editHeader()" id="headerForm">
+                <form [formGroup]="headerForm" (ngSubmit)="!isEditingHeader ? addHeader() : editHeader()"
+                    id="headerForm">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
                                 <label for="headerModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input formControlName="name" type="text" name="headerModalName" class="form-control" [(ngModel)]="iHeaderName" required/>
+                                <input formControlName="name" type="text" name="headerModalName" class="form-control"
+                                    [(ngModel)]="iHeaderName" required />
                             </div>
-                            <div *ngIf="this.headerForm.controls['name'].hasError('required') && (this.headerForm.controls['name'].touched)">
+                            <div
+                                *ngIf="this.headerForm.controls['name'].hasError('required') && (this.headerForm.controls['name'].touched)">
                                 <p class="text-danger">
                                     Por favor ingrese un nombre.
                                 </p>
@@ -69,18 +78,17 @@
                                 <label for="InputParameterModalType" class="form-label">Tipo:</label>
                             </div>
                             <div class="col-md-10">
-                                <select formControlName="type_id" class="form-select" name="InputParameterModalType" aria-label="Tipo" [(ngModel)]="iHeaderType" required>
-                                <option value="" disabled selected hidden>
-                                  Seleccionar...
-                                </option>              
-                                <option
-                                  *ngFor="let dataType of dataTypes"
-                                  [label]="dataType.name | titlecase"
-                                  [value]="dataType.id"
-                                ></option>
-                              </select>
+                                <select formControlName="type_id" class="form-select" name="InputParameterModalType"
+                                    aria-label="Tipo" [(ngModel)]="iHeaderType" required>
+                                    <option value="" disabled selected hidden>
+                                        Seleccionar...
+                                    </option>
+                                    <option *ngFor="let dataType of dataTypes" [label]="dataType.name | titlecase"
+                                        [value]="dataType.id"></option>
+                                </select>
                             </div>
-                            <div *ngIf="this.headerForm.controls['type_id'].hasError('required') && (this.headerForm.controls['type_id'].touched)">
+                            <div
+                                *ngIf="this.headerForm.controls['type_id'].hasError('required') && (this.headerForm.controls['type_id'].touched)">
                                 <p class="text-danger">
                                     Por favor seleccione una opción.
                                 </p>
@@ -90,16 +98,19 @@
                             <label for="headerModalDescription" class="form-label">Descripción:</label>
                         </div>
                         <div class="row align-items-center px-3">
-                            <textarea formControlName="description" name="headerModalDescription" class="form-control" rows="4" [(ngModel)]="iHeaderDescription" required></textarea>
+                            <textarea formControlName="description" name="headerModalDescription" class="form-control"
+                                rows="4" [(ngModel)]="iHeaderDescription" required></textarea>
                         </div>
-                        <div *ngIf="this.headerForm.controls['description'].hasError('required') && (this.headerForm.controls['description'].touched)">
+                        <div
+                            *ngIf="this.headerForm.controls['description'].hasError('required') && (this.headerForm.controls['description'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese una descripción.
                             </p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.headerForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.headerForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
                             <div *ngIf="!isEditingHeader; then addButton; else editButton"></div>
                             <ng-template #addButton>
                                 Agregar
@@ -116,25 +127,30 @@
     </div>
 
     <!-- INPUT PARAMETER MODAL -->
-    <div class="modal fade" id="inputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="inputParameterModalLabel" aria-hidden="true">
+    <div class="modal fade" id="inputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="inputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="inputParameterModalLabel">
                         Parámetro de entrada
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditInput()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="cancelEditInput()"></button>
                 </div>
-                <form [formGroup]="inputParamForm" (ngSubmit)="!isEditingInput ? addInputParameter() : editInputParameter()">
+                <form [formGroup]="inputParamForm"
+                    (ngSubmit)="!isEditingInput ? addInputParameter() : editInputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
                                 <label for="InputParameterModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input formControlName="name" type="text" name="InputParameterModalName" class="form-control" [(ngModel)]="iInputParamName" required />
+                                <input formControlName="name" type="text" name="InputParameterModalName"
+                                    class="form-control" [(ngModel)]="iInputParamName" required />
                             </div>
-                            <div *ngIf="this.inputParamForm.controls['name'].hasError('required') && (this.inputParamForm.controls['name'].touched)">
+                            <div
+                                *ngIf="this.inputParamForm.controls['name'].hasError('required') && (this.inputParamForm.controls['name'].touched)">
                                 <p class="text-danger">
                                     Por favor ingrese un nombre.
                                 </p>
@@ -145,18 +161,17 @@
                                 <label for="InputParameterModalType" class="form-label">Tipo:</label>
                             </div>
                             <div class="col-md-10">
-                                <select formControlName="type_id" class="form-select" name="InputParameterModalType" aria-label="Tipo" [(ngModel)]="iInputParamType" required>
-                                <option value="" disabled selected hidden>
-                                  Seleccionar...
-                                </option>
-                                <option
-                                  *ngFor="let dataType of dataTypes"
-                                  [label]="dataType.name | titlecase"
-                                  [value]="dataType.id"
-                                ></option>
-                              </select>
+                                <select formControlName="type_id" class="form-select" name="InputParameterModalType"
+                                    aria-label="Tipo" [(ngModel)]="iInputParamType" required>
+                                    <option value="" disabled selected hidden>
+                                        Seleccionar...
+                                    </option>
+                                    <option *ngFor="let dataType of dataTypes" [label]="dataType.name | titlecase"
+                                        [value]="dataType.id"></option>
+                                </select>
                             </div>
-                            <div *ngIf="this.inputParamForm.controls['type_id'].hasError('required') && (this.inputParamForm.controls['type_id'].touched)">
+                            <div
+                                *ngIf="this.inputParamForm.controls['type_id'].hasError('required') && (this.inputParamForm.controls['type_id'].touched)">
                                 <p class="text-danger">
                                     Por favor seleccione una opción.
                                 </p>
@@ -164,12 +179,14 @@
                         </div>
                         <div class="row align-items-center ps-2 pt-2">
                             <label for="InputParameterModalDescription" class="form-label">Descripción:
-                      </label>
+                            </label>
                         </div>
                         <div class="row align-items-center px-3">
-                            <textarea formControlName="description" name="InputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iInputParamDescription" required></textarea>
+                            <textarea formControlName="description" name="InputParameterModalDescription"
+                                class="form-control" rows="4" [(ngModel)]="iInputParamDescription" required></textarea>
                         </div>
-                        <div *ngIf="this.inputParamForm.controls['description'].hasError('required') && (this.inputParamForm.controls['description'].touched)">
+                        <div
+                            *ngIf="this.inputParamForm.controls['description'].hasError('required') && (this.inputParamForm.controls['description'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese una descripción.
                             </p>
@@ -177,7 +194,9 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.inputParamForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.inputParamForm.invalid) ? '': 'modal'"
+                            data-bs-dismiss="modal">
                             <div *ngIf="!isEditingInput; then addButton; else editButton"></div>
                             <ng-template #addButton>
                                 Agregar
@@ -194,25 +213,30 @@
     </div>
 
     <!-- OUTPUT PARAMETER MODAL -->
-    <div class="modal fade" id="outputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="outputParameterModalLabel" aria-hidden="true">
+    <div class="modal fade" id="outputParameterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="outputParameterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title w-100" id="outputParameterModalLabel">
                         Parámetro de salida
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditOutput()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="cancelEditOutput()"></button>
                 </div>
-                <form [formGroup]="outputParamForm" (ngSubmit)="!isEditingOutput ? addOutputParameter() : editOutputParameter()">
+                <form [formGroup]="outputParamForm"
+                    (ngSubmit)="!isEditingOutput ? addOutputParameter() : editOutputParameter()">
                     <div class="modal-body">
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
                                 <label for="OutputParameterModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <input formControlName="name" type="text" name="OutputParameterModalName" class="form-control" [(ngModel)]="iOutputParamName" required />
+                                <input formControlName="name" type="text" name="OutputParameterModalName"
+                                    class="form-control" [(ngModel)]="iOutputParamName" required />
                             </div>
-                            <div *ngIf="this.outputParamForm.controls['name'].hasError('required') && (this.outputParamForm.controls['name'].touched)">
+                            <div
+                                *ngIf="this.outputParamForm.controls['name'].hasError('required') && (this.outputParamForm.controls['name'].touched)">
                                 <p class="text-danger">
                                     Por favor ingrese un nombre.
                                 </p>
@@ -220,495 +244,472 @@
                         </div>
                         <div class="row align-items-center p-2">
                             <div class="col-md-2">
-                                <label for="OutputParameterModalType" class="form-label">Tipo:</label >
+                                <label for="OutputParameterModalType" class="form-label">Tipo:</label>
                             </div>
                             <div class="col-md-10">
-                                <select
-                                formControlName="type_id"
-                                class="form-select"
-                                name="OutputParameterModalType"
-                                aria-label="Tipo"
-                                [(ngModel)]="iOutputParamType"
-                                required
-                                >
-                                <option value="" disabled selected hidden>
-                                    Seleccionar...
-                                </option>
-                                <!-- Si esto esta seleccionado error-->
-                                <option
-                                    *ngFor="let dataType of dataTypes"
-                                    [label]="dataType.name | titlecase"
-                                    [value]="dataType.id"
-                                ></option>
-                                </select>
-                            </div>
-                            <div *ngIf="this.outputParamForm.controls['type_id'].hasError('required') && (this.outputParamForm.controls['type_id'].touched)">
-                                <p class="text-danger">
-                                    Por favor seleccione una opción.
-                                </p>
-                            </div>
-                            </div>
-                                <div class="row align-items-center ps-2 pt-2">
-                                <label for="OutputParameterModalDescription" class="form-label"
-                                    >Descripción:
-                                </label>
-                            </div>
-                            <div class="row align-items-center px-3">
-                                <textarea formControlName="description" name="OutputParameterModalDescription" class="form-control" rows="4" [(ngModel)]="iOutputParamDescription" required></textarea>
-                            </div>
-                            <div *ngIf="this.outputParamForm.controls['description'].hasError('required') && (this.outputParamForm.controls['description'].touched)">
-                                <p class="text-danger">
-                                    Por favor ingrese una descripción.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.outputParamForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
-                                <div *ngIf="!isEditingOutput; then addButton; else editButton"></div>
-                                <ng-template #addButton>
-                                    Agregar
-                                </ng-template>
-                                <ng-template #editButton>
-                                    Editar
-                                </ng-template>
-                            </button>
-                            <!--data-bs-dismiss="modal"-->
-                        </div>
-                </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- QUERY STRING MODAL -->
-        <div class="modal fade" id="queryStringModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="queryStringModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="queryStringModalLabel">
-                            Query string
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditQuery()"></button>
-                    </div>
-                    <form [formGroup]="queryStringForm" (ngSubmit)="!isEditingQuery ? addQueryString() : editQueryString()">
-                        <div class="modal-body">
-                            <div class="row align-items-center p-2">
-                                <div class="col-md-2">
-                                    <label for="queryStringModalName" class="form-label">Nombre:</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <input formControlName="name" type="text" name="queryStringModalName" class="form-control" [(ngModel)]="iQueryStringName" required />
-                                </div>
-                                <div *ngIf="this.queryStringForm.controls['name'].hasError('required') && (this.queryStringForm.controls['name'].touched)">
-                                    <p class="text-danger">
-                                        Por favor ingrese un nombre.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row align-items-center p-2">
-                                <div class="col-md-2">
-                                    <label for="queryStringModalType" class="form-label">Tipo:</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <select formControlName="type_id" class="form-select" name="queryStringModalType" aria-label="Tipo" [(ngModel)]="iQueryStringType" required>
+                                <select formControlName="type_id" class="form-select" name="OutputParameterModalType"
+                                    aria-label="Tipo" [(ngModel)]="iOutputParamType" required>
                                     <option value="" disabled selected hidden>
                                         Seleccionar...
                                     </option>
                                     <!-- Si esto esta seleccionado error-->
-                                    <option
-                                        *ngFor="let dataType of dataTypes"
-                                        [label]="dataType.name | titlecase"
-                                        [value]="dataType.id"
-                                    ></option>
-                                    </select>
-                                </div>
-                                <div *ngIf="this.queryStringForm.controls['type_id'].hasError('required') && (this.queryStringForm.controls['type_id'].touched)">
-                                    <p class="text-danger">
-                                        Por favor seleccione una opción.
-                                    </p>
-                                </div>
+                                    <option *ngFor="let dataType of dataTypes" [label]="dataType.name | titlecase"
+                                        [value]="dataType.id"></option>
+                                </select>
                             </div>
-                            <label for="queryStringModalObligatory" class="form-label p-2">Obligatorio:</label>
-                            <label class="radio-inline p-2">
-                            <input
-                                formControlName="required"
-                                class="form-check-input"
-                                type="radio"
-                                name="required"
-                                value="true"
-                                [(ngModel)]="iQueryStringRequired"
-                                required
-                            />Sí
-                            </label>
-                            <label class="radio-inline p-2">
-                            <input
-                                formControlName="required"
-                                class="form-check-input"
-                                type="radio"
-                                name="required"
-                                value="false"
-                                [(ngModel)]="iQueryStringRequired"
-                                required
-                            />No
-                            </label>
-                            <div *ngIf="this.queryStringForm.controls['required'].hasError('required') && (this.queryStringForm.controls['required'].touched)">
+                            <div
+                                *ngIf="this.outputParamForm.controls['type_id'].hasError('required') && (this.outputParamForm.controls['type_id'].touched)">
                                 <p class="text-danger">
                                     Por favor seleccione una opción.
                                 </p>
                             </div>
-                            <div class="row align-items-center ps-2 pt-2">
-                                <label for="queryStringModalDescription" class="form-label">Descripción:</label>
-                            </div>
-                            <div class="row align-items-center px-3">
-                                <textarea formControlName="description" name="queryStringModalDescription" class="form-control" rows="4" [(ngModel)]="iQueryStringDescription" required></textarea>
-                            </div>
-                            <div *ngIf="this.queryStringForm.controls['description'].hasError('required') && (this.queryStringForm.controls['description'].touched)">
-                                <p class="text-danger">
-                                    Por favor ingrese una descripción.
-                                </p>
-                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.queryStringForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
-                                <div *ngIf="!isEditingQuery; then addButton; else editButton"></div>
-                                <ng-template #addButton>
-                                    Agregar
-                                </ng-template>
-                                <ng-template #editButton>
-                                    Editar
-                                </ng-template>
-                            </button>
-                            <!--data-bs-dismiss="modal"-->
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="OutputParameterModalDescription" class="form-label">Descripción:
+                            </label>
                         </div>
-                    </form>
-                </div>
+                        <div class="row align-items-center px-3">
+                            <textarea formControlName="description" name="OutputParameterModalDescription"
+                                class="form-control" rows="4" [(ngModel)]="iOutputParamDescription" required></textarea>
+                        </div>
+                        <div
+                            *ngIf="this.outputParamForm.controls['description'].hasError('required') && (this.outputParamForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.outputParamForm.invalid) ? '': 'modal'"
+                            data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingOutput; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
+                        </button>
+                        <!--data-bs-dismiss="modal"-->
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
-        <!-- BODY MODAL -->
-        <div class="modal fade" id="BodyModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="BodyModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title w-100" id="BodyModalLabel">
-                            Body
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEditBody()"></button>
-                    </div>
-                    <form [formGroup]="bodyForm" (ngSubmit)="!isEditingBody ? addBody() : editBody()">
-                        <div class="modal-body">
-                            <div class="row align-items-center p-2">
-                                <div class="col-md-2">
-                                    <label for="BodyModalName" class="form-label">Nombre:</label>
-                                </div>
-                                <div class="col-md-10">
-                                    <input formControlName="name" type="text" name="BodyModalName" class="form-control" [(ngModel)]="iBodyName" required />
-                                </div>
-                                <div *ngIf="this.bodyForm.controls['name'].hasError('required') && (this.bodyForm.controls['name'].touched)">
-                                    <p class="text-danger">
-                                        Por favor ingrese un nombre.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row align-items-center p-2">
-                                <div class="col-md-2">
-                                    <label for="BodyModalType" class="form-label">Tipo:</label >
+    <!-- QUERY STRING MODAL -->
+    <div class="modal fade" id="queryStringModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="queryStringModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="queryStringModalLabel">
+                        Query string
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="cancelEditQuery()"></button>
+                </div>
+                <form [formGroup]="queryStringForm" (ngSubmit)="!isEditingQuery ? addQueryString() : editQueryString()">
+                    <div class="modal-body">
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="queryStringModalName" class="form-label">Nombre:</label>
                             </div>
                             <div class="col-md-10">
-                                <select
-                                formControlName="type_id"
-                                class="form-select"
-                                name="BodyModalType"
-                                aria-label="Tipo"
-                                [(ngModel)]="iBodyType"
-                                required
-                                >
-                                <option value="" disabled selected hidden>
-                                    Seleccionar...
-                                </option>
-                                <!-- Si esto esta seleccionado error-->
-                                <option
-                                    *ngFor="let dataType of dataTypes"
-                                    [label]="dataType.name | titlecase"
-                                    [value]="dataType.id"
-                                ></option>
+                                <input formControlName="name" type="text" name="queryStringModalName"
+                                    class="form-control" [(ngModel)]="iQueryStringName" required />
+                            </div>
+                            <div
+                                *ngIf="this.queryStringForm.controls['name'].hasError('required') && (this.queryStringForm.controls['name'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un nombre.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="queryStringModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select formControlName="type_id" class="form-select" name="queryStringModalType"
+                                    aria-label="Tipo" [(ngModel)]="iQueryStringType" required>
+                                    <option value="" disabled selected hidden>
+                                        Seleccionar...
+                                    </option>
+                                    <!-- Si esto esta seleccionado error-->
+                                    <option *ngFor="let dataType of dataTypes" [label]="dataType.name | titlecase"
+                                        [value]="dataType.id"></option>
                                 </select>
                             </div>
-                            <div *ngIf="this.bodyForm.controls['type_id'].hasError('required') && (this.bodyForm.controls['type_id'].touched)">
+                            <div
+                                *ngIf="this.queryStringForm.controls['type_id'].hasError('required') && (this.queryStringForm.controls['type_id'].touched)">
                                 <p class="text-danger">
                                     Por favor seleccione una opción.
                                 </p>
                             </div>
-                            </div>
-                                <div class="row align-items-center ps-2 pt-2">
-                                <label for="BodyModalDescription" class="form-label"
-                                    >Descripción:
-                                </label>
-                                </div>
-                                <div class="row align-items-center px-3">
-                                    <textarea formControlName="description" name="BodyModalDescription" class="form-control" rows="4" [(ngModel)]="iBodyDescription" required></textarea>
-                                </div>
-                                <div *ngIf="this.bodyForm.controls['description'].hasError('required') && (this.bodyForm.controls['description'].touched)">
-                                    <p class="text-danger">
-                                        Por favor ingrese una descripción.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" [attr.data-bs-dismiss]="(this.bodyForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
-                                    <div *ngIf="!isEditingBody; then addButton; else editButton"></div>
-                                    <ng-template #addButton>
-                                        Agregar
-                                    </ng-template>
-                                    <ng-template #editButton>
-                                        Editar
-                                    </ng-template>
-                                </button>
-                            </div>
-                    </form>
+                        </div>
+                        <label for="queryStringModalObligatory" class="form-label p-2">Obligatorio:</label>
+                        <label class="radio-inline p-2">
+                            <input formControlName="required" class="form-check-input" type="radio" name="required"
+                                value="true" [(ngModel)]="iQueryStringRequired" required />Sí
+                        </label>
+                        <label class="radio-inline p-2">
+                            <input formControlName="required" class="form-check-input" type="radio" name="required"
+                                value="false" [(ngModel)]="iQueryStringRequired" required />No
+                        </label>
+                        <div
+                            *ngIf="this.queryStringForm.controls['required'].hasError('required') && (this.queryStringForm.controls['required'].touched)">
+                            <p class="text-danger">
+                                Por favor seleccione una opción.
+                            </p>
+                        </div>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="queryStringModalDescription" class="form-label">Descripción:</label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea formControlName="description" name="queryStringModalDescription"
+                                class="form-control" rows="4" [(ngModel)]="iQueryStringDescription" required></textarea>
+                        </div>
+                        <div
+                            *ngIf="this.queryStringForm.controls['description'].hasError('required') && (this.queryStringForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- FORM -->
-            <div class="row">
-                <div class="col-md-11 mx-auto mt-3">
-                    <h2>Ruta</h2>
-                    <form [formGroup]="routeForm" (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
-                        <div class="row detalles">
-                            <!--Division superior-->
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="route-name" class="form-label">Nombre</label>
-                                    <input formControlName="name" type="text" name="route-name" class="form-control" id="route-name" [(ngModel)]="iName" required />
-                                    <div *ngIf="this.routeForm.controls['name'].hasError('required') && (this.routeForm.controls['name'].touched)">
-                                        <p class="text-danger">
-                                            Por favor ingrese un nombre.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="route-url" class="form-label">URL de la ruta</label>
-                                    <input formControlName="route" type="url" pattern="/[a-zA-Z0-9][a-zA-Z0-9-]+" placeholder="/ejemplo/ex" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
-                                    <div *ngIf="this.routeForm.controls['route'].hasError('required') && (this.routeForm.controls['route'].touched)">
-                                        <p class="text-danger">
-                                            Por favor ingrese un URL.
-                                        </p>
-                                    </div>
-                                    <div *ngIf="this.routeForm.controls['route'].hasError('pattern') && (this.routeForm.controls['route'].touched)">
-                                        <p class="text-danger">
-                                            El URL tiene que empezar con "/" y no puede terminar con "/".
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="route-method" class="form-label">Sección</label>
-                                <div class="mb-3">
-                                    <div class="row align-items-center g-0">
-                                        <div class="col-md-11">
-                                            <select formControlName="section_id" class="form-select" name="route-section" id="route-section" [(ngModel)]="iSection" required>
-                                                <option value="" disabled selected hidden>
-                                                    Seleccionar...
-                                                </option>
-                                                <option
-                                                    *ngFor="let section of sections"
-                                                    [label]="section.name"
-                                                    [value]="section.id"                                                    
-                                                ></option>                                                    
-                                            </select>
-                                        </div>
-                                        <div class="col-md-1 text-center">
-                                            <i data-bs-toggle="modal" data-bs-target="#sectionModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="this.routeForm.controls['section_id'].hasError('required') && (this.routeForm.controls['section_id'].touched)">
-                                        <p class="text-danger">
-                                            Por favor seleccione una sección.
-                                        </p>
-                                    </div>
-                                </div>
-                                <label for="route-method" class="form-label">Método</label>
-                                <div class="mb-3">
-                                    <select formControlName="method" class="form-select" name="route-method" id="route-method" [(ngModel)]="iMethod" required>
-                                    <option value="" disabled selected hidden>Seleccionar...</option>
-                                    <option value="GET">GET</option>
-                                    <option value="POST">POST</option>
-                                    <option value="PUT">PUT</option>
-                                    <option value="DELETE">DELETE</option>
-                                </select>
-                                    <div *ngIf="this.routeForm.controls['method'].hasError('required') && (this.routeForm.controls['method'].touched)">
-                                        <p class="text-danger">
-                                            Por favor seleccione un método.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <label for="api-route-description" class="form-label">
-                                Descripción
-                            </label>
-                            <div class="mb-3">
-                                <textarea formControlName="description" class="form-control" name="route-description" id="route-description" rows="4" [(ngModel)]="iDescription" required></textarea>
-                                <div *ngIf="this.routeForm.controls['description'].hasError('required') && (this.routeForm.controls['description'].touched)">
-                                    <p class="text-danger">
-                                        Por favor ingrese una descripción.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row extras">
-                            <!--VALIDAR 1 o mas headers-->
-                            <div class="col-md border">
-                                <h6 class="text-center">Headers</h6>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#headerModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
-                                <div class="max-height">
-                                    <div *ngFor="let header of headers; let i = index" class="row">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" [value]="header.name" disabled />
-                                            <span class="input-group-text">
-                                                <i
-                                                class="fa-solid fa-pen fa-lg me-2"
-                                                style="cursor: pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#headerModal"
-                                                (click)="selectEditHeader(i)">
-                                                </i>
-                                                <i
-                                                style="cursor: pointer"
-                                                (click)="deleteHeader(i)"
-                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--VALIDAR 1 o mas parametros de entrada-->
-                            <div class="col-md border">
-                                <h6 class="text-center">Parámetros de entrada</h6>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#inputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
-                                <div class="max-height">
-                                    <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" [value]="input_parameter.name" disabled />
-                                            <span class="input-group-text">
-                                                <i
-                                                class="fa-solid fa-pen fa-lg me-2"
-                                                style="cursor: pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#inputParameterModal"
-                                                (click)="selectInputParameter(i)">
-                                                </i>
-                                                <i
-                                                style="cursor: pointer"
-                                                (click)="deleteInputParameter(i)"
-                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--VALIDAR 1 o mas parametros de salido-->
-                            <div class="col-md border">
-                                <h6 class="text-center">Parámetros de salida</h6>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#outputParameterModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
-                                <div class="max-height">
-                                    <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" [value]="output_parameter.name" disabled />
-                                            <span class="input-group-text">
-                                                <i
-                                                class="fa-solid fa-pen fa-lg me-2"
-                                                style="cursor: pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#outputParameterModal"
-                                                (click)="selectOutputParameter(i)">
-                                                </i>
-                                                <i
-                                                style="cursor: pointer"
-                                                (click)="deleteOutputParameter(i)"
-                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--VALIDAR 0 o mas query strings-->
-                            <div class="col-md border">
-                                <h6 class="text-center">Query strings</h6>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#queryStringModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
-                                <div class="max-height">
-                                    <div *ngFor="let query_string of query_strings; let i = index" class="row">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" [value]="query_string.name" disabled />
-                                            <span class="input-group-text">
-                                                <i
-                                                class="fa-solid fa-pen fa-lg me-2"
-                                                style="cursor: pointer"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#queryStringModal"
-                                                (click)="selectQueryString(i)">
-                                                </i>
-                                                <i
-                                                style="cursor: pointer"
-                                                (click)="deleteQueryString(i)"
-                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--BODY-->
-                            <div class="col-md border">
-                                <h6 class="text-center">Body</h6>
-                                <div class="col-md-12 text-center">
-                                    <i data-bs-toggle="modal" data-bs-target="#BodyModal" class="fa-solid fa-square-plus fa-lg"></i>
-                                </div>
-                                <div class="max-height">
-                                    <div *ngFor="let body of bodies; let i = index" class="row">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" [value]="body.name" disabled />
-                                            <span class="input-group-text">
-                                                <i
-                                                class="fa-solid fa-pen fa-lg me-2"
-                                                style="cursor: pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#BodyModal"
-                                                (click)="selectBody(i)">
-                                                </i>
-                                                <i
-                                                style="cursor: pointer"
-                                                (click)="deleteBody(i)"
-                                                class="fa-solid fa-circle-xmark fa-lg text-danger">
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-grid col-md-2 ms-auto mt-3">
-                            <button type="input" class="btn btn-primary">
-                                <div *ngIf="!isEditing; then addButton; else editButton"></div>
-                                <ng-template #addButton>
-                                    Agregar
-                                </ng-template>
-                                <ng-template #editButton>
-                                    Editar
-                                </ng-template>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.queryStringForm.invalid) ? '': 'modal'"
+                            data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingQuery; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
+                        </button>
+                        <!--data-bs-dismiss="modal"-->
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+
+    <!-- BODY MODAL -->
+    <div class="modal fade" id="BodyModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="BodyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="BodyModalLabel">
+                        Body
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="cancelEditBody()"></button>
+                </div>
+                <form [formGroup]="bodyForm" (ngSubmit)="!isEditingBody ? addBody() : editBody()">
+                    <div class="modal-body">
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="BodyModalName" class="form-label">Nombre:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input formControlName="name" type="text" name="BodyModalName" class="form-control"
+                                    [(ngModel)]="iBodyName" required />
+                            </div>
+                            <div
+                                *ngIf="this.bodyForm.controls['name'].hasError('required') && (this.bodyForm.controls['name'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un nombre.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center p-2">
+                            <div class="col-md-2">
+                                <label for="BodyModalType" class="form-label">Tipo:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select formControlName="type_id" class="form-select" name="BodyModalType"
+                                    aria-label="Tipo" [(ngModel)]="iBodyType" required>
+                                    <option value="" disabled selected hidden>
+                                        Seleccionar...
+                                    </option>
+                                    <!-- Si esto esta seleccionado error-->
+                                    <option *ngFor="let dataType of dataTypes" [label]="dataType.name | titlecase"
+                                        [value]="dataType.id"></option>
+                                </select>
+                            </div>
+                            <div
+                                *ngIf="this.bodyForm.controls['type_id'].hasError('required') && (this.bodyForm.controls['type_id'].touched)">
+                                <p class="text-danger">
+                                    Por favor seleccione una opción.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row align-items-center ps-2 pt-2">
+                            <label for="BodyModalDescription" class="form-label">Descripción:
+                            </label>
+                        </div>
+                        <div class="row align-items-center px-3">
+                            <textarea formControlName="description" name="BodyModalDescription" class="form-control"
+                                rows="4" [(ngModel)]="iBodyDescription" required></textarea>
+                        </div>
+                        <div
+                            *ngIf="this.bodyForm.controls['description'].hasError('required') && (this.bodyForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"
+                            [attr.data-bs-dismiss]="(this.bodyForm.invalid) ? '': 'modal'" data-bs-dismiss="modal">
+                            <div *ngIf="!isEditingBody; then addButton; else editButton"></div>
+                            <ng-template #addButton>
+                                Agregar
+                            </ng-template>
+                            <ng-template #editButton>
+                                Editar
+                            </ng-template>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="row">
+        <div class="col-md-11 mx-auto mt-3">
+            <h2>Ruta</h2>
+            <form [formGroup]="routeForm" (ngSubmit)=" !isEditing ? addRoute() : onEdit()">
+                <div class="row detalles">
+                    <!--Division superior-->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="route-name" class="form-label">Nombre</label>
+                            <input formControlName="name" type="text" name="route-name" class="form-control"
+                                id="route-name" [(ngModel)]="iName" required />
+                            <div
+                                *ngIf="this.routeForm.controls['name'].hasError('required') && (this.routeForm.controls['name'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un nombre.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="route-url" class="form-label">URL de la ruta</label>
+                            <input formControlName="route" type="url"
+                                pattern="^(\/\w+)+(\.)?\w+(\?(\w+=[\w\d]+(&\w+=[\w\d]+)*)+){0,1}$"
+                                placeholder="/ejemplo/ex" name="route-url" class="form-control" id="route-url"
+                                [(ngModel)]="iURL" required />
+                            <div
+                                *ngIf="this.routeForm.controls['route'].hasError('required') && (this.routeForm.controls['route'].touched)">
+                                <p class="text-danger">
+                                    Por favor ingrese un URL.
+                                </p>
+                            </div>
+                            <div
+                                *ngIf="this.routeForm.controls['route'].hasError('pattern') && (this.routeForm.controls['route'].touched)">
+                                <p class="text-danger">
+                                    El URL tiene que empezar con "/" y no puede terminar con "/".
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="route-method" class="form-label">Sección</label>
+                        <div class="mb-3">
+                            <div class="row align-items-center g-0">
+                                <div class="col-md-11">
+                                    <select formControlName="section_id" class="form-select" name="route-section"
+                                        id="route-section" [(ngModel)]="iSection" required>
+                                        <option value="" disabled selected hidden>
+                                            Seleccionar...
+                                        </option>
+                                        <option *ngFor="let section of sections" [label]="section.name"
+                                            [value]="section.id"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 text-center">
+                                    <i data-bs-toggle="modal" data-bs-target="#sectionModal"
+                                        class="fa-solid fa-square-plus fa-lg"></i>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="this.routeForm.controls['section_id'].hasError('required') && (this.routeForm.controls['section_id'].touched)">
+                                <p class="text-danger">
+                                    Por favor seleccione una sección.
+                                </p>
+                            </div>
+                        </div>
+                        <label for="route-method" class="form-label">Método</label>
+                        <div class="mb-3">
+                            <select formControlName="method" class="form-select" name="route-method" id="route-method"
+                                [(ngModel)]="iMethod" required>
+                                <option value="" disabled selected hidden>Seleccionar...</option>
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                            <div
+                                *ngIf="this.routeForm.controls['method'].hasError('required') && (this.routeForm.controls['method'].touched)">
+                                <p class="text-danger">
+                                    Por favor seleccione un método.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="api-route-description" class="form-label">
+                        Descripción
+                    </label>
+                    <div class="mb-3">
+                        <textarea formControlName="description" class="form-control" name="route-description"
+                            id="route-description" rows="4" [(ngModel)]="iDescription" required></textarea>
+                        <div
+                            *ngIf="this.routeForm.controls['description'].hasError('required') && (this.routeForm.controls['description'].touched)">
+                            <p class="text-danger">
+                                Por favor ingrese una descripción.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row extras">
+                    <!--VALIDAR 1 o mas headers-->
+                    <div class="col-md border">
+                        <h6 class="text-center">Headers</h6>
+                        <div class="col-md-12 text-center">
+                            <i data-bs-toggle="modal" data-bs-target="#headerModal"
+                                class="fa-solid fa-square-plus fa-lg"></i>
+                        </div>
+                        <div class="max-height">
+                            <div *ngFor="let header of headers; let i = index" class="row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [value]="header.name" disabled />
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer"
+                                            data-bs-toggle="modal" data-bs-target="#headerModal"
+                                            (click)="selectEditHeader(i)">
+                                        </i>
+                                        <i style="cursor: pointer" (click)="deleteHeader(i)"
+                                            class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--VALIDAR 1 o mas parametros de entrada-->
+                    <div class="col-md border">
+                        <h6 class="text-center">Parámetros de entrada</h6>
+                        <div class="col-md-12 text-center">
+                            <i data-bs-toggle="modal" data-bs-target="#inputParameterModal"
+                                class="fa-solid fa-square-plus fa-lg"></i>
+                        </div>
+                        <div class="max-height">
+                            <div *ngFor="let input_parameter of input_parameters; let i = index" class="row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [value]="input_parameter.name" disabled />
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer"
+                                            data-bs-toggle="modal" data-bs-target="#inputParameterModal"
+                                            (click)="selectInputParameter(i)">
+                                        </i>
+                                        <i style="cursor: pointer" (click)="deleteInputParameter(i)"
+                                            class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--VALIDAR 1 o mas parametros de salido-->
+                    <div class="col-md border">
+                        <h6 class="text-center">Parámetros de salida</h6>
+                        <div class="col-md-12 text-center">
+                            <i data-bs-toggle="modal" data-bs-target="#outputParameterModal"
+                                class="fa-solid fa-square-plus fa-lg"></i>
+                        </div>
+                        <div class="max-height">
+                            <div *ngFor="let output_parameter of output_parameters; let i = index" class="row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [value]="output_parameter.name" disabled />
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer"
+                                            data-bs-toggle="modal" data-bs-target="#outputParameterModal"
+                                            (click)="selectOutputParameter(i)">
+                                        </i>
+                                        <i style="cursor: pointer" (click)="deleteOutputParameter(i)"
+                                            class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--VALIDAR 0 o mas query strings-->
+                    <div class="col-md border">
+                        <h6 class="text-center">Query strings</h6>
+                        <div class="col-md-12 text-center">
+                            <i data-bs-toggle="modal" data-bs-target="#queryStringModal"
+                                class="fa-solid fa-square-plus fa-lg"></i>
+                        </div>
+                        <div class="max-height">
+                            <div *ngFor="let query_string of query_strings; let i = index" class="row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [value]="query_string.name" disabled />
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer"
+                                            data-bs-toggle="modal" data-bs-target="#queryStringModal"
+                                            (click)="selectQueryString(i)">
+                                        </i>
+                                        <i style="cursor: pointer" (click)="deleteQueryString(i)"
+                                            class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--BODY-->
+                    <div class="col-md border">
+                        <h6 class="text-center">Body</h6>
+                        <div class="col-md-12 text-center">
+                            <i data-bs-toggle="modal" data-bs-target="#BodyModal"
+                                class="fa-solid fa-square-plus fa-lg"></i>
+                        </div>
+                        <div class="max-height">
+                            <div *ngFor="let body of bodies; let i = index" class="row">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [value]="body.name" disabled />
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer"
+                                            data-bs-toggle="modal" data-bs-target="#BodyModal" (click)="selectBody(i)">
+                                        </i>
+                                        <i style="cursor: pointer" (click)="deleteBody(i)"
+                                            class="fa-solid fa-circle-xmark fa-lg text-danger">
+                                        </i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid col-md-2 ms-auto mt-3">
+                    <button type="input" class="btn btn-primary">
+                        <div *ngIf="!isEditing; then addButton; else editButton"></div>
+                        <ng-template #addButton>
+                            Agregar
+                        </ng-template>
+                        <ng-template #editButton>
+                            Editar
+                        </ng-template>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
