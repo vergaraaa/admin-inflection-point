@@ -1,196 +1,130 @@
 <div class="container-fluid">
-  <div class="row row-height">
-    <div class="col-md-3 left">
-      <ul class="list-unstyled pt-3">
-        <li class="mb-1" *ngFor="let section of sections">
-          <button
-            class="btn btn-toggle align-items-center rounded"
-            data-bs-toggle="collapse"
-            [attr.data-bs-target]="'#collapse' + section.id"
-            aria-expanded="true"
-          >
-            {{ section.name }}
-          </button>
+    <div class="row row-height">
+        <div class="col-md-3 left">
+            <ul class="list-unstyled pt-3">
+                <li class="mb-1" *ngFor="let section of sections">
+                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
+                        {{ section.name }}
+                    </button>
 
-          <div class="collapse collapse" [id]="'collapse' + section.id">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li *ngIf="routes[section.id].length === 0">
-                <p class="empty-message">No hay rutas disponibles</p>
-              </li>
-              <li class="route-row" *ngFor="let route of routes[section.id]">
-                <a
-                  routerLink="./"
-                  [queryParams]="{ route: route.id }"
-                  class="link-light rounded route-link"
-                >
-                  <i
-                    class="ms-3 fas fa-circle"
-                    [ngClass]="
+                    <div class="collapse collapse" [id]="'collapse' + section.id">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li *ngIf="routes[section.id].length === 0">
+                                <p class="empty-message">No hay rutas disponibles</p>
+                            </li>
+                            <li class="route-row" *ngFor="let route of routes[section.id]">
+                                <a routerLink="./" [queryParams]="{ route: route.id }"
+                                    class="link-light rounded route-link">
+                                    <i class="ms-3 fas fa-circle" [ngClass]="
                       routeStatuses[route.id] &&
                       routeStatuses[route.id].status === 200
                         ? 'estatus'
                         : 'estatus-error'
-                    "
-                    *ngIf="route.method === 'GET'"
-                    [tooltip]="
+                    " *ngIf="route.method === 'GET'" [tooltip]="
                       routeStatuses[route.id] &&
                       routeStatuses[route.id].lastSeen
                         ? 'Última vez actualizado: ' +
                           routeStatuses[route.id].lastSeen
                         : 'Última vez actualizado: No disponible'
-                    "
-                  ></i>
-                  <i
-                    class="ms-3 fas fa-circle estatus-invisible"
-                    *ngIf="route.method !== 'GET'"
-                  ></i>
-                  {{ route.route }}</a
-                >
-                <div [ngSwitch]="route.method">
-                  <p
-                    *ngSwitchCase="'GET'"
-                    class="route-method badge bg-info p-2"
-                  >
-                    {{ route.method }}
-                  </p>
-                  <p
-                    *ngSwitchCase="'POST'"
-                    class="route-method badge bg-success p-2"
-                  >
-                    {{ route.method }}
-                  </p>
-                  <p
-                    *ngSwitchCase="'PUT'"
-                    class="route-method badge bg-warning p-2"
-                  >
-                    {{ route.method }}
-                  </p>
-                  <p
-                    *ngSwitchCase="'DELETE'"
-                    class="route-method badge bg-danger p-2"
-                  >
-                    {{ route.method }}
-                  </p>
-                </div>
-              </li>
-              <li
-                class="link-light bg-white text-black-50 add-route-link"
-                [routerLink]="['/create-route', apiId]"
-                [queryParams]="{ section: section.id }"
-                *ngIf="havePermissionToEdit"
-              ></li>
+                    "></i>
+                                    <i class="ms-3 fas fa-circle estatus-invisible" *ngIf="route.method !== 'GET'"></i>
+                                    {{ route.route }}</a>
+                                <div [ngSwitch]="route.method">
+                                    <p *ngSwitchCase="'GET'" class="route-method badge bg-info p-2 mb-1">
+                                        {{ route.method }}
+                                    </p>
+                                    <p *ngSwitchCase="'POST'" class="route-method badge bg-success p-2 mb-1">
+                                        {{ route.method }}
+                                    </p>
+                                    <p *ngSwitchCase="'PUT'" class="route-method badge bg-warning p-2 mb-1">
+                                        {{ route.method }}
+                                    </p>
+                                    <p *ngSwitchCase="'DELETE'" class="route-method badge bg-danger p-2 mb-1">
+                                        {{ route.method }}
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="link-light bg-white text-black-50 add-route-link"
+                                [routerLink]="['/create-route', apiId]" [queryParams]="{ section: section.id }"
+                                *ngIf="havePermissionToEdit"></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="link-light bg-white add-route-button" [routerLink]="'/create-route/' + apiId"
+                    *ngIf="havePermissionToEdit">
+                    Agregar Ruta
+                </li>
             </ul>
-          </div>
-        </li>
-        <li
-          class="link-light bg-white add-route-button"
-          [routerLink]="'/create-route/' + apiId"
-          *ngIf="havePermissionToEdit"
-        >
-          Agregar Ruta
-        </li>
-      </ul>
-    </div>
-    <div class="col-md right">
-      <div class="api-info" *ngIf="!routeId">
-        <div class="row mt-4 align-items-center options-row">
-          <div class="col-md-8 my-auto">
-            <h2>
-              {{ apiData.name }}
-              <i
-                class="ms-3 fas fa-circle"
-                [ngClass]="
+        </div>
+        <div class="col-md right">
+            <div class="api-info" *ngIf="!routeId">
+                <div class="row mt-4 align-items-center options-row">
+                    <div class="col-md-8 my-auto">
+                        <h2>
+                            {{ apiData.name }}
+                            <i class="ms-3 fas fa-circle" [ngClass]="
                   apiStatus == 'green'
                     ? 'estatus'
                     : apiStatus == 'yellow'
                     ? 'estatus-info'
                     : 'estatus-error'
-                "
-                [tooltip]="
+                " [tooltip]="
                   apiStatus
                     ? 'Última vez actualizado: ' + lastSeenApiStatus
                     : 'Última vez actualizado: No disponible'
-                "
-              ></i>
-            </h2>
-          </div>
-          <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
-            <div class="row">
-              <div class="col options-route-details">
-                <i class="fa-solid fa-pen editar" (click)="edit(apiId)"></i>
+                "></i>
+                        </h2>
+                    </div>
+                    <div class="col-md-4 mt-1" *ngIf="havePermissionToEdit">
+                        <div class="row">
+                            <div class="col options-route-details">
+                                <i class="fa-solid fa-pen editar" (click)="edit(apiId)"></i>
 
-                <i
-                  class="fa-solid fa-trash borrar"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                ></i>
-              </div>
+                                <i class="fa-solid fa-trash borrar" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <h5>Descripción</h5>
+                    <p class="p">
+                        {{ apiData.description }}
+                    </p>
+                </div>
+                <div class="row mt-3">
+                    <h5>URL</h5>
+                    <p class="p">
+                        {{ apiData.url }}
+                    </p>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <div class="row mt-3">
-          <h5>Descripción</h5>
-          <p class="p">
-            {{ apiData.description }}
-          </p>
+            <app-route-detail *ngIf="routeId && apiData" [routeId]="routeId"
+                [havePermissionToEdit]="havePermissionToEdit" [apiUrl]="apiData.url"
+                [routeStatus]="routeStatuses[routeId]" (onDelete)="getApiDetails()"></app-route-detail>
         </div>
-        <div class="row mt-3">
-          <h5>URL</h5>
-          <p class="p">
-            {{ apiData.url }}
-          </p>
-        </div>
-      </div>
-
-      <app-route-detail
-        *ngIf="routeId && apiData"
-        [routeId]="routeId"
-        [havePermissionToEdit]="havePermissionToEdit"
-        [apiUrl]="apiData.url"
-        [routeStatus]="routeStatuses[routeId]"
-        (onDelete)="getApiDetails()"
-      ></app-route-detail>
     </div>
-  </div>
 
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">¿Seguro que quieres borrar esta Api?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteApi()">
+                        Borrar
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">¿Seguro que quieres borrar esta Api?</div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cerrar
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            (click)="deleteApi()"
-          >
-            Borrar
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>

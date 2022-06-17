@@ -12,18 +12,19 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteApi()">
-            Borrar
-          </button>
+                        Borrar
+                    </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
+                        Cerrar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!--Modal colaboradoes-->
-    <div class="modal fade" id="modalColaboradores" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalColaboradores" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -39,9 +40,10 @@
                         <div class="col-md-10 offset-md-1 p-0">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
-                  <i class="fas fa-search"></i>
-                </span>
-                                <input type="text" class="form-control" placeholder="Buscar" aria-label="Search" [(ngModel)]="queryColaboradores" aria-describedby="basic-addon1" />
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Buscar" aria-label="Search"
+                                    [(ngModel)]="queryColaboradores" aria-describedby="basic-addon1" />
                             </div>
                         </div>
                     </div>
@@ -68,7 +70,8 @@
                                             </td>
                                             <td class="text-start">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" [(ngModel)]="user.selected" id="flexCheckDefault" />
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        [(ngModel)]="user.selected" id="flexCheckDefault" />
                                                     <label class="form-check-label" for="flexCheckDefault"></label>
                                                 </div>
                                             </td>
@@ -82,8 +85,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="setCollaborators()">
-            Guardar Cambios
-          </button>
+                        Guardar Cambios
+                    </button>
                 </div>
             </div>
         </div>
@@ -102,15 +105,15 @@
         <div class="col-md-1 ps-1 pe-3 pt-3">
             <div class="d-grid">
                 <button class="btn text-white" type="button" style="background-color: #282c38" routerLink="/create-api">
-          AGREGAR
-        </button>
+                    AGREGAR
+                </button>
             </div>
         </div>
     </div>
 
     <!--Tabla mis apis-->
     <div class="row mt-3 g-0 table-title text-white">
-        <div class="col-md-12 text-center p-3">Mis Apis</div>
+        <div class="col-md-12 text-center p-2">Mis Apis</div>
     </div>
     <div class="row g-0">
         <div class="example-container mat-elevation-z8">
@@ -120,7 +123,8 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                         API
                     </mat-header-cell>
-                    <mat-cell class="clickable link-highlight" *matCellDef="let api" [routerLink]="['/api/', api.id]">{{ api.name }}</mat-cell>
+                    <mat-cell class="clickable link-highlight" *matCellDef="let api" [routerLink]="['/api/', api.id]">{{
+                        api.name }}</mat-cell>
                 </ng-container>
 
                 <!-- Description Column -->
@@ -159,35 +163,22 @@
                       statusData[api.id!].routes[0].lastSeen
                     : 'Última vez actualizado: No Disponible'
                   : 'Última vez actualizado: No Disponible'
-              "></span
-          ></mat-cell>
-        </ng-container>
+              "></span></mat-cell>
+                </ng-container>
 
-        <!-- Operations Column-->
-        <ng-container matColumnDef="operations">
-          <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
-          <mat-cell *matCellDef="let api">
-            <span class="mx-auto">
-              <i
-                class="fa-solid fa-pen fa-lg mx-2"
-                style="cursor: pointer"
-                (click)="edit(api.id!)"
-              ></i>
-              <i
-                class="fa-solid fa-user fa-lg mx-2"
-                style="cursor: pointer"
-                (click)="onClickColaborators(api.id!)"
-                data-bs-toggle="modal"
-                data-bs-target="#modalColaboradores"
-              ></i>
-              <i
-                class="fa-solid fa-trash fa-lg mx-2"
-                style="color: #ce1010; cursor: pointer"
-                (click)="onClickDelete(api.id!, api.name)"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              ></i>
-            </span>
+                <!-- Operations Column-->
+                <ng-container matColumnDef="operations">
+                    <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
+                    <mat-cell *matCellDef="let api">
+                        <span class="">
+                            <i class="fa-solid fa-pen fa-lg me-2" style="cursor: pointer" (click)="edit(api.id!)"></i>
+                            <i class="fa-solid fa-user fa-lg mx-2" style="cursor: pointer"
+                                (click)="onClickColaborators(api.id!)" data-bs-toggle="modal"
+                                data-bs-target="#modalColaboradores"></i>
+                            <i class="fa-solid fa-trash fa-lg mx-2" style="color: #ce1010; cursor: pointer"
+                                (click)="onClickDelete(api.id!, api.name)" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"></i>
+                        </span>
                     </mat-cell>
                 </ng-container>
 
@@ -201,7 +192,7 @@
 
     <!--Tabla apis a colaborar-->
     <div class="row mt-5 g-0 table-title text-white">
-        <div class="col-md-12 text-center p-3">Apis en las que colaboro</div>
+        <div class="col-md-12 text-center p-2">Apis en las que colaboro</div>
     </div>
     <div class="row g-0">
         <div class="example-container mat-elevation-z8">
@@ -211,7 +202,8 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                         API
                     </mat-header-cell>
-                    <mat-cell class="clickable link-highlight" *matCellDef="let api" [routerLink]="['/api/', api.id]">{{ api.name }}</mat-cell>
+                    <mat-cell class="clickable link-highlight" *matCellDef="let api" [routerLink]="['/api/', api.id]">{{
+                        api.name }}</mat-cell>
                 </ng-container>
 
                 <!-- Description Column -->
@@ -261,12 +253,8 @@
                     <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
                     <mat-cell *matCellDef="let api">
                         <span class="mx-auto">
-              <i
-                class="fa-solid fa-pen fa-lg mx-2"
-                style="cursor: pointer"
-                (click)="edit(api.id!)"
-              ></i>
-            </span>
+                            <i class="fa-solid fa-pen fa-lg mx-2" style="cursor: pointer" (click)="edit(api.id!)"></i>
+                        </span>
                     </mat-cell>
                 </ng-container>
 
