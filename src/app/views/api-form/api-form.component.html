@@ -39,7 +39,7 @@
                         </div>
                         <div *ngIf="this.apiForm.controls['url'].hasError('pattern') && (this.apiForm.controls['url'].touched)">
                             <p class="text-danger">
-                                El URL tiene que comenzar con http:// o https://
+                                El URL tiene que comenzar con http:// o https:// y no puede terminar en /
                             </p>
                         </div>
                     </div>

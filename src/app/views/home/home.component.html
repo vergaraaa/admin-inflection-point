@@ -1,71 +1,59 @@
 <div class="container mt-5">
-  <div class="row">
-    <div class="example-header">
-      <mat-form-field appearance="fill">
-        <input
-          matInput
-          placeholder="Buscar"
-          autocomplete="off"
-          (keyup)="filterData($event)"
-        />
-      </mat-form-field>
+    <div class="row">
+        <div class="search-container">
+            <mat-form-field appearance="fill">
+                <mat-label>Buscar</mat-label>
+                <input matInput autocomplete="off" (keyup)="filterData($event)">
+                <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+        </div>
     </div>
-  </div>
-  <div class="row mt-3 g-0">
-    <div class="example-container mat-elevation-z8">
-      <mat-table class="" [dataSource]="dataSource" matSort>
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            Nombre
-          </mat-header-cell>
-          <mat-cell
-            class="clickable link-highlight"
-            *matCellDef="let api"
-            [routerLink]="['/api/', api.id]"
-            >{{ api.name }}</mat-cell
-          >
-        </ng-container>
+    <div class="row mt-3 g-0">
+        <div class="example-container mat-elevation-z8">
+            <mat-table class="" [dataSource]="dataSource" matSort>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Nombre
+                    </mat-header-cell>
+                    <mat-cell class="clickable link-highlight" *matCellDef="let api" [routerLink]="['/api/', api.id]">{{ api.name }}</mat-cell>
+                </ng-container>
 
-        <!-- Description Column -->
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            Descripción
-          </mat-header-cell>
-          <mat-cell *matCellDef="let api"> {{ api.description }} </mat-cell>
-        </ng-container>
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Descripción
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{ api.description }} </mat-cell>
+                </ng-container>
 
-        <!-- URL Column -->
-        <ng-container matColumnDef="url">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            URL
-          </mat-header-cell>
-          <mat-cell *matCellDef="let api"> {{ api.url }} </mat-cell>
-        </ng-container>
+                <!-- URL Column -->
+                <ng-container matColumnDef="url">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        URL
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{ api.url }} </mat-cell>
+                </ng-container>
 
-        <!-- Status Column-->
-        <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            Estatus
-          </mat-header-cell>
-          <mat-cell *matCellDef="let api"
-            ><span
-              [ngClass]="
+                <!-- Status Column-->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estatus
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let api"><span [ngClass]="
                 statusData[api.id!]
                   ? statusData[api.id!].status
                     ? 'estatus'
                     : 'estatus-error'
                   : 'estatus-error'
-              "
-              [tooltip]="
+              " [tooltip]="
                 statusData[api.id!]
                   ? statusData[api.id!].status
                     ? 'Última vez actualizado: ' +
                       statusData[api.id!].routes[0].lastSeen
                     : 'Última vez actualizado: No Disponible'
                   : 'Última vez actualizado: No Disponible'
-              "
-            ></span
+              "></span
           ></mat-cell>
         </ng-container>
 

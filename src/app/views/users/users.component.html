@@ -27,7 +27,9 @@
     <div class="row">
         <div class="search-container">
             <mat-form-field appearance="fill">
-                <input matInput placeholder="Buscar" autocomplete="off" (keyup)="filterData($event)">
+                <mat-label>Buscar</mat-label>
+                <input matInput autocomplete="off" (keyup)="filterData($event)">
+                <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
         </div>
     </div>

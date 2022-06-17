@@ -488,7 +488,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="route-url" class="form-label">URL de la ruta</label>
-                                    <input formControlName="route" type="url" pattern="/.*" placeholder="/ejemplo/ex" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
+                                    <input formControlName="route" type="url" pattern="/[a-zA-Z0-9][a-zA-Z0-9-]+" placeholder="/ejemplo/ex" name="route-url" class="form-control" id="route-url" [(ngModel)]="iURL" required />
                                     <div *ngIf="this.routeForm.controls['route'].hasError('required') && (this.routeForm.controls['route'].touched)">
                                         <p class="text-danger">
                                             Por favor ingrese un URL.
@@ -496,7 +496,7 @@
                                     </div>
                                     <div *ngIf="this.routeForm.controls['route'].hasError('pattern') && (this.routeForm.controls['route'].touched)">
                                         <p class="text-danger">
-                                            El URL tiene que empezar con "/".
+                                            El URL tiene que empezar con "/" y no puede terminar con "/".
                                         </p>
                                     </div>
                                 </div>
