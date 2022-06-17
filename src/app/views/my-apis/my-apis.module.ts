@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../../directives/directives.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule.forChild([{ path: '', component: MyApisComponent }]),
     SharedModule,
     FormsModule,
+    DirectivesModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,

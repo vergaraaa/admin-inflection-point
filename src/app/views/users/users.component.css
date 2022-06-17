@@ -28,3 +28,40 @@ h1 {
 .clickable {
     cursor: pointer;
 }
+
+
+/*Mat paginator*/
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.mat-form-field {
+    font-size: 16px;
+    width: 100%;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 700px;
+}
+
+.mat-header-cell {
+    background-color: #282c38;
+    color: white;
+    font-size: 18px;
+}
+
+
+/*Flecha blanca para contraste*/
+
+::ng-deep .mat-sort-header-arrow {
+    color: #fff;
+}

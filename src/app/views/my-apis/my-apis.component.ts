@@ -22,7 +22,6 @@ export class MyApisComponent implements OnInit {
   query: string = '';
   queryColaboradores: string = '';
   usersData: User[] = [];
-  ascDescBool: boolean = false;
 
   displayedColumns = ["name", "description", "url", "status", "operations"];
   dataSource: MatTableDataSource<Api> = new MatTableDataSource;
@@ -32,6 +31,8 @@ export class MyApisComponent implements OnInit {
   @ViewChild(MatPaginator) paginatorCollab!: MatPaginator;
   @ViewChild(MatSort) sortPaginatorCollab!: MatSort;
 
+  statusData: any = {};
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -40,18 +41,7 @@ export class MyApisComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getApisOfUser().subscribe((data: any) => {
-      this.apisData = data.user_apis;
-      this.collaboratorApisData = data.collaborator_apis;
-      this.dataSource = new MatTableDataSource(this.apisData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sortPaginator;
-      this.dataSourceCollab = new MatTableDataSource(this.collaboratorApisData);
-      this.dataSourceCollab.paginator = this.paginatorCollab;
-      this.dataSourceCollab.sort = this.sortPaginatorCollab;
-      console.log(this.apisData);
-      console.log(this.collaboratorApisData);
-    });
+    this.getApis();
     this.getUsers();
   }
 
@@ -61,8 +51,49 @@ export class MyApisComponent implements OnInit {
   }
 
   getApis() {
-    this.apiService.getApisOfUser().subscribe((data: any) => {
-      this.apisData = data;
+    this.apiService.getApisOfUser().subscribe((dataApi: any) => {
+      this.apiService.getStatus().subscribe((dataStatus: any) => {
+        this.apisData = dataApi.user_apis;
+        this.statusData = dataStatus;
+        console.log(this.apisData);
+        console.log(this.statusData);
+        for(let i = 0; i < this.apisData.length; i++){
+          if(this.statusData.hasOwnProperty(this.apisData[i].id)){
+            this.apisData[i].status = true;
+          }
+          else{
+            this.apisData[i].status = false;
+          }
+        }
+        console.log(this.apisData);
+        this.dataSource = new MatTableDataSource(this.apisData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sortPaginator;
+      });
+
+      this.apiService.getStatus().subscribe((dataStatusCollab: any) => {
+        
+        this.collaboratorApisData = dataApi.collaborator_apis;
+        this.statusData = dataStatusCollab;
+        for(let i = 0; i<this.collaboratorApisData.length; i++){
+          if(this.statusData.hasOwnProperty(this.collaboratorApisData[i].id)){
+            this.collaboratorApisData[i].status = true;
+          }
+          else{
+            this.collaboratorApisData[i].status = false;
+          }
+        }
+        this.dataSourceCollab = new MatTableDataSource(this.collaboratorApisData);
+        this.dataSourceCollab.paginator = this.paginatorCollab;
+        this.dataSourceCollab.sort = this.sortPaginatorCollab;
+      });
+    });
+  }
+
+  getStatus() {
+    this.apiService.getStatus().subscribe((data: any) => {
+      this.statusData = data;
+      console.log(data);
     });
   }
 

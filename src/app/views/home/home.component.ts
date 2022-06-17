@@ -23,8 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getApis();
-    this.getStatus();
-    
+    // this.getStatus();
   }
 
   getApis() {
