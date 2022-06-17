@@ -36,6 +36,7 @@ export class RouteDetailComponent implements OnInit {
   query: string = '';
 
   testApiResponse: string = '';
+  apiResponseError: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -99,9 +100,16 @@ export class RouteDetailComponent implements OnInit {
 
     this.apiService
       .testRoute(url, method, this.headers, this.query_strings, this.bodies)
-      .subscribe((data: any) => {
-        this.testApiResponse = data;
-      });
+      .subscribe(
+        (data: any) => {
+          this.testApiResponse = data;
+          this.apiResponseError = false;
+        },
+        (error: any) => {
+          this.testApiResponse = error;
+          this.apiResponseError = true;
+        }
+      );
   }
 
   onChangeCheckbox(event: any, input: any) {

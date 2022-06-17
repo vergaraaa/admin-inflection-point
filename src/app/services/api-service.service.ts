@@ -1,118 +1,141 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/api.user';
-import { Api } from '../models/api.model'
-import { Header } from '../models/forms.model'
+import { Api } from '../models/api.model';
+import { Header } from '../models/forms.model';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ApiService {
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient) { }
+  getApisData() {
+    return this.http.get('http://localhost:3000/api/apis/');
+  }
 
-    getApisData() {
-        return this.http.get('http://localhost:3000/api/apis/');
-    }
+  getApiDetail(apiId: number) {
+    return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
+  }
 
-    getApiDetail(apiId: number) {
-        return this.http.get(`http://localhost:3000/api/apis/${apiId}`);
-    }
+  getRouteDetails(routeId: number) {
+    return this.http.get(
+      `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
+    );
+  }
 
-    getRouteDetails(routeId: number) {
-        return this.http.get(
-            `http://localhost:3000/api/apis/getRouteDetails/${routeId}`
-        );
-    }
+  createApi(api: Api) {
+    var body = {
+      api: api,
+      token: localStorage.getItem('token'),
+    };
 
-    createApi(api: Api) {
-        var body = {
-            api: api,
-            token: localStorage.getItem('token'),
-        }
+    return this.http.post(`http://localhost:3000/api/apis/addApi`, body);
+  }
 
-        return this.http.post(
-            `http://localhost:3000/api/apis/addApi`,
-            body
-        )
-    }
+  deleteApi(apiId: number) {
+    return this.http.delete(`http://localhost:3000/api/apis/${apiId}`);
+  }
 
-    deleteApi(apiId: number) {
+  editApi(apiId: number, api: Api) {
+    return this.http.put(`http://localhost:3000/api/apis/${apiId}`, api);
+  }
 
-        return this.http.delete(`http://localhost:3000/api/apis/${apiId}`);
+  getApisOfUser() {
+    var body = {
+      token: localStorage.getItem('token'),
+    };
 
-    }
+    return this.http.post(
+      `http://localhost:3000/api/apis/getApisOfUser/`,
+      body
+    );
+  }
 
-    editApi(apiId: number, api: Api,) {
+  deleteRoute(routeId: number) {
+    return this.http.delete(
+      `http://localhost:3000/api/apis/deleteRoute/${routeId}`
+    );
+  }
 
-        return this.http.put(`http://localhost:3000/api/apis/${apiId}`,
-            api);
+  getOneApi(apiId: number) {
+    return this.http.get(`http://localhost:3000/api/apis/getOneApi/${apiId}`);
+  }
 
-    }
+  testRoute(
+    url: string,
+    method: string,
+    headers: any,
+    queryString: any,
+    bodies: any
+  ) {
+    let headersObj: {
+      [key: string]: string;
+    } = {};
+    headers.forEach((header: Header) => {
+      headersObj[header.name] = header.value;
+    });
 
-    getApisOfUser() {
-        var body = {
-            'token': localStorage.getItem('token')
-        }
+    let queryStringObj: {
+      [key: string]: string;
+    } = {};
+    queryString.forEach((query: Header) => {
+      queryStringObj[query.name] = query.value;
+    });
 
-        return this.http.post(`http://localhost:3000/api/apis/getApisOfUser/`, body);
-    }
+    let bodyObj: {
+      [key: string]: string;
+    } = {};
+    bodies.forEach((body: Header) => {
+      bodyObj[body.name] = body.value;
+    });
 
-    deleteRoute(routeId: number) {
-
-        return this.http.delete(`http://localhost:3000/api/apis/deleteRoute/${routeId}`);
-
-    }
-
-    getOneApi(apiId: number) {
-        return this.http.get(`http://localhost:3000/api/apis/getOneApi/${apiId}`);
-    }
-
-    testRoute(url: string, method: string, headers: any, queryString: any, bodies: any) {
-        let headersObj: {
-            [key: string]: string
-        } = {}
-        headers.forEach((header: Header) => {
-            headersObj[header.name] = header.value
+    switch (method) {
+      case 'GET':
+        return this.http.get(url, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
         });
-
-        let queryStringObj: {
-            [key: string]: string
-        } = {}
-        queryString.forEach((query: Header) => {
-            queryStringObj[query.name] = query.value
+      case 'POST':
+        return this.http.post(url, bodyObj, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
         });
-
-        let bodyObj: {
-            [key: string]: string
-        } = {}
-        bodies.forEach((body: Header) => {
-            bodyObj[body.name] = body.value
+      case 'PUT':
+        return this.http.put(url, bodyObj, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
         });
-
-
-        switch (method) {
-            case 'GET':
-                return this.http.get(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'POST':
-                return this.http.post(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'PUT':
-                return this.http.put(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'DELETE':
-                return this.http.delete(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'PATCH':
-                return this.http.patch(url, bodyObj, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'HEAD':
-                return this.http.head(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            case 'OPTIONS':
-                return this.http.options(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-            default:
-                return this.http.get(url, { headers: new HttpHeaders(headersObj), params: queryStringObj });
-        }
+      case 'DELETE':
+        return this.http.delete(url, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
+        });
+      case 'PATCH':
+        return this.http.patch(url, bodyObj, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
+        });
+      case 'HEAD':
+        return this.http.head(url, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
+        });
+      case 'OPTIONS':
+        return this.http.options(url, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
+        });
+      default:
+        return this.http.get(url, {
+          headers: new HttpHeaders(headersObj),
+          params: queryStringObj,
+        });
     }
+  }
 
-    getStatus() {
-        return this.http.get(`http://localhost:3000/api/apis/getStatus`);
-    }
+  getStatus() {
+    return this.http.get(`http://localhost:3000/api/apis/getStatus`);
+  }
 }

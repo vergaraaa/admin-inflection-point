@@ -228,10 +228,12 @@
         </div>
 
         <h6>URL a probar</h6>
-        <p>{{ apiUrl + route.route }}</p>
+        <p *ngIf="route">{{ apiUrl + route.route }}</p>
         <div *ngIf="testApiResponse">
           <h6>Respuesta</h6>
-          <pre>{{ testApiResponse | json }}</pre>
+          <pre [ngClass]="apiResponseError ? 'error-text' : ''">{{
+            testApiResponse | json
+          }}</pre>
         </div>
       </div>
       <div class="modal-footer">
@@ -250,11 +252,19 @@
   </div>
 </div>
 <!-- FIN TEST API MODAL -->
-<div class="row">
+<div class="row" *ngIf="route">
   <div class="col-md-6">
     <h2>
       {{ route.name }}
-      <i class="ms-3 fas fa-circle estatus" *ngIf="route.method === 'GET'"></i>
+      <i
+        class="ms-3 fas fa-circle"
+        [ngClass]="
+          routeStatus && routeStatus.status === 200
+            ? 'estatus'
+            : 'estatus-error'
+        "
+        *ngIf="route.method === 'GET'"
+      ></i>
     </h2>
   </div>
   <!-- <div class="col-md-4">
@@ -264,7 +274,7 @@
                     </button>
                 </div>
             </div> -->
-  <div class="col-md-6 mt-1" *ngIf="havePermissionToEdit">
+  <div class="col-md-6 mt-1">
     <div class="row">
       <div class="col options-route-details">
         <i
@@ -273,10 +283,12 @@
           data-bs-target="#testApiModal"
         ></i>
         <i
+          *ngIf="havePermissionToEdit"
           class="fa-solid fa-pen editar"
           [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"
         ></i>
         <i
+          *ngIf="havePermissionToEdit"
           class="fa-solid fa-trash borrar"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
@@ -287,7 +299,7 @@
 </div>
 
 <!-- METHOD -->
-<div class="row">
+<div class="row" *ngIf="route">
   <div [ngSwitch]="route.method">
     <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
       <span class="badge route-method bg-info p-2 me-3">{{

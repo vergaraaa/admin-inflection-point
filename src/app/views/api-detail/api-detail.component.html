@@ -1,9 +1,14 @@
 <div class="container-fluid">
-    <div class="row row-height">
-        <div class="col-md-3 left">
-            <ul class="list-unstyled pt-3">
-                <li class="mb-1" *ngFor="let section of sections">
-                    <button class="btn btn-toggle align-items-center rounded" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + section.id" aria-expanded="true">
+  <div class="row row-height">
+    <div class="col-md-3 left">
+      <ul class="list-unstyled pt-3">
+        <li class="mb-1" *ngFor="let section of sections">
+          <button
+            class="btn btn-toggle align-items-center rounded"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapse' + section.id"
+            aria-expanded="true"
+          >
             {{ section.name }}
           </button>
 
@@ -21,14 +26,18 @@
                   <i
                     class="ms-3 fas fa-circle"
                     [ngClass]="
+                      routeStatuses[route.id] &&
                       routeStatuses[route.id].status === 200
                         ? 'estatus'
                         : 'estatus-error'
                     "
                     *ngIf="route.method === 'GET'"
                     [tooltip]="
-                      'Última vez actualizado: ' +
+                      routeStatuses[route.id] &&
                       routeStatuses[route.id].lastSeen
+                        ? 'Última vez actualizado: ' +
+                          routeStatuses[route.id].lastSeen
+                        : 'Última vez actualizado: No disponible'
                     "
                   ></i>
                   <i
@@ -36,13 +45,32 @@
                     *ngIf="route.method !== 'GET'"
                   ></i>
                   {{ route.route }}</a
-
                 >
                 <div [ngSwitch]="route.method">
-                  <p *ngSwitchCase="'GET'" class="route-method badge bg-info p-2">{{ route.method }}</p>
-                  <p *ngSwitchCase="'POST'" class="route-method badge bg-success p-2">{{ route.method }}</p>
-                  <p *ngSwitchCase="'PUT'" class="route-method badge bg-warning p-2">{{ route.method }}</p>
-                  <p *ngSwitchCase="'DELETE'" class="route-method badge bg-danger p-2">{{ route.method }}</p>
+                  <p
+                    *ngSwitchCase="'GET'"
+                    class="route-method badge bg-info p-2"
+                  >
+                    {{ route.method }}
+                  </p>
+                  <p
+                    *ngSwitchCase="'POST'"
+                    class="route-method badge bg-success p-2"
+                  >
+                    {{ route.method }}
+                  </p>
+                  <p
+                    *ngSwitchCase="'PUT'"
+                    class="route-method badge bg-warning p-2"
+                  >
+                    {{ route.method }}
+                  </p>
+                  <p
+                    *ngSwitchCase="'DELETE'"
+                    class="route-method badge bg-danger p-2"
+                  >
+                    {{ route.method }}
+                  </p>
                 </div>
               </li>
               <li
@@ -105,7 +133,7 @@
       </div>
 
       <app-route-detail
-        *ngIf="routeId"
+        *ngIf="routeId && apiData"
         [routeId]="routeId"
         [havePermissionToEdit]="havePermissionToEdit"
         [apiUrl]="apiData.url"

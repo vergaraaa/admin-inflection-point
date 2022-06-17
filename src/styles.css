@@ -39,6 +39,11 @@
   text-align: left;
 }
 
+.link-highlight:hover {
+  text-decoration: underline;
+  color: #f1592a;
+}
+
 @keyframes tooltip-slide {
   0% {
     opacity: 0;
@@ -50,5 +55,11 @@
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

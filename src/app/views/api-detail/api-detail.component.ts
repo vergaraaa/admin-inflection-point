@@ -69,12 +69,17 @@ export class ApiDetailComponent implements OnInit, OnChanges {
 
   getStatus() {
     this.apiService.getStatus().subscribe((data: any) => {
-      const statusData = data[this.apiId].routes;
-      if (data[this.apiId].status) {
-        this.apiStatus = data[this.apiId].status;
-      } else {
-        this.apiStatus = false;
+      let statusData = [];
+
+      if (data[this.apiId]) {
+        statusData = data[this.apiId].routes;
+        if (data[this.apiId].status) {
+          this.apiStatus = data[this.apiId].status;
+        } else {
+          this.apiStatus = false;
+        }
       }
+      console.log(this.apiStatus);
 
       const routeStatusesObj: {
         [key: string]: string;
@@ -84,7 +89,6 @@ export class ApiDetailComponent implements OnInit, OnChanges {
         routeStatusesObj[route.route_id] = route;
       });
       this.routeStatuses = routeStatusesObj;
-      console.log(this.apiStatus);
     });
   }
 }

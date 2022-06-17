@@ -7,7 +7,7 @@ import { User } from 'src/app/models/api.user';
 import { CollaboratorsService } from 'src/app/services/collaborators.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-my-apis',
@@ -23,9 +23,9 @@ export class MyApisComponent implements OnInit {
   queryColaboradores: string = '';
   usersData: User[] = [];
 
-  displayedColumns = ["name", "description", "url", "status", "operations"];
-  dataSource: MatTableDataSource<Api> = new MatTableDataSource;
-  dataSourceCollab: MatTableDataSource<Api> = new MatTableDataSource;
+  displayedColumns = ['name', 'description', 'url', 'status', 'operations'];
+  dataSource: MatTableDataSource<Api> = new MatTableDataSource();
+  dataSourceCollab: MatTableDataSource<Api> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sortPaginator!: MatSort;
   @ViewChild(MatPaginator) paginatorCollab!: MatPaginator;
@@ -45,7 +45,7 @@ export class MyApisComponent implements OnInit {
     this.getUsers();
   }
 
-  filterData($event : any){
+  filterData($event: any) {
     this.dataSource.filter = $event.target.value;
     this.dataSourceCollab.filter = $event.target.value;
   }
@@ -57,11 +57,10 @@ export class MyApisComponent implements OnInit {
         this.statusData = dataStatus;
         console.log(this.apisData);
         console.log(this.statusData);
-        for(let i = 0; i < this.apisData.length; i++){
-          if(this.statusData.hasOwnProperty(this.apisData[i].id)){
+        for (let i = 0; i < this.apisData.length; i++) {
+          if (this.statusData.hasOwnProperty(this.apisData[i].id)) {
             this.apisData[i].status = true;
-          }
-          else{
+          } else {
             this.apisData[i].status = false;
           }
         }
@@ -72,18 +71,18 @@ export class MyApisComponent implements OnInit {
       });
 
       this.apiService.getStatus().subscribe((dataStatusCollab: any) => {
-        
         this.collaboratorApisData = dataApi.collaborator_apis;
         this.statusData = dataStatusCollab;
-        for(let i = 0; i<this.collaboratorApisData.length; i++){
-          if(this.statusData.hasOwnProperty(this.collaboratorApisData[i].id)){
+        for (let i = 0; i < this.collaboratorApisData.length; i++) {
+          if (this.statusData.hasOwnProperty(this.collaboratorApisData[i].id)) {
             this.collaboratorApisData[i].status = true;
-          }
-          else{
+          } else {
             this.collaboratorApisData[i].status = false;
           }
         }
-        this.dataSourceCollab = new MatTableDataSource(this.collaboratorApisData);
+        this.dataSourceCollab = new MatTableDataSource(
+          this.collaboratorApisData
+        );
         this.dataSourceCollab.paginator = this.paginatorCollab;
         this.dataSourceCollab.sort = this.sortPaginatorCollab;
       });
@@ -120,14 +119,32 @@ export class MyApisComponent implements OnInit {
 
   searchUsers() {
     return this.usersData.filter((user) => {
-      return (
-        user.first_name
-          .toLowerCase()
-          .includes(this.queryColaboradores.toLowerCase()) ||
-        user.last_name
-          .toLowerCase()
-          .includes(this.queryColaboradores.toLowerCase())
-      );
+      // Check if user is the user that is logged in
+      const googleAuth = localStorage.getItem('google_auth');
+      const microsoftAuth = localStorage.getItem('microsoft_auth');
+
+      let userEmail = '';
+      if (googleAuth) {
+        userEmail = JSON.parse(googleAuth).email.toLowerCase();
+      } else if (microsoftAuth) {
+        userEmail = JSON.parse(microsoftAuth).email.toLowerCase();
+      }
+
+      if (
+        userEmail !== user.email.toLowerCase() &&
+        (user.role_id === 1 || user.role_id === 2)
+      ) {
+        return (
+          user.first_name
+            .toLowerCase()
+            .includes(this.queryColaboradores.toLowerCase()) ||
+          user.last_name
+            .toLowerCase()
+            .includes(this.queryColaboradores.toLowerCase())
+        );
+      } else {
+        return false;
+      }
     });
   }
 
