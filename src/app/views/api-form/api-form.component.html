@@ -30,7 +30,8 @@
                     <div class="mb-3">
                         <label for="api-url" class="form-label">URL *</label>
                         <!--En el pattern  poner la regex de las urls validas-->
-                        <input required type="url" pattern="https?://.+" placeholder="http:// o https://" formControlName="url" name="api-url" class="form-control" id="api-url" [(ngModel)]="api.url" />
+                        <input required type="url" pattern="(https?://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^\s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^\s]{2,}|https?://(?:www.|(?!www))[a-zA-Z0-9]+.[^\s]{2,}|www.[a-zA-Z0-9]+.[^\s]{2,}).*[^/]$" placeholder="http:// o https://"
+                            formControlName="url" name="api-url" class="form-control" id="api-url" [(ngModel)]="api.url" />
                         <div *ngIf="this.apiForm.controls['url'].hasError('required') && (this.apiForm.controls['url'].touched)">
                             <p class="text-danger">
                                 Por favor ingrese un URL.

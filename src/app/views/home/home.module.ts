@@ -8,6 +8,14 @@ import { SharedModule } from './../../shared/shared.module';
 import { LoadingIndicatorComponent } from 'src/app/shared/loading-indicator/loading-indicator.component';
 import { FormsModule } from '@angular/forms';
 
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 @NgModule({
   declarations: [HomeComponent],
   imports: [
@@ -16,6 +24,11 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     DirectivesModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
 })
 export class HomeModule {}

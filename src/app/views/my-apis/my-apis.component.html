@@ -1,366 +1,238 @@
 <div class="container mt-5">
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          ¿Seguro que quieres borrar {{ nameSelectedApi }}?
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            (click)="deleteApi()"
-          >
+
+    <!--Modal borrar api-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que quieres borrar {{ nameSelectedApi }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteApi()">
             Borrar
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Cerrar
           </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--Modal colaboradoes-->
-  <div
-    class="modal fade"
-    id="modalColaboradores"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h5 class="modal-title w-100" id="exampleModalLabel">
-            Colaboradores
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <!-- Texto Modal Colaboradores-->
-
-          <div class="row">
-            <div class="col-md-10 offset-md-1 p-0">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">
-                  <i class="fas fa-search"></i>
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                  aria-label="Search"
-                  [(ngModel)]="queryColaboradores"
-                  aria-describedby="basic-addon1"
-                />
-              </div>
+                </div>
             </div>
-          </div>
+        </div>
+    </div>
 
-          <div class="row mt-3">
-            <div class="col-md-12 mx-auto">
-              <div class="table-responsive-md">
-                <table class="table text-start align-middle">
-                  <tbody>
-                    <tr
-                      class="noborder"
-                      *ngFor="let user of searchUsers(); let i = index"
-                    >
-                      <td scope="row">
-                        {{ user.first_name }} {{ user.last_name }}
-                      </td>
-                      <td scope="row">
-                        {{ user.email }}
-                      </td>
-                      <td class="text-start">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            [(ngModel)]="user.selected"
-                            id="flexCheckDefault"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="flexCheckDefault"
-                          >
-                          </label>
+    <!--Modal colaboradoes-->
+    <div class="modal fade" id="modalColaboradores" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title w-100" id="exampleModalLabel">
+                        Colaboradores
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Texto Modal Colaboradores-->
+
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1 p-0">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                  <i class="fas fa-search"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="queryColaboradores" aria-describedby="basic-addon1" />
+                            </div>
                         </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 mx-auto">
+                            <div class="table-responsive-md">
+                                <table class="table text-start align-middle">
+                                    <tbody>
+                                        <tr class="noborder" *ngFor="let user of searchUsers(); let i = index">
+                                            <td scope="row">
+                                                {{ user.first_name }} {{ user.last_name }}
+                                            </td>
+                                            <td scope="row">
+                                                {{ user.email }}
+                                            </td>
+                                            <td class="text-start">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" [(ngModel)]="user.selected" id="flexCheckDefault" />
+                                                    <label class="form-check-label" for="flexCheckDefault"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="setCollaborators()">
+                    Guardar Cambios
+                  </button>
+                </div>
             </div>
-          </div>
         </div>
+    </div>
 
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            (click)="setCollaborators()"
-          >
-            Guardar Cambios
-          </button>
+    <div class="row ">
+        <div class="col-md-11">
+            <div class="search-container">
+                <mat-form-field appearance="fill">
+                    <input matInput placeholder="Buscar" autocomplete="off" (keyup)="filterData($event)">
+                </mat-form-field>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-9 offset-md-1">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">
-          <i class="fas fa-search"></i>
-        </span>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="query"
-          placeholder="Search..."
-          aria-label="Search"
-          aria-describedby="basic-addon1"
-        />
-      </div>
-    </div>
-    <div class="col-md-1 ps-1 pe-3">
-      <div class="d-grid">
-        <button
-          class="btn text-white"
-          type="button"
-          style="background-color: #282c38"
-          routerLink="/create-api"
-        >
+        <div class="col-md-1 ps-1 pe-3 pt-3">
+            <div class="d-grid">
+                <button class="btn text-white" type="button" style="background-color: #282c38" routerLink="/create-api">
           AGREGAR
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="row mt-3">
-    <div class="col-md-10 mx-auto">
-      <div class="table-responsive-md">
-        <table class="table text-center align-middle">
-          <thead class="text-white" style="background-color: #282c38">
-            <tr>
-              <th [colSpan]="5" class="table-title">Mis Apis</th>
-            </tr>
-          </thead>
-          <thead class="text-white" style="background-color: #282c38">
-            <tr>
-              <th
-                class="col-2 clickable"
-                (click)="sortMyApis('name', ascDescBool)"
-              >
-                API
-              </th>
-              <th
-                class="col-3 clickable"
-                (click)="sortMyApis('description', ascDescBool)"
-              >
-                Descripción
-              </th>
-              <th
-                class="col-3 clickable"
-                (click)="sortMyApis('url', ascDescBool)"
-              >
-                URL
-              </th>
-              <th class="col-2 clickable">Estatus</th>
-              <th class="col-2">Operaciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="apisData.length === 0">
-              <td colspan="5">Aún no has creado ninguna Api</td>
-            </tr>
-            <tr *ngFor="let api of searchMyApis(); let i = index">
-              <td
-                scope="row"
-                class="clickable align-left"
-                [routerLink]="['/api/', api.id]"
-              >
-                {{ api.name }}
-              </td>
-              <td>
-                <button
-                  class="btn btn-toggle align-items-center rounded collapsed"
-                  data-bs-toggle="collapse"
-                  [attr.data-bs-target]="'#descripcion' + api.id"
-                  aria-expanded="false"
-                >
-                  Descripción
-                </button>
-                <div class="collapse" [attr.id]="'descripcion' + api.id">
-                  <p>
-                    {{ api.description }}
-                  </p>
-                </div>
-              </td>
-              <td>
-                {{ api.url }}
-              </td>
-              <td>
-                <div
-                  [ngClass]="
-                    api.id == 2 || api.id == 5 ? 'estatus-error' : 'estatus'
-                  "
-                  class="mx-auto"
-                ></div>
-              </td>
-
-              <td>
-                <i
-                  class="fa-solid fa-pen fa-lg mx-2"
-                  style="cursor: pointer"
-                  (click)="edit(api.id!)"
-                ></i>
-
-                <i
-                  class="fa-solid fa-user fa-lg mx-2"
-                  style="cursor: pointer"
-                  (click)="onClickColaborators(api.id!)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalColaboradores"
-                ></i>
-
-                <i
-                  class="fa-solid fa-trash fa-lg mx-2"
-                  style="color: #ce1010; cursor: pointer"
-                  (click)="onClickDelete(api.id!, api.name)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                ></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <!--Tabla mis apis-->
+    <div class="row mt-3 g-0 table-title text-white">
+        <div class="col-md-12 text-center p-3">
+            Mis Apis
+        </div>
     </div>
-  </div>
+    <div class="row g-0">
+        <div class="example-container mat-elevation-z8">
 
-  <div class="row mt-3">
-    <div class="col-md-10 mx-auto">
-      <div class="table-responsive-md">
-        <table class="table text-center align-middle">
-          <thead class="text-white" style="background-color: #282c38">
-            <tr>
-              <th [colSpan]="5" class="table-title">
-                Apis en las que colaboro
-              </th>
-            </tr>
-          </thead>
-          <thead class="text-white" style="background-color: #282c38">
-            <tr>
-              <th
-                class="col-2 clickable"
-                (click)="sortCollaboratorApis('name', ascDescBool)"
-              >
-                API
-              </th>
-              <th
-                class="col-3 clickable"
-                (click)="sortCollaboratorApis('description', ascDescBool)"
-              >
-                Descripción
-              </th>
-              <th
-                class="col-3 clickable"
-                (click)="sortCollaboratorApis('url', ascDescBool)"
-              >
-                URL
-              </th>
-              <th class="col-2 clickable">Estatus</th>
-              <th class="col-2 clickable">Operaciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="collaboratorApisData.length === 0">
-              <td colspan="5">Aún no colaboras en ninguna Api</td>
-            </tr>
-            <tr *ngFor="let api of searchCollaboratorApis(); let i = index">
-              <td
-                scope="row"
-                class="clickable align-left"
-                [routerLink]="['/api/', api.id]"
-              >
-                {{ api.name }}
-              </td>
-              <td>
-                <button
-                  class="btn btn-toggle align-items-center rounded collapsed"
-                  data-bs-toggle="collapse"
-                  [attr.data-bs-target]="'#descripcion' + api.id"
-                  aria-expanded="false"
-                >
-                  Descripción
-                </button>
-                <div class="collapse" [attr.id]="'descripcion' + api.id">
-                  <p>
-                    {{ api.description }}
-                  </p>
-                </div>
-              </td>
-              <td>
-                {{ api.url }}
-              </td>
-              <td>
-                <div
-                  [ngClass]="
-                    api.id == 2 || api.id == 5 ? 'estatus-error' : 'estatus'
-                  "
-                  class="mx-auto"
-                ></div>
-              </td>
+            <mat-table [dataSource]="dataSource" matSort>
 
-              <td>
-                <i
-                  class="fa-solid fa-pen fa-lg mx-2"
-                  style="cursor: pointer"
-                  (click)="edit(api.id!)"
-                ></i>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> API </mat-header-cell>
+                    <mat-cell class="clickable" *matCellDef="let api"><a [routerLink]="['/api/', api.id]">{{api.name}}</a></mat-cell>
+                </ng-container>
 
-                <!-- <i
-                  class="fa-solid fa-trash fa-lg mx-2"
-                  style="color: #ce1010; cursor: pointer"
-                  (click)="onClickDelete(api.id!, api.name)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                ></i> -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{api.description}} </mat-cell>
+                </ng-container>
+
+                <!-- URL Column -->
+                <ng-container matColumnDef="url">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> URL </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{api.url}} </mat-cell>
+                </ng-container>
+
+                <!-- Status Column-->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                    <mat-cell *matCellDef="let api"><span [ngClass]="
+                      statusData[api.id!]
+                        ? statusData[api.id!].status
+                          ? 'estatus'
+                          : 'estatus-error'
+                        : 'estatus-error'" [tooltip]="
+                      statusData[api.id!]
+                        ? statusData[api.id!].status
+                          ? 'Última vez actualizado: ' +
+                            statusData[api.id!].routes[0].lastSeen
+                          : 'Última vez actualizado: No Disponible'
+                        : 'Última vez actualizado: No Disponible'
+                    "></span></mat-cell>
+                </ng-container>
+
+                <!-- Operations Column-->
+                <ng-container matColumnDef="operations">
+                    <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
+                    <mat-cell *matCellDef="let api">
+                        <span class="mx-auto">
+                            <i class="fa-solid fa-pen fa-lg mx-2" style="cursor: pointer" (click)="edit(api.id!)"></i>
+                            <i class="fa-solid fa-user fa-lg mx-2" style="cursor: pointer" (click)="onClickColaborators(api.id!)" data-bs-toggle="modal" data-bs-target="#modalColaboradores"></i>
+                            <i class="fa-solid fa-trash fa-lg mx-2" style="color: #ce1010; cursor: pointer" (click)="onClickDelete(api.id!, api.name)" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[15, 25, 50, 100]"></mat-paginator>
+        </div>
     </div>
-  </div>
+
+    <!--Tabla apis a colaborar-->
+    <div class="row mt-5 g-0 table-title text-white">
+        <div class="col-md-12 text-center p-3">
+            Apis en las que colaboro
+        </div>
+    </div>
+    <div class="row g-0">
+        <div class="example-container mat-elevation-z8">
+
+            <mat-table [dataSource]="dataSourceCollab" matSort>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> API </mat-header-cell>
+                    <mat-cell class="clickable" *matCellDef="let api"><a [routerLink]="['/api/', api.id]">{{api.name}}</a></mat-cell>
+                </ng-container>
+
+                <!-- Description Column -->
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{api.description}} </mat-cell>
+                </ng-container>
+
+                <!-- URL Column -->
+                <ng-container matColumnDef="url">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> URL </mat-header-cell>
+                    <mat-cell *matCellDef="let api"> {{api.url}} </mat-cell>
+                </ng-container>
+
+                <!-- Status Column-->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+                    <mat-cell *matCellDef="let api">
+                        <!-- <span [ngClass]="api.id == 2 || api.id == 5 ? 'estatus-error' : 'estatus'" class="mx-auto"></span> -->
+
+                        <span [ngClass]="
+                statusData[api.id!]
+                  ? statusData[api.id!].status
+                    ? 'estatus'
+                    : 'estatus-error'
+                  : 'estatus-error'" [tooltip]="
+                statusData[api.id!]
+                  ? statusData[api.id!].status
+                    ? 'Última vez actualizado: ' +
+                      statusData[api.id!].routes[0].lastSeen
+                    : 'Última vez actualizado: No Disponible'
+                  : 'Última vez actualizado: No Disponible'
+              "></span>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="operations">
+                    <mat-header-cell *matHeaderCellDef> Operaciones </mat-header-cell>
+                    <mat-cell *matCellDef="let api">
+                        <span class="mx-auto">
+                            <i class="fa-solid fa-pen fa-lg mx-2" style="cursor: pointer" (click)="edit(api.id!)"></i>
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[15, 25, 50, 100]"></mat-paginator>
+        </div>
+    </div>
 </div>
