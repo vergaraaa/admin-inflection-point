@@ -99,7 +99,18 @@
               {{ apiData.name }}
               <i
                 class="ms-3 fas fa-circle"
-                [ngClass]="apiStatus ? 'estatus' : 'estatus-error'"
+                [ngClass]="
+                  apiStatus == 'green'
+                    ? 'estatus'
+                    : apiStatus == 'yellow'
+                    ? 'estatus-info'
+                    : 'estatus-error'
+                "
+                [tooltip]="
+                  apiStatus
+                    ? 'Última vez actualizado: ' + lastSeenApiStatus
+                    : 'Última vez actualizado: No disponible'
+                "
               ></i>
             </h2>
           </div>

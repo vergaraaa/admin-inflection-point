@@ -264,6 +264,15 @@
             : 'estatus-error'
         "
         *ngIf="route.method === 'GET'"
+        [tooltip]="
+          routeStatus && routeStatus.lastSeen
+            ? 'Última vez actualizado: ' +
+              routeStatus.lastSeen +
+              ' (Estatus: ' +
+              routeStatus.status +
+              ')'
+            : 'Última vez actualizado: No disponible'
+        "
       ></i>
     </h2>
   </div>
@@ -278,7 +287,7 @@
     <div class="row">
       <div class="col options-route-details">
         <i
-          class="fa-solid fa-flask-vial"
+          class="fa-solid fa-flask-vial color-naranja"
           data-bs-toggle="modal"
           data-bs-target="#testApiModal"
         ></i>

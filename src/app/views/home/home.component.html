@@ -52,8 +52,10 @@
             ><span
               [ngClass]="
                 statusData[api.id!]
-                  ? statusData[api.id!].status
+                  ? statusData[api.id!].status === 'green'
                     ? 'estatus'
+                    : statusData[api.id!].status === 'yellow'
+                    ? 'estatus-info'
                     : 'estatus-error'
                   : 'estatus-error'
               "
