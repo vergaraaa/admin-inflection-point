@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api-service.service';
 import { Api } from 'src/app/models/api.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +12,8 @@ import {MatSort} from '@angular/material/sort';
 })
 export class HomeComponent implements OnInit {
   apisData: Api[] = [];
-  displayedColumns = ["name", "description", "url", "status"];
-  dataSource: MatTableDataSource<Api> = new MatTableDataSource;
+  displayedColumns = ['name', 'description', 'url', 'status'];
+  dataSource: MatTableDataSource<Api> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sortPaginator!: MatSort;
 
@@ -27,18 +27,16 @@ export class HomeComponent implements OnInit {
   }
 
   getApis() {
-    
     this.apiService.getApisData().subscribe((dataApi: any) => {
       this.apiService.getStatus().subscribe((dataStatus: any) => {
-        
         this.apisData = dataApi;
         this.statusData = dataStatus;
-        for(let i = 0; i<this.apisData.length; i++){
-          if(this.statusData.hasOwnProperty(this.apisData[i].id)){
+        console.log(this.statusData);
+        for (let i = 0; i < this.apisData.length; i++) {
+          if (this.statusData.hasOwnProperty(this.apisData[i].id)) {
             // this.apisData[i].status = this.statusData[this.apisData[i].id!].status?true:false;
             this.apisData[i].status = true;
-          }
-          else{
+          } else {
             this.apisData[i].status = false;
           }
           console.log(this.statusData[this.apisData[i].id!]);
@@ -51,7 +49,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  filterData($event : any){
+  filterData($event: any) {
     this.dataSource.filter = $event.target.value;
   }
 

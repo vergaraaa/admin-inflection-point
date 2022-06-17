@@ -17,7 +17,8 @@ export class ApiDetailComponent implements OnInit, OnChanges {
   routes: any[] = [];
   sections: any[] = [];
   routeStatuses: any = {};
-  apiStatus: boolean = false;
+  apiStatus: string = 'red';
+  lastSeenApiStatus: any;
 
   havePermissionToEdit: boolean = false;
 
@@ -76,10 +77,14 @@ export class ApiDetailComponent implements OnInit, OnChanges {
         if (data[this.apiId].status) {
           this.apiStatus = data[this.apiId].status;
         } else {
-          this.apiStatus = false;
+          this.apiStatus = 'red';
         }
       }
       console.log(this.apiStatus);
+
+      if (statusData.length > 0) {
+        this.lastSeenApiStatus = statusData[0].lastSeen;
+      }
 
       const routeStatusesObj: {
         [key: string]: string;

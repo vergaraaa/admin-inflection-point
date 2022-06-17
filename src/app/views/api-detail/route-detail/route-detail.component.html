@@ -161,186 +161,200 @@
           routeStatus && routeStatus.status === 200
             ? 'estatus'
             : 'estatus-error'
-        " *ngIf="route.method === 'GET'"></i>
+        " *ngIf="route.method === 'GET'" [tooltip]="
+          routeStatus && routeStatus.lastSeen
+            ? 'Última vez actualizado: ' +
+              routeStatus.lastSeen +
+              ' (Estatus: ' +
+              routeStatus.status +
+              ')'
+            : 'Última vez actualizado: No disponible'
+        "></i>
         </h2>
     </div>
+    <!-- <div class="col-md-4">
+                <div class="div-probar">
+                    <button class="btn btn-probar" type="button" data-bs-toggle="modal" data-bs-target="#testApiModal">
+                        Probar
+                    </button>
+                </div>
+            </div> -->
     <div class="col-md-6 mt-1">
         <div class="row">
             <div class="col options-route-details">
-                <i class="fa-solid fa-flask-vial" data-bs-toggle="modal" data-bs-target="#testApiModal"></i>
+                <i class="fa-solid fa-flask-vial color-naranja" data-bs-toggle="modal" data-bs-target="#testApiModal"></i>
                 <i *ngIf="havePermissionToEdit" class="fa-solid fa-pen editar" [routerLink]="'/edit-route/' + route.api_id + '/' + route.id"></i>
                 <i *ngIf="havePermissionToEdit" class="fa-solid fa-trash borrar" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
             </div>
         </div>
     </div>
-</div>
 
-<!-- METHOD -->
-<div class="row" *ngIf="route">
-    <div [ngSwitch]="route.method">
-        <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
-            <span class="badge route-method bg-info p-2 me-3">{{
+    <!-- METHOD -->
+    <div class="row" *ngIf="route">
+        <div [ngSwitch]="route.method">
+            <div *ngSwitchCase="'GET'" class="alert alert-info p-2" role="alert">
+                <span class="badge route-method bg-info p-2 me-3">{{
         route.method
       }}</span>
-            <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-        </div>
-        <div *ngSwitchCase="'POST'" class="alert alert-success p-2" role="alert">
-            <span class="badge route-method bg-success p-2 me-3">{{
+                <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'POST'" class="alert alert-success p-2" role="alert">
+                <span class="badge route-method bg-success p-2 me-3">{{
         route.method
       }}</span>
-            <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-        </div>
-        <div *ngSwitchCase="'PUT'" class="alert alert-warning p-2" role="alert">
-            <span class="badge route-method bg-warning p-2 me-3">{{
+                <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'PUT'" class="alert alert-warning p-2" role="alert">
+                <span class="badge route-method bg-warning p-2 me-3">{{
         route.method
       }}</span>
-            <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-        </div>
-        <div *ngSwitchCase="'DELETE'" class="alert alert-danger p-2" role="alert">
-            <span class="badge route-method bg-danger p-2 me-3">{{
+                <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
+            </div>
+            <div *ngSwitchCase="'DELETE'" class="alert alert-danger p-2" role="alert">
+                <span class="badge route-method bg-danger p-2 me-3">{{
         route.method
       }}</span>
-            <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
-        </div>
-    </div>
-
-    <!-- Campos de la ruta -->
-    <div class="row mt-3 mx-2">
-        <div class="col-12 mt-3">
-            <h5>Parámetros de entrada</h5>
-            <table class="table table-sm table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <!-- <th>Obligatorio</th> -->
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-
-                <tbody *ngIf="input_params.length > 0">
-                    <tr *ngFor="let input_param of input_params">
-                        <td>{{ input_param.name }}</td>
-                        <td>{{ input_param.data_type }}</td>
-                        <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
-                        <td>{{ input_param.description }}</td>
-                    </tr>
-                </tbody>
-                <tbody *ngIf="input_params.length == 0">
-                    <tr>
-                        <td colspan="4">No hay parámetros de entrada</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-12 mt-3">
-            <h5>Query Strings</h5>
-            <table class="table table-sm table-striped">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Obligatorio</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="query_strings.length > 0">
-                    <tr *ngFor="let query_string of query_strings">
-                        <td>{{ query_string.name }}</td>
-                        <td>{{ query_string.data_type }}</td>
-                        <td>{{ query_string.required ? "Si" : "No" }}</td>
-                        <td>{{ query_string.description }}</td>
-                    </tr>
-                </tbody>
-                <tbody *ngIf="query_strings.length == 0">
-                    <tr>
-                        <td colspan="4">No hay query strings</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-12 mt-3">
-            <h5>Headers</h5>
-            <div class="col-12">
-                <table class="table table-sm table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Descripción</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="headers.length > 0">
-                        <tr *ngFor="let header of headers">
-                            <td>{{ header.name }}</td>
-                            <td>{{ header.data_type }}</td>
-                            <td>{{ header.description }}</td>
-                        </tr>
-                    </tbody>
-                    <tbody *ngIf="headers.length == 0">
-                        <tr>
-                            <td colspan="3">No hay headers</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <b class="me-3">{{ route.route }}</b> <i>{{ route.description }}</i>
             </div>
         </div>
-        <div class="col-12 mt-3">
-            <h5>Parámetros de salida</h5>
-            <div class="col-12">
+
+        <!-- Campos de la ruta -->
+        <div class="row mt-3 mx-2">
+            <div class="col-12 mt-3">
+                <h5>Parámetros de entrada</h5>
                 <table class="table table-sm table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Tipo</th>
+                            <!-- <th>Obligatorio</th> -->
                             <th>Descripción</th>
                         </tr>
                     </thead>
 
-                    <tbody *ngIf="output_params.length > 0">
-                        <tr *ngFor="let output_param of output_params">
-                            <td>{{ output_param.name }}</td>
-                            <td>{{ output_param.data_type }}</td>
-                            <td>{{ output_param.description }}</td>
+                    <tbody *ngIf="input_params.length > 0">
+                        <tr *ngFor="let input_param of input_params">
+                            <td>{{ input_param.name }}</td>
+                            <td>{{ input_param.data_type }}</td>
+                            <!-- <td>{{ input_param.required ? "Si" : "No" }}</td> -->
+                            <td>{{ input_param.description }}</td>
                         </tr>
                     </tbody>
-                    <tbody *ngIf="output_params.length == 0">
+                    <tbody *ngIf="input_params.length == 0">
                         <tr>
                             <td colspan="4">No hay parámetros de entrada</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="col-12 mt-3">
-            <h5>Body</h5>
-            <div class="col-12">
+            <div class="col-12 mt-3">
+                <h5>Query Strings</h5>
                 <table class="table table-sm table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Tipo</th>
+                            <th>Obligatorio</th>
                             <th>Descripción</th>
                         </tr>
                     </thead>
-
-                    <tbody *ngIf="bodies.length > 0">
-                        <tr *ngFor="let body of bodies">
-                            <td>{{ body.name }}</td>
-                            <td>{{ body.data_type }}</td>
-                            <td>{{ body.description }}</td>
+                    <tbody *ngIf="query_strings.length > 0">
+                        <tr *ngFor="let query_string of query_strings">
+                            <td>{{ query_string.name }}</td>
+                            <td>{{ query_string.data_type }}</td>
+                            <td>{{ query_string.required ? "Si" : "No" }}</td>
+                            <td>{{ query_string.description }}</td>
                         </tr>
                     </tbody>
-                    <tbody *ngIf="bodies.length == 0">
+                    <tbody *ngIf="query_strings.length == 0">
                         <tr>
-                            <td colspan="4">No hay body</td>
+                            <td colspan="4">No hay query strings</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <div class="col-12 mt-3">
+                <h5>Headers</h5>
+                <div class="col-12">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="headers.length > 0">
+                            <tr *ngFor="let header of headers">
+                                <td>{{ header.name }}</td>
+                                <td>{{ header.data_type }}</td>
+                                <td>{{ header.description }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="headers.length == 0">
+                            <tr>
+                                <td colspan="3">No hay headers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h5>Parámetros de salida</h5>
+                <div class="col-12">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngIf="output_params.length > 0">
+                            <tr *ngFor="let output_param of output_params">
+                                <td>{{ output_param.name }}</td>
+                                <td>{{ output_param.data_type }}</td>
+                                <td>{{ output_param.description }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="output_params.length == 0">
+                            <tr>
+                                <td colspan="4">No hay parámetros de entrada</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <h5>Body</h5>
+                <div class="col-12">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngIf="bodies.length > 0">
+                            <tr *ngFor="let body of bodies">
+                                <td>{{ body.name }}</td>
+                                <td>{{ body.data_type }}</td>
+                                <td>{{ body.description }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="bodies.length == 0">
+                            <tr>
+                                <td colspan="4">No hay body</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+
+
     </div>
-
-
-
-</div>

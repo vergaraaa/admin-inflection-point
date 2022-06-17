@@ -44,6 +44,13 @@
   color: #f1592a;
 }
 
+.estatus-info {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ead940;
+}
+
 @keyframes tooltip-slide {
   0% {
     opacity: 0;
